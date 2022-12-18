@@ -9,7 +9,20 @@ class SendJson(models.Model):
     response = ulrr.urlopen(url).read().decode('utf8')
     data = json.loads(response)
 
+    page_size=0
+
     titles_list = []
     for item in data['items']:
         titles_list.append(item['title'])
-    string_titles = ' ||| '.join([str(elem) for remove_number,elem in enumerate(titles_list)])
+        page_size+=1
+    titles = titles_list
+
+    descriptions_list = []
+    for item in data['items']:
+        descriptions_list.append(item['description'])
+    descriptions = descriptions_list
+
+    authors_list = []
+    for item in data['items']:
+        authors_list.append(item['author'])
+    authors = authors_list

@@ -5,4 +5,4 @@ class SendJsonSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SendJson
-        fields = ('id', 'string_titles')
+        fields = ('id', 'page_size', 'titles', 'authors', 'descriptions')
