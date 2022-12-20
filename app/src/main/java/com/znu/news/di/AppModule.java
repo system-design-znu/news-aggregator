@@ -17,6 +17,7 @@ import com.znu.news.data.repo.UserRepository_Impl;
 import com.znu.news.utils.rx.AppSchedulerProvider;
 import com.znu.news.utils.rx.SchedulerProvider;
 
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Named;
@@ -26,9 +27,11 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
+import okhttp3.ConnectionSpec;
 import okhttp3.OkHttpClient;
+import okhttp3.TlsVersion;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
@@ -75,19 +78,29 @@ public class AppModule {
     @Provides
     @Singleton
     HeaderInterceptorHelper provideHeaderInterceptorHelper(AppPreferencesHelper appPreferencesHelper) {
-        return new HeaderInterceptorHelper(appPreferencesHelper.getAccessToken());
+        return new HeaderInterceptorHelper(appPreferencesHelper);
     }
 
     @Provides
     @Singleton
-    OkHttpClient provideOkHttpClient(AppPreferencesHelper appPreferencesHelper, HeaderInterceptorHelper headerInterceptorHelper) {
+    ConnectionSpec provideConnectionSpec() {
+        return new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS)
+                .tlsVersions(TlsVersion.TLS_1_0)
+                .allEnabledCipherSuites()
+                .build();
+    }
+
+    @Provides
+    @Singleton
+    OkHttpClient provideOkHttpClient(HeaderInterceptorHelper headerInterceptorHelper, ConnectionSpec spec) {
         return new OkHttpClient
                 .Builder()
+                .connectionSpecs(Collections.singletonList(spec))
                 .addInterceptor(headerInterceptorHelper)
                 .callTimeout(40, TimeUnit.SECONDS)
-                .connectTimeout(40, TimeUnit.SECONDS)
-                .readTimeout(40, TimeUnit.SECONDS)
-                .writeTimeout(40, TimeUnit.SECONDS)
+                .connectTimeout(5, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS)
                 .build();
     }
 
@@ -95,10 +108,10 @@ public class AppModule {
     @Singleton
     Retrofit provideRetrofit(OkHttpClient okHttpClient, @Named("BASE_URL") String BASE_URL) {
         return new Retrofit.Builder()
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(BASE_URL)
                 .client(okHttpClient)
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
     }
 

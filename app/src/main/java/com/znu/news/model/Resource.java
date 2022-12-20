@@ -7,33 +7,19 @@ import static com.znu.news.model.Status.SUCCESS;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.List;
-
 public class Resource<T> {
 
 
     public Status status;
 
-    @Nullable
-    public T data;
+    public final T data;
 
-    @Nullable
-    public String message;
+    public Error error;
 
-    @Nullable
-    public Integer errorCode;
-
-    public Resource(Status status, @Nullable T data, @Nullable String message, @Nullable Integer errorCode) {
+    public Resource(Status status, @Nullable T data, @Nullable Error error) {
         this.status = status;
         this.data = data;
-        this.message = message;
-        this.errorCode = errorCode;
-    }
-
-    public Resource(Status status, @Nullable T data, @Nullable String message) {
-        this.status = status;
-        this.data = data;
-        this.message = message;
+        this.error = error;
     }
 
     public static Resource loading() {
@@ -44,12 +30,8 @@ public class Resource<T> {
         return new Resource(SUCCESS, data, null);
     }
 
-    public static Resource error(@NonNull String message) {
-        return new Resource(ERROR, null, message);
-    }
-
-    public static Resource error(@NonNull String message, Integer errorCode) {
-        return new Resource(ERROR, null, message, errorCode);
+    public static Resource error(@NonNull Error error) {
+        return new Resource(ERROR, null, error);
     }
 }
 

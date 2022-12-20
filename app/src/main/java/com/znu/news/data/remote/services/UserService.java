@@ -1,6 +1,6 @@
 package com.znu.news.data.remote.services;
 
-public class UserService {
+public interface UserService {
 
 
 }

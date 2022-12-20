@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -18,11 +19,11 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", "\"http://www.news.io/v2\"")
+            buildConfigField("String", "BASE_URL", "\"https://jsonplaceholder.typicode.com/posts/\"")
             buildConfigField("String", "PREF_NAME", "\"news_app\"")
         }
         release {
-            buildConfigField("String", "BASE_URL", "\"http://www.news.io/v2\"")
+            buildConfigField("String", "BASE_URL", "\"https://jsonplaceholder.typicode.com/posts/\"")
             buildConfigField("String", "PREF_NAME", "\"news_app\"")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -54,6 +55,8 @@ dependencies {
 
     //hilt
     implementation("com.google.dagger:hilt-android:2.42")
+    annotationProcessor("com.google.dagger:hilt-compiler:2.42")
+
 
     //paging
     implementation("androidx.paging:paging-runtime:3.2.0-alpha03")
@@ -62,6 +65,7 @@ dependencies {
     //room
     def room_version = "2.4.3"
     implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-rxjava2:$room_version")
     implementation("com.google.code.gson:gson:2.9.0")
 
@@ -71,7 +75,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.retrofit2:retrofit-mock:2.3.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.7.2")
-    implementation("com.squareup.retrofit2:adapter-rxjava:2.0.2")
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 
     //rxjava
     implementation('io.reactivex.rxjava2:rxandroid:2.1.1')

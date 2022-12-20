@@ -1,8 +1,12 @@
 package com.znu.news.data.remote.services;
 
-public class NewsService {
+import com.znu.news.data.remote.model.NewsResponse;
 
-//    example
-//    @GET("news")
-//    Single<Response> getNews();
+import io.reactivex.Single;
+import retrofit2.http.GET;
+
+public interface NewsService {
+
+    @GET("news")
+    Single<NewsResponse> getTrendingNews();
 }
