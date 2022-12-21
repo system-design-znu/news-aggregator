@@ -1,28 +1,22 @@
 package com.znu.news.ui.main;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import com.znu.news.R;
 import com.znu.news.databinding.ActivityMainBinding;
-import com.znu.news.model.Error;
-import com.znu.news.ui.base.BaseViewModelActivity;
-import com.znu.news.viewmodel.NewsViewModel;
+import com.znu.news.ui.base.BaseActivity;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class MainActivity extends BaseViewModelActivity<ActivityMainBinding, NewsViewModel> {
+public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
-    @Override
-    protected void initViewModel() {
-        viewModel = new ViewModelProvider(this).get(NewsViewModel.class);
-    }
+    private NavHostFragment navHostFragment;
 
     @Override
     public int getLayoutId() {
@@ -31,43 +25,16 @@ public class MainActivity extends BaseViewModelActivity<ActivityMainBinding, New
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         super.onCreate(savedInstanceState);
 
-        observeTrendingNews();
-    }
+        navHostFragment =
+                (NavHostFragment) getSupportFragmentManager()
+                        .findFragmentById(R.id.nav_host_fragment);
 
-    private void observeTrendingNews() {
-        viewModel.observeTrendingNews().observe(this, response -> {
-            switch (response.status) {
-                case LOADING:
-                    Toast.makeText(this, "LOADING error", Toast.LENGTH_SHORT).show();
-                    break;
 
-                case ERROR:
-                    handleError(response.error);
-                    break;
-
-                case SUCCESS:
-                    Toast.makeText(this, "SUCCESS error", Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        });
-    }
-
-    private void handleError(Error error) {
-        switch (error.errorType) {
-            case Connection:
-                Toast.makeText(this, "Connection error", Toast.LENGTH_SHORT).show();
-                break;
-
-            case Unauthorized:
-                Toast.makeText(this, "Unauthorized error", Toast.LENGTH_SHORT).show();
-                openLoginActivity();
-                break;
-
-            case Unknown:
-                Toast.makeText(this, "Unknown error", Toast.LENGTH_SHORT).show();
-                break;
+        if (navHostFragment != null) {
+            NavigationUI.setupWithNavController(binding.bottomNavigationView, navHostFragment.getNavController());
         }
     }
 }

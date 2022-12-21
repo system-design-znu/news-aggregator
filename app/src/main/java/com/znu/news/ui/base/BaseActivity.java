@@ -55,5 +55,6 @@ public abstract class BaseActivity<B extends ViewDataBinding> extends AppCompatA
 
     public void openLoginActivity() {
         startActivity(toActivity(LoginActivity.class));
+        finish();
     }
 }

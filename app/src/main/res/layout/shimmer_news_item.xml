@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_distance"
+        android:layoutDirection="rtl"
+        app:cardCornerRadius="@dimen/medium_radius"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_distance">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/news_image_view"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:background="@drawable/all_8corner_bg"
+                android:backgroundTint="@color/shimmer"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:riv_border_width="0dp"
+                app:riv_corner_radius="@dimen/medium_radius" />
+
+            <TextView
+                android:id="@+id/news_title_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_distance"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="@dimen/small_distance"
+                android:background="@drawable/all_4corner_bg"
+                android:backgroundTint="@color/shimmer"
+                android:maxLines="2"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/news_pubDate_tv"
+                app:layout_constraintStart_toEndOf="@+id/news_image_view"
+                app:layout_constraintTop_toTopOf="@id/news_image_view" />
+
+            <TextView
+                android:id="@+id/news_category_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_distance"
+                android:background="@drawable/all_4corner_bg"
+                android:backgroundTint="@color/shimmer"
+                android:padding="4dp"
+                android:text="\t\t"
+                android:textColor="?attr/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/news_image_view"
+                app:layout_constraintStart_toEndOf="@+id/news_image_view" />
+
+            <TextView
+                android:id="@+id/news_author_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_distance"
+                android:alpha="0.6"
+                android:background="@drawable/all_4corner_bg"
+                android:backgroundTint="@color/shimmer"
+                android:text="\t\t"
+                app:layout_constraintBottom_toTopOf="@+id/news_category_tv"
+                app:layout_constraintStart_toEndOf="@+id/news_image_view"
+                app:layout_constraintTop_toBottomOf="@+id/news_title_tv" />
+
+            <TextView
+                android:id="@+id/news_pubDate_tv"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.4"
+                android:background="@drawable/all_4corner_bg"
+                android:backgroundTint="@color/shimmer"
+                android:text="\t\t"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/news_title_tv" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

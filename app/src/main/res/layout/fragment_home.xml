@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layoutDirection="rtl"
+        tools:context=".ui.main.home.HomeFragment">
+
+        <LinearLayout
+            android:id="@+id/home_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_distance"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/medium_distance"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/navigation_image_view"
+                android:layout_width="@dimen/touch_target_size"
+                android:layout_height="@dimen/touch_target_size"
+                android:background="@drawable/all_4corner_bg"
+                android:backgroundTint="?attr/colorSecondary"
+                android:padding="@dimen/small_distance"
+                android:src="@drawable/hambergermenu"
+                app:tint="?attr/colorPrimary" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="@string/app_name"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="@dimen/medium_text_size"
+                android:textStyle="bold" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/profile_image_view"
+                android:layout_width="@dimen/touch_target_size"
+                android:layout_height="@dimen/touch_target_size"
+                android:background="@drawable/all_8corner_bg"
+                android:backgroundTint="?attr/colorSecondary"
+                app:riv_border_width="0dp"
+                app:riv_corner_radius="@dimen/medium_radius"
+                app:tint="?attr/colorPrimary" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:alpha="0.05"
+            android:background="@color/pure_black"
+            app:layout_constraintBottom_toTopOf="@+id/home_tab_layout" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/home_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_marginTop="@dimen/medium_distance"
+            android:background="?attr/colorOnBackground"
+            android:paddingStart="@dimen/medium_distance"
+            android:paddingEnd="@dimen/medium_distance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_appbar"
+            app:tabIndicator="@drawable/tab_indicator"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="?attr/colorControlNormal"
+            app:tabTextAppearance="@style/TabText" />
+
+        <View
+            android:id="@+id/divider_view"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:alpha="0.1"
+            android:background="@color/pure_black"
+            app:layout_constraintTop_toBottomOf="@+id/home_tab_layout" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/home_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:nestedScrollingEnabled="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider_view" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="small_radius">4dp</dimen>
+    <dimen name="medium_radius">8dp</dimen>
+    <dimen name="large_radius">16dp</dimen>
+
+    <dimen name="icon_size">24dp</dimen>
+    <dimen name="touch_target_size">40dp</dimen>
+
+    <dimen name="small_distance">8dp</dimen>
+    <dimen name="medium_distance">16dp</dimen>
+    <dimen name="large_distance">24dp</dimen>
+
+    <dimen name="default_text_size">14sp</dimen>
+    <dimen name="small_text_size">16sp</dimen>
+    <dimen name="medium_text_size">24sp</dimen>
+    <dimen name="large_text_size">32sp</dimen>
+</resources>

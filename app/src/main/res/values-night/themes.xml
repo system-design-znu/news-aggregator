@@ -1,16 +1,25 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Theme.News" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.News" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/indigo_a_200</item>
+        <item name="colorPrimaryVariant">@color/indigo_a_200</item>
+        <item name="colorOnPrimary">@color/pure_black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/indigo_a_200_25</item>
+        <item name="colorSecondaryVariant">@color/indigo_a_200_25</item>
+        <item name="colorOnSecondary">@color/light_white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="colorControlNormal">@color/pure_white</item>
+        <item name="colorSurface">@color/dark_blue</item>
+        <item name="colorOnBackground">@color/dark_black</item>
+        <item name="colorBackgroundFloating">?attr/colorPrimary</item>
+        <item name="android:windowBackground">?attr/colorOnBackground</item>
+        <item name="android:textColor">@color/pure_white</item>
+        <item name="android:textSize">@dimen/default_text_size</item>
+        <item name="android:fontFamily">@font/yekan_bakh_fa</item>
+        <item name="fontFamily">@font/yekan_bakh_fa</item>
     </style>
 </resources>

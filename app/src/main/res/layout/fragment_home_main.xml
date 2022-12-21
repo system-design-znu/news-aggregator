@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/home_main_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.home.HomeMainFragment">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/home_main_sv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/home_main_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/large_distance"
+                    android:layoutDirection="rtl"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/popular_news_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/medium_distance"
+                        android:text="@string/popular_news"
+                        android:textSize="@dimen/medium_text_size"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/medium_distance"
+                        android:drawableEnd="@drawable/arrow_right"
+                        android:text="@string/view_all"
+                        android:textColor="?attr/colorPrimary"
+                        app:layout_constraintBottom_toBottomOf="@id/popular_news_tv"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/popular_news_tv" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/popular_relative_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/small_distance"
+                        app:layout_constraintTop_toBottomOf="@+id/popular_news_tv">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/popular_news_rv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/popular_shimmer_fl"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <include layout="@layout/shimmer_news_item" />
+
+                                <include layout="@layout/shimmer_news_item" />
+
+                                <include layout="@layout/shimmer_news_item" />
+                            </LinearLayout>
+                        </com.facebook.shimmer.ShimmerFrameLayout>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/important_news_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/medium_distance"
+                        android:layout_marginTop="@dimen/small_distance"
+                        android:text="@string/important_news"
+                        android:textSize="@dimen/medium_text_size"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/popular_relative_layout" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/medium_distance"
+                        android:drawableEnd="@drawable/arrow_right"
+                        android:text="@string/view_all"
+                        android:textColor="?attr/colorPrimary"
+                        app:layout_constraintBottom_toBottomOf="@id/important_news_tv"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/important_news_tv" />
+
+                    <RelativeLayout
+                        android:id="@+id/important_relative_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/small_distance"
+                        app:layout_constraintTop_toBottomOf="@+id/important_news_tv">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/important_news_rv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/important_shimmer_fl"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <include layout="@layout/shimmer_news_item" />
+
+                                <include layout="@layout/shimmer_news_item" />
+
+                                <include layout="@layout/shimmer_news_item" />
+                            </LinearLayout>
+                        </com.facebook.shimmer.ShimmerFrameLayout>
+                    </RelativeLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

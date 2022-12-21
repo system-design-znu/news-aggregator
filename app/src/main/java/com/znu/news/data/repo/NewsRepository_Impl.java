@@ -1,24 +1,38 @@
 package com.znu.news.data.repo;
 
-import com.znu.news.data.remote.model.NewsResponse;
+import com.znu.news.data.remote.model.NewsDtoMapper;
 import com.znu.news.data.remote.services.NewsService;
+import com.znu.news.model.News;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
 import io.reactivex.Single;
 
 public class NewsRepository_Impl implements NewsRepository {
 
-    private NewsService newsService;
+    private final NewsService newsService;
+    private final NewsDtoMapper newsDtoMapper;
 
     @Inject
-    public NewsRepository_Impl(NewsService newsService) {
+    public NewsRepository_Impl(NewsService newsService, NewsDtoMapper newsDtoMapper) {
         this.newsService = newsService;
+        this.newsDtoMapper = newsDtoMapper;
     }
 
     @Override
-    public Single<NewsResponse> getTrendingNews() {
-        return newsService.getTrendingNews();
+    public Single<List<News>> getTrendingNews() {
+        return newsService.getTrendingNews().map(newsDtoMapper::toDomainList);
+    }
+
+    @Override
+    public Single<List<News>> getPopularNews() {
+        return newsService.getPopularNews().map(newsDtoMapper::toDomainList);
+    }
+
+    @Override
+    public Single<List<News>> getImportantNewsNews() {
+        return newsService.getImportantNews().map(newsDtoMapper::toDomainList);
     }
 }

@@ -13,14 +13,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 
-public abstract class BaseFragment<B extends ViewDataBinding, VM extends BaseViewModel> extends Fragment {
+public abstract class BaseFragment<B extends ViewDataBinding> extends Fragment {
 
 
     protected B binding;
-    protected VM viewModel;
     protected BaseActivity<?> activity;
-
-    protected abstract void initViewModel();
 
 
     public abstract
@@ -40,7 +37,6 @@ public abstract class BaseFragment<B extends ViewDataBinding, VM extends BaseVie
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
-        initViewModel();
         return binding.getRoot();
     }
 
@@ -49,5 +45,9 @@ public abstract class BaseFragment<B extends ViewDataBinding, VM extends BaseVie
     public void onDetach() {
         activity = null;
         super.onDetach();
+    }
+
+    protected void openLoginActivity() {
+        activity.openLoginActivity();
     }
 }

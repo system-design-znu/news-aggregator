@@ -27,17 +27,17 @@ public abstract class CallbackWrapper<T, E extends Error> implements SingleObser
             if (response != null) {
                 if (response.errorBody() != null) {
                     E error = getError(response.errorBody());
-                    if (error != null) onFailure(Resource.error(error));
+                    if (error != null) onComplete(Resource.error(error));
                     else
-                        onFailure(Resource.error(new Error.RemoteServiceError(response.code(), throwable)));
+                        onComplete(Resource.error(new Error.RemoteServiceError(response.code(), throwable)));
                     return;
                 }
             }
-            onFailure(Resource.error(new Error.RemoteServiceError(InternalServerError, throwable)));
+            onComplete(Resource.error(new Error.RemoteServiceError(InternalServerError, throwable)));
         } else if (throwable instanceof IOException) {
-            onFailure(Resource.error(new Error.RemoteServiceError(Connection, throwable)));
+            onComplete(Resource.error(new Error.RemoteServiceError(Connection, throwable)));
         } else {
-            onFailure(Resource.error(new Error.RemoteServiceError(Unknown, throwable)));
+            onComplete(Resource.error(new Error.RemoteServiceError(Unknown, throwable)));
         }
     }
 
@@ -51,8 +51,6 @@ public abstract class CallbackWrapper<T, E extends Error> implements SingleObser
     }
 
     protected abstract void onComplete(Resource<T> response);
-
-    protected abstract void onFailure(Resource<T> error);
 
     protected E getError(ResponseBody responseBody) {
         try {

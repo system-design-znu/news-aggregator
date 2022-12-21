@@ -1,36 +1,52 @@
 package com.znu.news.ui.base;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseAdapter<ITEM> extends RecyclerView.Adapter<BaseViewHolder<ITEM, ?>> {
+public abstract class BaseAdapter<Item> extends RecyclerView.Adapter<BaseViewHolder<Item, ?>> {
 
-    protected List<ITEM> items;
+    protected List<Item> items;
     protected LayoutInflater layoutInflater;
 
-    protected abstract BaseViewHolder<ITEM, ?> initViewHolder(View view);
-    protected abstract
-    @LayoutRes
-    int getLayoutId();
+    public BaseAdapter() {
+        items = new ArrayList<>();
+    }
+
+    public BaseAdapter(List<Item> items) {
+        this.items = items;
+    }
+
+    protected abstract BaseViewHolder<Item, ?> initViewHolder(ViewGroup parent);
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void submitData(List<Item> items) {
+        this.items = items;
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
-    public BaseViewHolder<ITEM, ?> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BaseViewHolder<Item, ?> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (layoutInflater == null) {
             layoutInflater = LayoutInflater.from(parent.getContext());
         }
-        return initViewHolder(layoutInflater.inflate(getLayoutId(), parent, true));
+        return initViewHolder(parent);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BaseViewHolder<ITEM, ?> holder, int position) {
+    public int getItemCount() {
+        return items.size();
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull BaseViewHolder<Item, ?> holder, int position) {
         holder.bind(items.get(position));
     }
 }
