@@ -1,5 +1,7 @@
 package com.znu.news.data.repo;
 
+import android.util.Log;
+
 import com.znu.news.data.remote.model.NewsDtoMapper;
 import com.znu.news.data.remote.services.NewsService;
 import com.znu.news.model.News;
@@ -23,16 +25,16 @@ public class NewsRepository_Impl implements NewsRepository {
 
     @Override
     public Single<List<News>> getTrendingNews() {
-        return newsService.getTrendingNews().map(newsDtoMapper::toDomainList);
+        return newsService.getTrendingNews().map(newsResponse -> newsDtoMapper.toDomainList(newsResponse.getNewsDtoList()));
     }
 
     @Override
     public Single<List<News>> getPopularNews() {
-        return newsService.getPopularNews().map(newsDtoMapper::toDomainList);
+        return newsService.getPopularNews().map(newsResponse -> newsDtoMapper.toDomainList(newsResponse.getNewsDtoList()));
     }
 
     @Override
     public Single<List<News>> getImportantNewsNews() {
-        return newsService.getImportantNews().map(newsDtoMapper::toDomainList);
+        return newsService.getImportantNews().map(newsResponse -> newsDtoMapper.toDomainList(newsResponse.getNewsDtoList()));
     }
 }

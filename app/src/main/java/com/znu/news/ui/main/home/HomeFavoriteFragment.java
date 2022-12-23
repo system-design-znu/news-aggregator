@@ -18,7 +18,7 @@ public class HomeFavoriteFragment extends BaseViewModelFragment<FragmentHomeFavo
 
     @Override
     protected void initViewModel() {
-        viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        viewModel = new ViewModelProvider(requireParentFragment()).get(HomeViewModel.class);
     }
 
     @Override

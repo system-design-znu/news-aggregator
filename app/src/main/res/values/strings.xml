@@ -12,4 +12,5 @@
     <string name="popular_news">اخبار پربازدید</string>
     <string name="view_all">مشاهده همه</string>
     <string name="important_news">اخبار مهم</string>
+    <string name="trending_news">اخبار داغ</string>
 </resources>

@@ -29,7 +29,7 @@ public abstract class CallbackWrapper<T, E extends Error> implements SingleObser
                     E error = getError(response.errorBody());
                     if (error != null) onComplete(Resource.error(error));
                     else
-                        onComplete(Resource.error(new Error.RemoteServiceError(response.code(), throwable)));
+                        onComplete(Resource.error(new Error.RemoteServiceError(response.code())));
                     return;
                 }
             }

@@ -9,7 +9,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/small_distance"
+        android:layout_marginTop="@dimen/small_distance"
         android:layoutDirection="rtl"
         app:cardCornerRadius="@dimen/medium_radius"
         app:cardElevation="0dp"
@@ -69,20 +69,19 @@
                 android:alpha="0.6"
                 android:background="@drawable/all_4corner_bg"
                 android:backgroundTint="@color/shimmer"
-                android:text="\t\t"
+                android:text="\t\t\t\t\t\t\t"
                 app:layout_constraintBottom_toTopOf="@+id/news_category_tv"
                 app:layout_constraintStart_toEndOf="@+id/news_image_view"
                 app:layout_constraintTop_toBottomOf="@+id/news_title_tv" />
 
             <TextView
                 android:id="@+id/news_pubDate_tv"
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.4"
                 android:background="@drawable/all_4corner_bg"
                 android:backgroundTint="@color/shimmer"
-                android:text="\t\t"
+                android:text="\t\t\t\t"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/news_title_tv" />
         </androidx.constraintlayout.widget.ConstraintLayout>

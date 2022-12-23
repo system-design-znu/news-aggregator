@@ -62,4 +62,8 @@ public enum ErrorType {
         }
         return Unknown;
     }
+
+    public int getErrorCode() {
+        return errorCode;
+    }
 }

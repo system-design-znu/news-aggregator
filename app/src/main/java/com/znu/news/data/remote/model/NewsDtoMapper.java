@@ -10,8 +10,14 @@ public class NewsDtoMapper implements DomainMapper<NewsDto, News> {
 
 
     @Override
-    public News mapToDomainModel(NewsDto model) {
-        return new News();
+    public News mapToDomainModel(NewsDto newsDto) {
+        return new News(
+                newsDto.getTitle(),
+                newsDto.getPubDate(),
+                newsDto.getAuthor(),
+                newsDto.getEnclosure().getLink(),
+                newsDto.getCategories().get(0)
+        );
     }
 
     @Override
@@ -21,15 +27,15 @@ public class NewsDtoMapper implements DomainMapper<NewsDto, News> {
 
     public List<News> toDomainList(List<NewsDto> initial) {
         List<News> newsList = new ArrayList<>();
-        for (NewsDto newsDto: initial) {
-            mapToDomainModel(newsDto);
+        for (NewsDto newsDto : initial) {
+            newsList.add(mapToDomainModel(newsDto));
         }
         return newsList;
     }
 
     public List<NewsDto> fromDomainList(List<News> initial) {
         List<NewsDto> newsDtoList = new ArrayList<>();
-        for (News news: initial) {
+        for (News news : initial) {
             mapFromDomainModel(news);
         }
         return newsDtoList;

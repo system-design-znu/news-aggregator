@@ -7,26 +7,24 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/small_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="352dp"
+        android:layout_marginStart="@dimen/small_distance"
         android:layoutDirection="rtl"
         app:cardCornerRadius="@dimen/medium_radius"
         app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:padding="@dimen/small_distance">
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/news_image_view"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
+                android:layout_width="232dp"
+                android:layout_height="232dp"
                 android:background="@drawable/all_8corner_bg"
                 android:backgroundTint="@color/shimmer"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:riv_border_width="0dp"
@@ -36,47 +34,34 @@
                 android:id="@+id/news_title_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/small_distance"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/small_distance"
                 android:maxLines="2"
                 android:text="قیمت آیفون ۱۳ به ۶۰,۰۰۰ میلیون رسید."
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/news_pubDate_tv"
-                app:layout_constraintStart_toEndOf="@+id/news_image_view"
-                app:layout_constraintTop_toTopOf="@id/news_image_view" />
-
-            <TextView
-                android:id="@+id/news_category_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/small_distance"
-                android:background="@drawable/all_4corner_bg"
-                android:backgroundTint="?attr/colorSecondary"
-                android:padding="4dp"
-                android:text="تکنولوژی"
-                android:textColor="?attr/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/news_image_view"
-                app:layout_constraintStart_toEndOf="@+id/news_image_view" />
+                app:layout_constraintEnd_toEndOf="@id/news_image_view"
+                app:layout_constraintStart_toStartOf="@id/news_image_view"
+                app:layout_constraintTop_toBottomOf="@id/news_image_view" />
 
             <TextView
                 android:id="@+id/news_author_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/small_distance"
                 android:alpha="0.6"
+                android:maxLines="1"
                 android:text="خبرگزاری فارس"
-                app:layout_constraintBottom_toTopOf="@+id/news_category_tv"
-                app:layout_constraintStart_toEndOf="@+id/news_image_view"
+                app:layout_constraintEnd_toEndOf="@id/news_image_view"
+                app:layout_constraintStart_toStartOf="@id/news_image_view"
                 app:layout_constraintTop_toBottomOf="@+id/news_title_tv" />
 
             <TextView
                 android:id="@+id/news_pubDate_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_distance"
                 android:alpha="0.4"
                 android:text="۳ ساعت پیش"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/news_title_tv" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

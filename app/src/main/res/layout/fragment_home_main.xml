@@ -21,7 +21,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/medium_distance">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/home_main_layout"
@@ -32,11 +33,11 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/popular_news_tv"
+                        android:id="@+id/trending_news_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/medium_distance"
-                        android:text="@string/popular_news"
+                        android:layout_marginStart="@dimen/large_distance"
+                        android:text="@string/trending_news"
                         android:textSize="@dimen/medium_text_size"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
@@ -49,10 +50,74 @@
                         android:drawableEnd="@drawable/arrow_right"
                         android:text="@string/view_all"
                         android:textColor="?attr/colorPrimary"
+                        app:layout_constraintBottom_toBottomOf="@id/trending_news_tv"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/trending_news_tv" />
+
+                    <RelativeLayout
+                        android:id="@+id/trending_relative_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_distance"
+                        android:layout_marginBottom="@dimen/small_distance"
+                        app:layout_constraintTop_toBottomOf="@+id/trending_news_tv">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/trending_news_rv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:orientation="horizontal"
+                            android:paddingStart="0dp"
+                            android:paddingEnd="@dimen/small_distance"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/trending_shimmer_fl"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <include layout="@layout/shimmer_trending_news_item" />
+
+                                <include layout="@layout/shimmer_trending_news_item" />
+
+                                <include layout="@layout/shimmer_trending_news_item" />
+
+                                <include layout="@layout/shimmer_trending_news_item" />
+
+                                <include layout="@layout/shimmer_trending_news_item" />
+                            </LinearLayout>
+                        </com.facebook.shimmer.ShimmerFrameLayout>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/popular_news_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/large_distance"
+                        android:layout_marginTop="@dimen/medium_distance"
+                        android:text="@string/popular_news"
+                        android:textSize="@dimen/medium_text_size"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/trending_relative_layout" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/medium_distance"
+                        android:drawableEnd="@drawable/arrow_right"
+                        android:text="@string/view_all"
+                        android:textColor="?attr/colorPrimary"
                         app:layout_constraintBottom_toBottomOf="@id/popular_news_tv"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/popular_news_tv" />
-
 
                     <RelativeLayout
                         android:id="@+id/popular_relative_layout"
@@ -72,7 +137,7 @@
                             android:id="@+id/popular_shimmer_fl"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:visibility="visible">
+                            android:visibility="gone">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -92,8 +157,8 @@
                         android:id="@+id/important_news_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/medium_distance"
-                        android:layout_marginTop="@dimen/small_distance"
+                        android:layout_marginStart="@dimen/large_distance"
+                        android:layout_marginTop="@dimen/medium_distance"
                         android:text="@string/important_news"
                         android:textSize="@dimen/medium_text_size"
                         android:textStyle="bold"
@@ -129,7 +194,7 @@
                             android:id="@+id/important_shimmer_fl"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:visibility="visible">
+                            android:visibility="gone">
 
                             <LinearLayout
                                 android:layout_width="match_parent"

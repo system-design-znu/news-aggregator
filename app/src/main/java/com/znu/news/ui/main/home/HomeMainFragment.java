@@ -12,13 +12,10 @@ import androidx.lifecycle.ViewModelProvider;
 import com.znu.news.R;
 import com.znu.news.databinding.FragmentHomeMainBinding;
 import com.znu.news.model.Error;
-import com.znu.news.model.News;
 import com.znu.news.ui.base.BaseViewModelFragment;
 import com.znu.news.ui.main.comn.NewsAdapter;
 import com.znu.news.utils.Utils;
 import com.znu.news.viewmodel.HomeViewModel;
-
-import java.util.Arrays;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -37,7 +34,7 @@ public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBind
 
     @Override
     protected void initViewModel() {
-        viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        viewModel = new ViewModelProvider(requireParentFragment()).get(HomeViewModel.class);
     }
 
     @Override
@@ -45,32 +42,27 @@ public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBind
         super.onViewCreated(view, savedInstanceState);
 
         binding.homeMainRl.setOnRefreshListener(() -> {
-            viewModel.loadData();
 
             new Handler().postDelayed(
-                    (Runnable) () -> {
+                    () -> {
                         binding.homeMainRl.setRefreshing(false);
                     }, Utils.SWIPE_REFRESH_TIME
             );
         });
 
         setUpAdapters();
-
-        new Handler().postDelayed((Runnable) this::observeData, 2000);
+        observeData();
     }
 
     private void setUpAdapters() {
-        trendingNewsAdapter = new NewsAdapter();
+        trendingNewsAdapter = new NewsAdapter(true);
+        binding.trendingNewsRv.setAdapter(trendingNewsAdapter);
 
         popularNewsAdapter = new NewsAdapter();
         binding.popularNewsRv.setAdapter(popularNewsAdapter);
-        binding.popularShimmerFl.setVisibility(View.VISIBLE);
-        binding.popularShimmerFl.startShimmer();
 
         importantNewsAdapter = new NewsAdapter();
         binding.importantNewsRv.setAdapter(importantNewsAdapter);
-        binding.importantShimmerFl.setVisibility(View.VISIBLE);
-        binding.importantShimmerFl.startShimmer();
     }
 
     private void observeData() {
@@ -80,61 +72,69 @@ public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBind
     }
 
     private void observeImportantNews() {
-        //call from api
-//        viewModel.observeImportantNews().observe(getViewLifecycleOwner(), response -> {
-//            switch (response.status) {
-//                case LOADING:
-//                    binding.popularNewsProgressbar.setVisibility(View.VISIBLE);
-//                    break;
-//
-//                case ERROR:
-//                    binding.popularNewsProgressbar.setVisibility(View.GONE);
-//                    handleError(response.error);
-//                    break;
-//
-//                case SUCCESS:
-//                    break;
-//            }
-//        });
-        importantNewsAdapter.submitData(Arrays.asList(new News(), new News(), new News()));
-        binding.importantShimmerFl.setVisibility(View.GONE);
-        binding.importantShimmerFl.stopShimmer();
+        viewModel.observeImportantNews().observe(getViewLifecycleOwner(), response -> {
+            switch (response.status) {
+                case LOADING:
+                    binding.importantShimmerFl.setVisibility(View.VISIBLE);
+                    binding.importantShimmerFl.startShimmer();
+                    break;
+
+                case ERROR:
+                    binding.importantShimmerFl.setVisibility(View.GONE);
+                    binding.importantShimmerFl.stopShimmer();
+                    handleError(response.error);
+                    break;
+
+                case SUCCESS:
+                    importantNewsAdapter.submitData(response.data.subList(0, 3));
+                    binding.importantShimmerFl.setVisibility(View.GONE);
+                    binding.importantShimmerFl.stopShimmer();
+                    break;
+            }
+        });
     }
 
     private void observePopularNews() {
-        //call from api
-//        viewModel.observePopularNews().observe(getViewLifecycleOwner(), response -> {
-//            switch (response.status) {
-//                case LOADING:
-//                    binding.popularNewsProgressbar.setVisibility(View.VISIBLE);
-//                    break;
-//
-//                case ERROR:
-//                    binding.popularNewsProgressbar.setVisibility(View.GONE);
-//                    handleError(response.error);
-//                    break;
-//
-//                case SUCCESS:
-//                    break;
-//            }
-//        });
-        popularNewsAdapter.submitData(Arrays.asList(new News(), new News(), new News()));
-        binding.popularShimmerFl.setVisibility(View.GONE);
-        binding.popularShimmerFl.stopShimmer();
+        viewModel.observePopularNews().observe(getViewLifecycleOwner(), response -> {
+            switch (response.status) {
+                case LOADING:
+                    binding.popularShimmerFl.setVisibility(View.VISIBLE);
+                    binding.popularShimmerFl.startShimmer();
+                    break;
+
+                case ERROR:
+                    binding.popularShimmerFl.setVisibility(View.GONE);
+                    binding.popularShimmerFl.stopShimmer();
+                    handleError(response.error);
+                    break;
+
+                case SUCCESS:
+                    popularNewsAdapter.submitData(response.data.subList(0, 3));
+                    binding.popularShimmerFl.setVisibility(View.GONE);
+                    binding.popularShimmerFl.stopShimmer();
+                    break;
+            }
+        });
     }
 
     private void observeTrendingNews() {
         viewModel.observeTrendingNews().observe(getViewLifecycleOwner(), response -> {
             switch (response.status) {
                 case LOADING:
+                    binding.trendingShimmerFl.setVisibility(View.VISIBLE);
+                    binding.trendingShimmerFl.startShimmer();
                     break;
 
                 case ERROR:
+                    binding.trendingShimmerFl.setVisibility(View.GONE);
+                    binding.trendingShimmerFl.stopShimmer();
                     handleError(response.error);
                     break;
 
                 case SUCCESS:
-                    Toast.makeText(activity, "SUCCESS error", Toast.LENGTH_SHORT).show();
+                    trendingNewsAdapter.submitData(response.data.subList(0, 5));
+                    binding.trendingShimmerFl.setVisibility(View.GONE);
+                    binding.trendingShimmerFl.stopShimmer();
                     break;
             }
         });
