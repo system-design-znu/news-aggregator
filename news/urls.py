@@ -16,9 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.documentation import include_docs_urls
+from rest_framework.schemas import get_schema_view
+
+DOCS_TITLE = "News docs"
+DOCS_DESCRIPTION = "v0"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v0/news/irna', include('rss_to_json.urls')),
-    path('docs/', include_docs_urls()),
+    path('schema/', get_schema_view(title="News schema", description="v0")),
+    path('docs/', include_docs_urls(DOCS_TITLE, DOCS_DESCRIPTION)),
 ]
