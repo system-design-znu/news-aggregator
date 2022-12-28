@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.znu.news.R;
 import com.znu.news.databinding.FragmentHomeBinding;
+import com.znu.news.di.GlideApp;
 import com.znu.news.ui.base.BaseViewModelFragment;
 import com.znu.news.ui.base.FragmentStateAdapter;
 import com.znu.news.viewmodel.HomeViewModel;
@@ -30,13 +31,17 @@ public class HomeFragment extends BaseViewModelFragment<FragmentHomeBinding, Hom
     }
 
     @Override
-    public int getLayoutId() {
-        return R.layout.fragment_home;
+    protected FragmentHomeBinding initViewBinding() {
+        return FragmentHomeBinding.inflate(getLayoutInflater());
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        GlideApp.with(this)
+                .load(R.drawable.image)
+                .into(binding.profileImageView);
 
         setUpViewPager();
     }

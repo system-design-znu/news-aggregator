@@ -10,13 +10,16 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class SearchFragment extends BaseViewModelFragment<FragmentSearchBinding, SearchViewModel> {
 
+    public SearchFragment() {
+    }
+
     @Override
     protected void initViewModel() {
 
     }
 
     @Override
-    public int getLayoutId() {
-        return R.layout.fragment_search;
+    protected FragmentSearchBinding initViewBinding() {
+        return FragmentSearchBinding.inflate(getLayoutInflater());
     }
 }

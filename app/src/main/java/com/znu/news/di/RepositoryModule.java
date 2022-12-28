@@ -28,8 +28,8 @@ public class RepositoryModule {
 
     @Provides
     @Singleton
-    UserRepository provideUserRepository(UserService userService, AppPreferencesHelper appPreferencesHelper) {
-        return new UserRepository_Impl(userService, appPreferencesHelper);
+    UserRepository provideUserRepository(UserService userService) {
+        return new UserRepository_Impl(userService);
     }
 
     @Provides

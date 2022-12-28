@@ -1,9 +1,9 @@
 package com.znu.news.ui.base;
 
-import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
 
-public abstract class BaseViewHolder<ITEM, IB extends ViewDataBinding> extends RecyclerView.ViewHolder {
+public abstract class BaseViewHolder<Item, IB extends ViewBinding> extends RecyclerView.ViewHolder {
 
     public IB itemBinding;
 
@@ -12,5 +12,5 @@ public abstract class BaseViewHolder<ITEM, IB extends ViewDataBinding> extends R
         this.itemBinding = itemBinding;
     }
 
-    public abstract void bind(ITEM item);
+    public abstract void bind(Item item);
 }

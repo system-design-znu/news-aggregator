@@ -27,21 +27,26 @@ public class Error {
         public boolean isServerError;
 
         public RemoteServiceError(int errorCode) {
-            setError(errorCode);
+            errorType = ErrorType.valueOf(errorCode);
+            checkError(errorCode);
         }
 
         public RemoteServiceError(int errorCode, Throwable error) {
             errorType = ErrorType.valueOf(errorCode);
             this.error = error;
-            setError(errorCode);
+            checkError(errorCode);
+        }
+
+        public RemoteServiceError(ErrorType errorType) {
+            super(errorType);
         }
 
         public RemoteServiceError(ErrorType errorType, Throwable error) {
             super(errorType, error);
-            setError(errorType.getErrorCode());
+            checkError(errorType.errorCode);
         }
 
-        private void setError(int errorCode) {
+        private void checkError(int errorCode) {
             isClientError = (errorCode > 399) && (errorCode < 500);
             isServerError = (errorCode > 499) && (errorCode < 600);
         }

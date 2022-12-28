@@ -1,5 +1,6 @@
 package com.znu.news.di;
 
+import com.google.gson.Gson;
 import com.znu.news.BuildConfig;
 import com.znu.news.data.local.prefs.AppPreferencesHelper;
 import com.znu.news.data.remote.HeaderInterceptorHelper;

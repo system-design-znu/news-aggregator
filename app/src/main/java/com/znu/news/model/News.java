@@ -2,18 +2,26 @@ package com.znu.news.model;
 
 public class News {
 
+    private int id;
     private String title;
     private String pubDate;
     private String author;
     private String mediaUrl;
     private String category;
-
     public News(String title, String pubDate, String author, String mediaUrl, String category) {
         this.title = title;
         this.pubDate = pubDate;
         this.author = author;
         this.mediaUrl = mediaUrl;
         this.category = category;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

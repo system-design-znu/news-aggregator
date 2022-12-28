@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl"
+    tools:context=".ui.main.news.NewsDetailsFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/news_details_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/transparent"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorOnBackground"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:toolbarId="@id/fake_toolbar">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="464dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image"
+                app:layout_collapseMode="parallax" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/fake_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_distance"
+                android:layout_marginTop="@dimen/medium_distance"
+                android:layout_marginEnd="@dimen/small_distance"
+                app:layout_collapseMode="pin" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/news_details_sv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-24dp"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/top_24corner_bg"
+            android:backgroundTint="?attr/colorOnBackground"
+            android:paddingStart="@dimen/large_distance"
+            android:paddingTop="@dimen/medium_distance"
+            android:paddingEnd="@dimen/large_distance"
+            android:paddingBottom="@dimen/medium_distance">
+
+            <TextView
+                android:id="@+id/news_category_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/all_4corner_bg"
+                android:backgroundTint="?attr/colorSecondary"
+                android:paddingStart="@dimen/medium_distance"
+                android:paddingTop="@dimen/small_distance"
+                android:paddingEnd="@dimen/medium_distance"
+                android:paddingBottom="@dimen/small_distance"
+                android:text="تکنولوژی"
+                android:textColor="?attr/colorPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/news_pubDate_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_bg"
+                android:paddingStart="@dimen/medium_distance"
+                android:paddingTop="@dimen/small_distance"
+                android:paddingEnd="@dimen/medium_distance"
+                android:paddingBottom="@dimen/small_distance"
+                android:text="3 ساعت پیش"
+                android:textColor="?attr/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/news_category_tv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/news_category_tv" />
+
+            <TextView
+                android:id="@+id/news_title_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_distance"
+                android:maxLines="2"
+                android:text="قیمت آیفون ۱۳ به ۶۰,۰۰۰ میلیون رسید."
+                android:textSize="@dimen/small_text_size"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/news_category_tv" />
+
+            <TextView
+                android:id="@+id/news_author_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_distance"
+                android:alpha="0.6"
+                android:text="خبرگزاری فارس"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/news_title_tv" />
+
+            <View
+                android:id="@+id/divider_view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:alpha="0.1"
+                android:background="?attr/colorOnSurface"
+                app:layout_constraintTop_toBottomOf="@id/news_author_tv" />
+
+            <TextView
+                android:id="@+id/news_description_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_distance"
+                android:text="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد."
+                app:layout_constraintTop_toBottomOf="@+id/divider_view" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/news_details_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_distance"
+        android:layout_marginTop="@dimen/medium_distance"
+        android:layout_marginEnd="@dimen/small_distance"
+        android:layoutDirection="ltr"
+        app:menu="@menu/news_menu"
+        app:navigationIcon="@drawable/arrow_left" />
+
+    <View
+        android:id="@+id/divider_view2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="72dp"
+        android:alpha="0.1"
+        android:background="?attr/colorControlNormal"
+        android:visibility="gone" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

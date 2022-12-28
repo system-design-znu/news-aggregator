@@ -2,6 +2,7 @@ package com.znu.news.ui.main.home;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.znu.news.R;
 import com.znu.news.databinding.FragmentHomeMainBinding;
 import com.znu.news.model.Error;
+import com.znu.news.model.News;
 import com.znu.news.ui.base.BaseViewModelFragment;
 import com.znu.news.ui.main.comn.NewsAdapter;
 import com.znu.news.utils.Utils;
@@ -20,16 +22,19 @@ import com.znu.news.viewmodel.HomeViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBinding, HomeViewModel> {
+public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBinding, HomeViewModel> implements NewsAdapter.NewsCallBack {
 
 
     private NewsAdapter trendingNewsAdapter;
     private NewsAdapter popularNewsAdapter;
     private NewsAdapter importantNewsAdapter;
 
+    public HomeMainFragment() {
+    }
+
     @Override
-    public int getLayoutId() {
-        return R.layout.fragment_home_main;
+    protected FragmentHomeMainBinding initViewBinding() {
+        return FragmentHomeMainBinding.inflate(getLayoutInflater());
     }
 
     @Override
@@ -55,13 +60,16 @@ public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBind
     }
 
     private void setUpAdapters() {
-        trendingNewsAdapter = new NewsAdapter(true);
+        trendingNewsAdapter = new NewsAdapter(NewsAdapter.Card.TRENDING_CARD);
+        trendingNewsAdapter.setNewsCallBack(this);
         binding.trendingNewsRv.setAdapter(trendingNewsAdapter);
 
         popularNewsAdapter = new NewsAdapter();
+        popularNewsAdapter.setNewsCallBack(this);
         binding.popularNewsRv.setAdapter(popularNewsAdapter);
 
         importantNewsAdapter = new NewsAdapter();
+        importantNewsAdapter.setNewsCallBack(this);
         binding.importantNewsRv.setAdapter(importantNewsAdapter);
     }
 
@@ -80,13 +88,11 @@ public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBind
                     break;
 
                 case ERROR:
-                    binding.importantShimmerFl.setVisibility(View.GONE);
-                    binding.importantShimmerFl.stopShimmer();
                     handleError(response.error);
                     break;
 
                 case SUCCESS:
-                    importantNewsAdapter.submitData(response.data.subList(0, 3));
+                    importantNewsAdapter.submitData(response.data.subList(4, 7));
                     binding.importantShimmerFl.setVisibility(View.GONE);
                     binding.importantShimmerFl.stopShimmer();
                     break;
@@ -103,8 +109,6 @@ public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBind
                     break;
 
                 case ERROR:
-                    binding.popularShimmerFl.setVisibility(View.GONE);
-                    binding.popularShimmerFl.stopShimmer();
                     handleError(response.error);
                     break;
 
@@ -126,13 +130,11 @@ public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBind
                     break;
 
                 case ERROR:
-                    binding.trendingShimmerFl.setVisibility(View.GONE);
-                    binding.trendingShimmerFl.stopShimmer();
                     handleError(response.error);
                     break;
 
                 case SUCCESS:
-                    trendingNewsAdapter.submitData(response.data.subList(0, 5));
+                    trendingNewsAdapter.submitData(response.data.subList(5, 10));
                     binding.trendingShimmerFl.setVisibility(View.GONE);
                     binding.trendingShimmerFl.stopShimmer();
                     break;
@@ -141,19 +143,25 @@ public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBind
     }
 
     private void handleError(Error error) {
+        Error.RemoteServiceError remoteServiceError = (Error.RemoteServiceError) error;
         switch (error.errorType) {
-            case Connection:
-                Toast.makeText(activity, "Connection error", Toast.LENGTH_SHORT).show();
-                break;
-
-            case Unauthorized:
-                Toast.makeText(activity, "Unauthorized error", Toast.LENGTH_SHORT).show();
-                openLoginActivity();
-                break;
-
             case Unknown:
                 Toast.makeText(activity, "Unknown error", Toast.LENGTH_SHORT).show();
                 break;
+
+            default:
+                if (remoteServiceError.isServerError) {
+                    Toast.makeText(activity, "isServerError error", Toast.LENGTH_SHORT).show();
+                } else if (remoteServiceError.isClientError) {
+                    Toast.makeText(activity, "isClientError error", Toast.LENGTH_SHORT).show();
+                }
         }
+    }
+
+    @Override
+    public void onNewsClick(News news) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("newsId", news.getId());
+        navTo(R.id.action_to_newsDetailsFragment, bundle);
     }
 }

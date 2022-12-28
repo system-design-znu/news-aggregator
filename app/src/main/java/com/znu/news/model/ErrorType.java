@@ -3,7 +3,6 @@ package com.znu.news.model;
 public enum ErrorType {
 
     Unknown(-1),
-    Connection(0),
 
     // Client Errors
     BadRequest(400),
@@ -34,6 +33,7 @@ public enum ErrorType {
     TooManyRequests(429),
     RequestHeaderFieldsTooLarge(431),
     UnavailableForLegalReasons(451),
+    Connection(499),
 
     // Server Errors
     InternalServerError(500),
@@ -48,7 +48,7 @@ public enum ErrorType {
     NotExtended(510),
     NetworkAuthenticationRequired(511);
 
-    private final int errorCode;
+    public final int errorCode;
 
     ErrorType(int errorCode) {
         this.errorCode = errorCode;
@@ -61,9 +61,5 @@ public enum ErrorType {
             }
         }
         return Unknown;
-    }
-
-    public int getErrorCode() {
-        return errorCode;
     }
 }

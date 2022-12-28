@@ -8,21 +8,9 @@ import javax.inject.Inject;
 public class UserRepository_Impl implements UserRepository {
 
     private UserService userService;
-    private AppPreferencesHelper appPreferencesHelper;
 
     @Inject
-    public UserRepository_Impl(UserService userService, AppPreferencesHelper appPreferencesHelper) {
+    public UserRepository_Impl(UserService userService) {
         this.userService = userService;
-        this.appPreferencesHelper = appPreferencesHelper;
-    }
-
-    @Override
-    public String getAccessToken() {
-        return appPreferencesHelper.getAccessToken();
-    }
-
-    @Override
-    public void setAccessToken(String accessToken) {
-        appPreferencesHelper.setAccessToken(accessToken);
     }
 }

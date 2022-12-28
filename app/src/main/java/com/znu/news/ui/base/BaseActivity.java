@@ -6,27 +6,30 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
+import androidx.viewbinding.ViewBinding;
 
 import com.znu.news.ui.sign.LoginActivity;
+import com.znu.news.utils.SessionManager;
 
-public abstract class BaseActivity<B extends ViewDataBinding> extends AppCompatActivity {
+import javax.inject.Inject;
+
+public abstract class BaseActivity<B extends ViewBinding> extends AppCompatActivity {
+
+    @Inject
+    public SessionManager sessionManager;
 
     protected B binding;
 
-    public abstract
-    @LayoutRes
-    int getLayoutId();
+    protected abstract B initViewBinding();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, getLayoutId());
-        binding.executePendingBindings();
+
+        binding = initViewBinding();
+        setContentView(binding.getRoot());
     }
 
     public void hideKeyboard() {
@@ -50,7 +53,10 @@ public abstract class BaseActivity<B extends ViewDataBinding> extends AppCompatA
     }
 
     public Intent toActivity(Class<?> destination) {
-        return new Intent(this, destination);
+        Intent intent = new Intent(this, destination);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return intent;
     }
 
     public void openLoginActivity() {

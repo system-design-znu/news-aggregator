@@ -7,10 +7,9 @@
         <item>صفحه اصلی</item>
         <item>مورد علاقه</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="popular_news">اخبار پربازدید</string>
     <string name="view_all">مشاهده همه</string>
     <string name="important_news">اخبار مهم</string>
-    <string name="trending_news">اخبار داغ</string>
+    <string name="trending_news">اخبار داغ 🔥</string>
+    <string name="share">اشتراک گذاری</string>
 </resources>

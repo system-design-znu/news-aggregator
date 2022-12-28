@@ -7,10 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.databinding.ObservableBoolean;
-import androidx.databinding.ViewDataBinding;
+import androidx.viewbinding.ViewBinding;
 
-public abstract class BaseViewModelFragment<B extends ViewDataBinding, VM extends BaseViewModel> extends BaseFragment<B> {
+public abstract class BaseViewModelFragment<B extends ViewBinding, VM extends BaseViewModel> extends BaseFragment<B> {
 
     protected VM viewModel;
 

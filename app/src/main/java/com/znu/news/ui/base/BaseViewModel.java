@@ -1,6 +1,5 @@
 package com.znu.news.ui.base;
 
-import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.ViewModel;
 
 import com.znu.news.utils.rx.SchedulerProvider;
