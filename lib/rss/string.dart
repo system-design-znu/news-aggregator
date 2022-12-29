@@ -1,4 +1,11 @@
-class AppStrings {
-  static String cricArticleUrl = "https://api.rss2json.com/v1/api.json?rss_url=https://www.irna.ir/rss";
-  
+import '../data/models/api_result_model.dart';
+import '../data/repository/news_repository.dart';
+
+class ApiRepository {
+  final _provider = ApiProvider();
+  Future<NewsModel> fetchNewsList() {
+    return _provider.fetchNewsList();
+  }
 }
+
+class NetworkError extends Error {}

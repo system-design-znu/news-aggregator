@@ -16,7 +16,7 @@ class BuildMostSeenContainer extends StatelessWidget {
         itemCount: 10,
         scrollDirection: Axis.vertical,
         itemBuilder: ((context, index) {
-          return Padding(
+          return const Padding(
             padding: EdgeInsets.symmetric(horizontal: 40, vertical: 8),
             child: MostSeenContainer(),
           );

@@ -12,7 +12,7 @@ class MostSeenContainer extends StatelessWidget {
     return Container(
       width: 341,
       height: 72,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(
           Radius.circular(8),

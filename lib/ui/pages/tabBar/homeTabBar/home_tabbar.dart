@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_analysis_design/bloc/news_bloc.dart';
 import 'package:news_analysis_design/ui/pages/tabBar/hotNewsContainer/build_container_hot_news.dart';
 import 'package:news_analysis_design/ui/pages/tabBar/mostSeenContainer/build_container_most_seen.dart';
+import '../../../../bloc/news_event.dart';
 
 class HomeTabBarView extends StatefulWidget {
   const HomeTabBarView({Key? key}) : super(key: key);
@@ -11,6 +14,14 @@ class HomeTabBarView extends StatefulWidget {
 
 class _HomeTabBarViewState extends State<HomeTabBarView>
     with SingleTickerProviderStateMixin {
+  final NewsBloc _newsBloc = NewsBloc();
+  @override
+  void initState() {
+    super.initState();
+
+    _newsBloc.add(GetNewsList());
+  }
+
   @override
   Widget build(BuildContext context) {
     return sliverHomeTabBar();
@@ -42,19 +53,30 @@ class _HomeTabBarViewState extends State<HomeTabBarView>
                   ],
                 ),
                 const Spacer(),
-                const Text(
-                  'اخبار داغ',
-                  style: TextStyle(
-                      fontFamily: 'IS',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w900),
+                Row(
+                  children: [
+                    Image.asset('assets/images/fire.png'),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    const Text(
+                      'اخبار داغ',
+                      style: TextStyle(
+                          fontFamily: 'IS',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
         ),
         SliverToBoxAdapter(
-          child: BuildHotNewsContainer(),
+          child: BlocProvider(
+            create: (context) => _newsBloc,
+            child: BuildHotNewsContainer(),
+          ),
         ),
         SliverToBoxAdapter(
           child: Padding(
@@ -78,7 +100,7 @@ class _HomeTabBarViewState extends State<HomeTabBarView>
                     ),
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
                 const Text(
                   'اخبار پربازدید',
                   style: TextStyle(
@@ -90,10 +112,12 @@ class _HomeTabBarViewState extends State<HomeTabBarView>
             ),
           ),
         ),
-        SliverToBoxAdapter(
+        const SliverToBoxAdapter(
           child: BuildMostSeenContainer(),
         )
       ],
     );
   }
+
+  Widget _buildLoading() => Center(child: CircularProgressIndicator());
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../bloc/news_bloc.dart';
 import '../hotNewsContainer/build_container_hot_news.dart';
 import '../mostSeenContainer/build_container_most_seen.dart';
 
@@ -55,7 +57,10 @@ class _FavoriteTabBarViewState extends State<FavoriteTabBarView>
           ),
         ),
         SliverToBoxAdapter(
-          child: BuildHotNewsContainer(),
+          child: BlocProvider(
+            create: (context) => NewsBloc(),
+            child: BuildHotNewsContainer(),
+          ),
         ),
         SliverToBoxAdapter(
           child: Padding(
@@ -79,7 +84,7 @@ class _FavoriteTabBarViewState extends State<FavoriteTabBarView>
                     ),
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
                 const Text(
                   'اخبار پربازدید',
                   style: TextStyle(
@@ -91,8 +96,8 @@ class _FavoriteTabBarViewState extends State<FavoriteTabBarView>
             ),
           ),
         ),
-        SliverToBoxAdapter(
-          child: BuildMostSeenContainer(),
+        const SliverToBoxAdapter(
+          child:  BuildMostSeenContainer(),
         )
       ],
     );

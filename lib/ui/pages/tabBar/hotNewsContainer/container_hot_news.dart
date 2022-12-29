@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:news_analysis_design/data/models/api_result_model.dart';
 
 class HotNewsContainer extends StatelessWidget {
-  const HotNewsContainer({
-    Key? key,
-  }) : super(key: key);
+  HotNewsContainer(
+      {Key? key, required this.title, required this.date, required this.author})
+      : super(key: key);
+  String title;
+  String date;
+  String author;
+
+  get kTransparentImage => null;
 
   @override
   Widget build(BuildContext context) {
+    return newMethod(NewsModel());
+  }
+
+  Container newMethod(NewsModel newsModel) {
     return Container(
       height: 326,
       width: 250,
@@ -32,44 +42,46 @@ class HotNewsContainer extends StatelessWidget {
                 Directionality(
                   textDirection: TextDirection.rtl,
                   child: Text(
-                    'رکورد گران قیمت‌ترین ان‌اف‌تی دنیا شکسته شد',
-                    style: TextStyle(
+                    title,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
                       fontSize: 10,
                       fontFamily: 'IS',
                       fontWeight: FontWeight.w700,
                     ),
                     softWrap: true,
+                    maxLines: 1,
                   ),
                 ),
-                SizedBox(
-                  height: 12,
+                const SizedBox(
+                  height: 3,
                 ),
-                Text(
-                  'ان‌اف‌تی dr.wong',
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontFamily: 'IS',
-                    fontWeight: FontWeight.w400,
+                Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 2, vertical: 12),
+                    child: Text(
+                      author,
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontFamily: 'IS',
+                        fontWeight: FontWeight.w400,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 15,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image.asset('assets/images/icon_like_gray.png'),
-                      Text(
-                        'چند دقیقه قبل',
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontFamily: 'IS',
-                          fontWeight: FontWeight.w200,
-                        ),
-                      ),
-                    ],
+                  padding: const EdgeInsets.only(bottom: 0, top: 2),
+                  child: Text(
+                    date,
+                    style: const TextStyle(
+                      fontSize: 10,
+                      fontFamily: 'IS',
+                      fontWeight: FontWeight.w200,
+                    ),
+                    maxLines: 1,
                   ),
                 )
               ],

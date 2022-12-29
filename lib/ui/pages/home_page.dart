@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_analysis_design/ui/pages/appbar/appbar.dart';
 import 'package:news_analysis_design/ui/pages/tabBar/favoriteTabBar/favorite_tabbar.dart';
 import 'package:news_analysis_design/ui/pages/tabBar/homeTabBar/home_tabbar.dart';
+import 'package:news_analysis_design/ui/pages/tabBar/hotNewsContainer/container_hot_news.dart';
 import 'package:news_analysis_design/ui/pages/tabBar/mostSeenContainer/container_most_seen.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,6 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   TabController? _tabController;
+  var _bottonNavigationBar = 0;
   int isTouched = 0;
 
   @override
@@ -24,19 +26,60 @@ class _HomePageState extends State<HomePage>
         setState(
           () {
             isTouched = _tabController!.index;
-            //print(isTouched);
           },
         );
       },
     );
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffF9F9F9),
       appBar: getAppBar(),
       body: getTabView(),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(),
+        height: 89,
+        child: BottomNavigationBar(
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          currentIndex: _bottonNavigationBar,
+          onTap: (index) {
+            setState(() {
+              _bottonNavigationBar = index;
+            });
+          },
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.white,
+          items: [
+            BottomNavigationBarItem(
+              label: '',
+              icon: Image.asset(
+                'assets/images/icon_home.png',
+              ),
+            ),
+            BottomNavigationBarItem(
+              label: '',
+              icon: Image.asset('assets/images/icon_search.png'),
+            ),
+            BottomNavigationBarItem(
+              label: '',
+              icon: Image.asset('assets/images/icon_setting.png'),
+            )
+          ],
+        ),
+      ),
     );
+  }
+
+  List<Widget> getLayout() {
+    return <Widget>[
+      HomeTabBarView(),
+      //HotNewsContainer(),
+      MostSeenContainer(),
+      MostSeenContainer(),
+    ];
   }
 
   AppBar getAppBar() {
@@ -118,7 +161,7 @@ class _HomePageState extends State<HomePage>
   TabBarView getTabView() {
     return TabBarView(
       controller: _tabController,
-      children: const <Widget>[
+      children: <Widget>[
         FavoriteTabBarView(),
         HomeTabBarView(),
       ],
