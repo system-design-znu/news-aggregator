@@ -125,7 +125,7 @@ async def generator():
             print('[Exchange Created] => news_aggregator_direct')
         else:
             rabbit_mq_direct_exchange = await rabbit_mq_channel.declare_exchange('news_aggregator_direct', rabbit_mq_exchange_type.DIRECT, durable=True)
-        rabbit_mq_urls_queue = await rabbit_mq_channel.declare_queue('url')
+        rabbit_mq_urls_queue = await rabbit_mq_channel.declare_queue('url', durable=True)
         await rabbit_mq_urls_queue.bind(rabbit_mq_direct_exchange, routing_key='url')
         while True:
             if not shutdown_command_issued:
