@@ -29,7 +29,7 @@ shutdown_event = asyncio.Event()
 # commits.
 rss_container = [
     {
-        'url': 'https://www.isna.ir/rss-help',
+        'url': 'https://www.isna.ir/rss/tp/149',
         'fetch_counts_per_five_minutes': 300,
     },
     {
@@ -125,8 +125,8 @@ async def generator():
             print('[Exchange Created] => news_aggregator_direct')
         else:
             rabbit_mq_direct_exchange = await rabbit_mq_channel.declare_exchange('news_aggregator_direct', rabbit_mq_exchange_type.DIRECT, durable=True)
-        rabbit_mq_urls_queue = await rabbit_mq_channel.declare_queue('url', durable=True)
-        await rabbit_mq_urls_queue.bind(rabbit_mq_direct_exchange, routing_key='url')
+        rabbit_mq_urls_queue = await rabbit_mq_channel.declare_queue('fetchable_url', durable=True)
+        await rabbit_mq_urls_queue.bind(rabbit_mq_direct_exchange, routing_key='fetchable_url')
         while True:
             if not shutdown_command_issued:
                 shutdown_command_issued = False
