@@ -23,6 +23,7 @@
             app:toolbarId="@id/fake_toolbar">
 
             <ImageView
+                android:id="@+id/news_image_view"
                 android:layout_width="match_parent"
                 android:layout_height="464dp"
                 android:scaleType="centerCrop"
@@ -44,8 +45,8 @@
         android:id="@+id/news_details_sv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="-24dp"
         android:fillViewport="true"
+        android:layout_marginTop="-24dp"
         android:fitsSystemWindows="true"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
@@ -54,10 +55,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/top_24corner_bg"
             android:backgroundTint="?attr/colorOnBackground"
-            android:paddingStart="@dimen/large_distance"
-            android:paddingTop="@dimen/medium_distance"
-            android:paddingEnd="@dimen/large_distance"
-            android:paddingBottom="@dimen/medium_distance">
+            android:padding="@dimen/large_distance">
 
             <TextView
                 android:id="@+id/news_category_tv"
@@ -131,23 +129,21 @@
     </androidx.core.widget.NestedScrollView>
 
 
+    <View
+        android:id="@+id/status_bar_view"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:alpha="0.3"
+        android:background="?attr/colorControlNormal" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/news_details_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/small_distance"
-        android:layout_marginTop="@dimen/medium_distance"
+        android:layout_marginTop="@dimen/large_distance"
         android:layout_marginEnd="@dimen/small_distance"
         android:layoutDirection="ltr"
         app:menu="@menu/news_menu"
         app:navigationIcon="@drawable/arrow_left" />
-
-    <View
-        android:id="@+id/divider_view2"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="72dp"
-        android:alpha="0.1"
-        android:background="?attr/colorControlNormal"
-        android:visibility="gone" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

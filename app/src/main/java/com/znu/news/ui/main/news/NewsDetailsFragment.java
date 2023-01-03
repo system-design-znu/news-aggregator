@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.appbar.AppBarLayout;
 import com.znu.news.R;
 import com.znu.news.databinding.FragmentNewsDetailsBinding;
+import com.znu.news.di.GlideApp;
 import com.znu.news.ui.base.BaseViewModelFragment;
 import com.znu.news.viewmodel.NewsDetailsViewModel;
 
@@ -43,6 +44,11 @@ public class NewsDetailsFragment extends BaseViewModelFragment<FragmentNewsDetai
                 );
 
 
+        GlideApp.with(this)
+                .load(R.drawable.image)
+                .centerCrop()
+                .into(binding.newsImageView);
+
         setUpToolBar();
     }
 
@@ -67,10 +73,8 @@ public class NewsDetailsFragment extends BaseViewModelFragment<FragmentNewsDetai
                 }
 
                 if (scrollRange + verticalOffset == 0) {
-                    binding.dividerView2.setVisibility(View.VISIBLE);
 //                    getBaseActivity().getWindow().setStatusBarColor(getBaseActivity().getResources().getColor(R.color.black));
                 } else {
-                    binding.dividerView2.setVisibility(View.GONE);
 //                    getBaseActivity().getWindow().setStatusBarColor(getBaseActivity().getResources().getColor(R.color.black_100));
                 }
             }

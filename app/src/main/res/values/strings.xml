@@ -12,15 +12,13 @@
     <string name="important_news">اخبار مهم</string>
     <string name="trending_news">اخبار داغ 🔥</string>
     <string name="share">اشتراک گذاری</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="wellcom">خوش اومدی!</string>
+    <string name="welcome">خوش اومدی!</string>
     <string name="email">ایمیل</string>
     <string name="password">رمز عبور</string>
     <string name="login">وارد شدن</string>
-    <string name="choose_login">با گزینه زیر وارد شو!</string>
-    <string name="signUp">ثبت نام نکردی؟ ثبت نام</string>
-<!-- TODO: Remove or change this placeholder text -->
+    <string name="signUp">ثبت نام نکردی؟<font fgcolor='#5474FF'>ثبت نام</font></string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="firstName">نام</string>
     <string name="lastName">نام خانوادگی</string>
+    <string name="login_with_google">با گوگل وارد شوید</string>
 </resources>

@@ -1,8 +1,6 @@
 package com.znu.news.ui.main.home;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,7 +14,6 @@ import com.znu.news.model.Error;
 import com.znu.news.model.News;
 import com.znu.news.ui.base.BaseViewModelFragment;
 import com.znu.news.ui.main.comn.NewsAdapter;
-import com.znu.news.utils.Utils;
 import com.znu.news.viewmodel.HomeViewModel;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -45,15 +42,6 @@ public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBind
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        binding.homeMainRl.setOnRefreshListener(() -> {
-
-            new Handler().postDelayed(
-                    () -> {
-                        binding.homeMainRl.setRefreshing(false);
-                    }, Utils.SWIPE_REFRESH_TIME
-            );
-        });
 
         setUpAdapters();
         observeData();

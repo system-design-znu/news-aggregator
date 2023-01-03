@@ -1,6 +1,7 @@
 package com.znu.news.ui.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,5 +58,9 @@ public abstract class BaseFragment<B extends ViewBinding> extends Fragment {
 
     protected void navUp() {
         Navigation.findNavController(binding.getRoot()).navigateUp();
+    }
+
+    public Intent toActivity(Class<?> destination) {
+        return activity.toActivity(destination);
     }
 }

@@ -1,17 +1,16 @@
 package com.znu.news.ui.sign;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.znu.news.R;
 import com.znu.news.databinding.FragmentLoginBinding;
 import com.znu.news.ui.base.BaseViewModelFragment;
+import com.znu.news.ui.main.MainActivity;
 import com.znu.news.viewmodel.AuthViewModel;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -27,5 +26,16 @@ public class LoginFragment extends BaseViewModelFragment<FragmentLoginBinding, A
     @Override
     protected void initViewModel() {
         viewModel = new ViewModelProvider(activity).get(AuthViewModel.class);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        binding.signUpTextView.setOnClickListener(v -> navTo(R.id.action_loginFragment_to_signupFragment));
+        binding.loginButton.setOnClickListener(v -> {
+            startActivity(toActivity(MainActivity.class));
+            activity.finish();
+        });
     }
 }

@@ -26,17 +26,17 @@ public class NewsAdapter extends BaseAdapter<News> {
 
     @Override
     protected BaseViewHolder<News, ?> initViewHolder(ViewGroup parent) {
-        if (card == Card.TRENDING_CARD)
-            return new TrendingNewsViewHolder(
-                    TrendingNewsItemBinding.inflate(
+        if (card == Card.FULL_IMAGE_CARD)
+            return new FavoriteNewsViewHolder(
+                    FavoriteNewsItemBinding.inflate(
                             layoutInflater,
                             parent,
                             false
                     )
             );
-        else if (card == Card.FULL_IMAGE_CARD)
-            return new FavoriteNewsViewHolder(
-                    FavoriteNewsItemBinding.inflate(
+        else if (card == Card.TRENDING_CARD)
+            return new TrendingNewsViewHolder(
+                    TrendingNewsItemBinding.inflate(
                             layoutInflater,
                             parent,
                             false

@@ -1,7 +1,5 @@
 package com.znu.news.data.repo;
 
-import android.util.Log;
-
 import com.znu.news.data.remote.model.NewsDtoMapper;
 import com.znu.news.data.remote.services.NewsService;
 import com.znu.news.model.News;

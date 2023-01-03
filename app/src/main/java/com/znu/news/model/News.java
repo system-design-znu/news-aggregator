@@ -8,6 +8,7 @@ public class News {
     private String author;
     private String mediaUrl;
     private String category;
+
     public News(String title, String pubDate, String author, String mediaUrl, String category) {
         this.title = title;
         this.pubDate = pubDate;

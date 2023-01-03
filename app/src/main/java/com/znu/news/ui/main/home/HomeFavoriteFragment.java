@@ -1,7 +1,6 @@
 package com.znu.news.ui.main.home;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
