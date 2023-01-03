@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewbinding.ViewBinding;
 
-import com.znu.news.ui.sign.LoginActivity;
+import com.znu.news.ui.sign.AuthActivity;
 import com.znu.news.utils.SessionManager;
 
 import javax.inject.Inject;
@@ -60,7 +60,7 @@ public abstract class BaseActivity<B extends ViewBinding> extends AppCompatActiv
     }
 
     public void openLoginActivity() {
-        startActivity(toActivity(LoginActivity.class));
+        startActivity(toActivity(AuthActivity.class));
         finish();
     }
 }
