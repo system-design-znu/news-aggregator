@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewbinding.ViewBinding;
 
-import com.znu.news.ui.sign.AuthActivity;
+import com.znu.news.ui.auth.AuthActivity;
 import com.znu.news.utils.SessionManager;
 
 import javax.inject.Inject;

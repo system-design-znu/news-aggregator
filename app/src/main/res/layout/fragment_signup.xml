@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.sign.SignupFragment">
+    tools:context=".ui.auth.SignupFragment">
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -170,8 +170,6 @@
             android:layout_marginTop="@dimen/large_distance"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:paddingTop="@dimen/medium_distance"
-            android:paddingBottom="@dimen/medium_distance"
             android:stateListAnimator="@null"
             android:text="@string/login_with_google"
             android:textColor="?attr/colorControlNormal"

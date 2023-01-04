@@ -75,10 +75,6 @@ public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBind
                     binding.importantShimmerFl.startShimmer();
                     break;
 
-                case ERROR:
-                    handleError(response.error);
-                    break;
-
                 case SUCCESS:
                     importantNewsAdapter.submitData(response.data.subList(4, 7));
                     binding.importantShimmerFl.setVisibility(View.GONE);
@@ -94,10 +90,6 @@ public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBind
                 case LOADING:
                     binding.popularShimmerFl.setVisibility(View.VISIBLE);
                     binding.popularShimmerFl.startShimmer();
-                    break;
-
-                case ERROR:
-                    handleError(response.error);
                     break;
 
                 case SUCCESS:
@@ -117,10 +109,6 @@ public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBind
                     binding.trendingShimmerFl.startShimmer();
                     break;
 
-                case ERROR:
-                    handleError(response.error);
-                    break;
-
                 case SUCCESS:
                     trendingNewsAdapter.submitData(response.data.subList(5, 10));
                     binding.trendingShimmerFl.setVisibility(View.GONE);
@@ -128,22 +116,6 @@ public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBind
                     break;
             }
         });
-    }
-
-    private void handleError(Error error) {
-        Error.RemoteServiceError remoteServiceError = (Error.RemoteServiceError) error;
-        switch (error.errorType) {
-            case Unknown:
-                Toast.makeText(activity, "Unknown error", Toast.LENGTH_SHORT).show();
-                break;
-
-            default:
-                if (remoteServiceError.isServerError) {
-                    Toast.makeText(activity, "isServerError error", Toast.LENGTH_SHORT).show();
-                } else if (remoteServiceError.isClientError) {
-                    Toast.makeText(activity, "isClientError error", Toast.LENGTH_SHORT).show();
-                }
-        }
     }
 
     @Override

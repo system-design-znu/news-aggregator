@@ -62,24 +62,6 @@ public class NewsDetailsFragment extends BaseViewModelFragment<FragmentNewsDetai
             return false;
         });
 
-        binding.newsDetailsAppbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-
-            int scrollRange = -1;
-
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (scrollRange == -1) {
-                    scrollRange = appBarLayout.getTotalScrollRange();
-                }
-
-                if (scrollRange + verticalOffset == 0) {
-//                    getBaseActivity().getWindow().setStatusBarColor(getBaseActivity().getResources().getColor(R.color.black));
-                } else {
-//                    getBaseActivity().getWindow().setStatusBarColor(getBaseActivity().getResources().getColor(R.color.black_100));
-                }
-            }
-        });
-
         binding.newsDetailsToolbar.setNavigationOnClickListener(v -> navUp());
     }
 

@@ -39,6 +39,7 @@ public class Error {
 
         public RemoteServiceError(ErrorType errorType) {
             super(errorType);
+            checkError(errorType.errorCode);
         }
 
         public RemoteServiceError(ErrorType errorType, Throwable error) {

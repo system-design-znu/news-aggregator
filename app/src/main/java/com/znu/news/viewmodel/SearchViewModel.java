@@ -1,5 +1,7 @@
 package com.znu.news.viewmodel;
 
+import android.app.Application;
+
 import com.znu.news.ui.base.BaseViewModel;
 import com.znu.news.utils.rx.SchedulerProvider;
 
@@ -11,7 +13,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 public class SearchViewModel extends BaseViewModel {
 
     @Inject
-    public SearchViewModel(SchedulerProvider schedulerProvider) {
-        super(schedulerProvider);
+    public SearchViewModel(Application application
+            , SchedulerProvider schedulerProvider) {
+        super(application, schedulerProvider);
     }
 }

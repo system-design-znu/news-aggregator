@@ -1,6 +1,5 @@
-package com.znu.news.ui.sign;
+package com.znu.news.ui.auth;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Bundle;
