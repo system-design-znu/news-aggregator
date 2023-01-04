@@ -22,4 +22,10 @@
     <string name="lastName">نام خانوادگی</string>
     <string name="login_with_google">با گوگل وارد شوید</string>
     <string name="Connection">مشکلی در اتصال وجود دارد.</string>
+    <string name="edit_profile">ویرایش پروفایل</string>
+    <string name="account">اکانت</string>
+    <string name="notification">اعلان ها</string>
+    <string name="customize">شخصی‌سازی</string>
+    <string name="others_settings">سایر تنظیمات</string>
+    <string name="automatic">تنظیم خودکار</string>
 </resources>

@@ -1,12 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    android:layoutDirection="rtl"
     tools:context=".ui.main.setting.SettingFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/setting" />
-</FrameLayout>
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorSurface">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/profile_image_view"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_marginTop="@dimen/medium_distance"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:riv_border_width="0dp"
+                app:riv_corner_radius="96dp" />
+
+            <TextView
+                android:id="@+id/full_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_distance"
+                android:text="سارا محمودی"
+                android:textSize="@dimen/small_text_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_image_view" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/edit_profile_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/medium_distance"
+                android:stateListAnimator="@null"
+                android:text="@string/edit_profile"
+                app:cornerRadius="@dimen/large_distance"
+                app:icon="@drawable/arrow_right"
+                app:iconGravity="textEnd"
+                app:iconPadding="4dp"
+                app:iconTint="?attr/colorOnBackground"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/full_name_tv" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_distance"
+            android:layout_marginTop="@dimen/small_distance"
+            android:layout_marginEnd="@dimen/large_distance"
+            android:text="@string/account" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/email_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_distance"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="@dimen/large_distance"
+            android:drawableLeft="@drawable/edit"
+            android:drawableRight="@drawable/mail"
+            android:gravity="end|center_vertical"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingStart="@dimen/medium_distance"
+            android:paddingEnd="@dimen/medium_distance"
+            android:stateListAnimator="@null"
+            android:text="saramahmoudi@gmail.com"
+            android:textAllCaps="false"
+            android:textColor="?attr/colorControlNormal"
+            app:backgroundTint="?attr/colorSurface"
+            app:cornerRadius="@dimen/medium_radius" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/password_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_distance"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/large_distance"
+            android:drawableLeft="@drawable/edit"
+            android:drawableRight="@drawable/mail"
+            android:gravity="end|center_vertical"
+            android:inputType="textPassword"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingStart="@dimen/medium_distance"
+            android:paddingEnd="@dimen/medium_distance"
+            android:stateListAnimator="@null"
+            android:text="1234567"
+            android:textAllCaps="false"
+            android:textColor="?attr/colorControlNormal"
+            app:backgroundTint="?attr/colorSurface"
+            app:cornerRadius="@dimen/medium_radius" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_distance"
+            android:layout_marginTop="@dimen/medium_distance"
+            android:layout_marginEnd="@dimen/large_distance"
+            android:text="@string/notification" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/notification_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_distance"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="@dimen/large_distance"
+            android:drawableLeft="@drawable/arrow_right"
+            android:drawableRight="@drawable/notification"
+            android:gravity="center_vertical"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingStart="@dimen/medium_distance"
+            android:paddingEnd="@dimen/medium_distance"
+            android:stateListAnimator="@null"
+            android:text="@string/customize"
+            android:textAllCaps="false"
+            android:textColor="?attr/colorControlNormal"
+            app:backgroundTint="?attr/colorSurface"
+            app:cornerRadius="@dimen/medium_radius" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_distance"
+            android:layout_marginTop="@dimen/medium_distance"
+            android:layout_marginEnd="@dimen/large_distance"
+            android:text="@string/others_settings" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_distance"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="@dimen/large_distance"
+            app:cardCornerRadius="@dimen/medium_radius"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium_distance"
+                    android:checked="true"
+                    android:text="@string/automatic"
+                    app:buttonTint="?attr/colorPrimary" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/night_mode_sc"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/icon_size"
+                    android:layout_marginStart="@dimen/large_distance"
+                    android:layout_marginBottom="@dimen/small_distance"
+                    android:checked="true"
+                    android:paddingStart="@dimen/large_distance"
+                    android:paddingEnd="@dimen/large_distance"
+                    android:text="حالت تاریک"
+                    android:thumb="@drawable/thumb_selector"
+                    app:track="@drawable/track_selector" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

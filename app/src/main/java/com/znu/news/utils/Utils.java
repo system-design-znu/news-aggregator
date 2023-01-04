@@ -2,7 +2,12 @@ package com.znu.news.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
+
+import androidx.core.content.ContextCompat;
+
+import com.znu.news.R;
 
 public final class Utils {
 

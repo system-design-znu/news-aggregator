@@ -53,7 +53,7 @@ public class HomeFragment extends BaseViewModelFragment<FragmentHomeBinding, Hom
     private void observeData() {
         viewModel.observeError().observe(getViewLifecycleOwner(), error -> {
             binding.errorLayout.rootLayout.setVisibility(View.GONE);
-            if (error != null)
+            if (error != null) {
                 switch (error.errorType) {
                     case Unknown:
                         Toast.makeText(activity, "Unknown", Toast.LENGTH_SHORT).show();
@@ -73,6 +73,7 @@ public class HomeFragment extends BaseViewModelFragment<FragmentHomeBinding, Hom
                             Toast.makeText(activity, "isServerError", Toast.LENGTH_SHORT).show();
                         }
                 }
+            }
         });
     }
 
