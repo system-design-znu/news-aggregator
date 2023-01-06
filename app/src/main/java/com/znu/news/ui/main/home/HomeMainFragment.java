@@ -2,15 +2,15 @@ package com.znu.news.ui.main.home;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.znu.news.R;
 import com.znu.news.databinding.FragmentHomeMainBinding;
-import com.znu.news.model.Error;
 import com.znu.news.model.News;
 import com.znu.news.ui.base.BaseViewModelFragment;
 import com.znu.news.ui.main.comn.NewsAdapter;
@@ -48,6 +48,22 @@ public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBind
     }
 
     private void setUpAdapters() {
+
+        ViewPager2 viewPager2 = requireActivity().findViewById(R.id.home_view_pager);
+        RecyclerView.OnScrollListener onItemTouchListener = new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                viewPager2.setUserInputEnabled(newState == 0);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        };
+
+        binding.trendingNewsRv.addOnScrollListener(onItemTouchListener);
         trendingNewsAdapter = new NewsAdapter(NewsAdapter.Card.TRENDING_CARD);
         trendingNewsAdapter.setNewsCallBack(this);
         binding.trendingNewsRv.setAdapter(trendingNewsAdapter);

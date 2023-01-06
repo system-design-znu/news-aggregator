@@ -8,7 +8,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.znu.news.model.Error;
 import com.znu.news.model.ErrorType;
-import com.znu.news.model.Resource;
 import com.znu.news.utils.SessionManager;
 
 import java.io.IOException;
@@ -16,6 +15,7 @@ import java.lang.reflect.Type;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observer;
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 import okhttp3.ResponseBody;
@@ -41,31 +41,32 @@ public abstract class CallbackWrapper<T, E extends Error> implements SingleObser
 
                 if (response.errorBody() != null) {
                     E error = getError(response.errorBody());
-                    if (error != null) onFailure(Resource.error(error));
+                    if (error != null) onFailure(error);
                     else
-                        onFailure(Resource.error(new Error.RemoteServiceError(response.code())));
+                        onFailure(new Error.RemoteServiceError(response.code()));
                     return;
                 }
             }
-            onFailure(Resource.error(new Error.RemoteServiceError(InternalServerError)));
+            onFailure(new Error.RemoteServiceError(InternalServerError));
         } else if (throwable instanceof IOException) {
-            onFailure(Resource.error(new Error.RemoteServiceError(Connection)));
+            onFailure((new Error.RemoteServiceError(Connection)));
         } else {
-            onFailure(Resource.error(new Error.RemoteServiceError(Unknown)));
+            onFailure(new Error.RemoteServiceError(Unknown));
         }
     }
 
     @Override
     public void onSuccess(T t) {
-        onComplete(Resource.success(t));
+        onComplete(t);
     }
 
     @Override
     public void onSubscribe(Disposable d) {
     }
 
-    protected abstract void onComplete(Resource<T> response);
-    protected abstract void onFailure(Resource<T> response);
+    protected abstract void onComplete(T t);
+
+    protected abstract void onFailure(Error e);
 
     protected E getError(ResponseBody responseBody) {
         try {

@@ -28,4 +28,11 @@
     <string name="customize">شخصی‌سازی</string>
     <string name="others_settings">سایر تنظیمات</string>
     <string name="automatic">تنظیم خودکار</string>
+    <string name="dark_mode">حالت تاریک</string>
+    <string name="delete_cache">حذف کش</string>
+    <string name="about_app">درباره برنامه</string>
+    <string name="app_rules">قوانین برنامه</string>
+    <string name="help_developers">کمک و ارتباط با سازندگان</string>
+    <string name="app_release">نسخه برنامه</string>
+    <string name="logout">خروج از اکانت</string>
 </resources>

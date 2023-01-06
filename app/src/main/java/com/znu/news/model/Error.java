@@ -21,6 +21,11 @@ public class Error {
         this.error = error;
     }
 
+    public boolean isNotEqual(Error error) {
+        return error == null
+                || error.errorType != this.errorType;
+    }
+
     public static class RemoteServiceError extends Error {
 
         public boolean isClientError;

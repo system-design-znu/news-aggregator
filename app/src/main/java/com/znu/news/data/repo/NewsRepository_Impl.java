@@ -32,7 +32,7 @@ public class NewsRepository_Impl implements NewsRepository {
     }
 
     @Override
-    public Single<List<News>> getImportantNewsNews() {
+    public Single<List<News>> getImportantNews() {
         return newsService.getImportantNews().map(newsResponse -> newsDtoMapper.toDomainList(newsResponse.getNewsDtoList()));
     }
 }

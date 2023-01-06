@@ -1,9 +1,5 @@
 package com.znu.news.di;
 
-import android.app.Application;
-import android.content.Context;
-import android.net.ConnectivityManager;
-
 import com.znu.news.BuildConfig;
 import com.znu.news.data.local.prefs.AppPreferencesHelper;
 import com.znu.news.data.remote.HeaderInterceptorHelper;

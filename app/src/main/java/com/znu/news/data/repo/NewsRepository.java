@@ -12,5 +12,5 @@ public interface NewsRepository {
 
     Single<List<News>> getPopularNews();
 
-    Single<List<News>> getImportantNewsNews();
+    Single<List<News>> getImportantNews();
 }

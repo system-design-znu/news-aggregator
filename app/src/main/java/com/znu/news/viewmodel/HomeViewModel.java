@@ -1,5 +1,6 @@
 package com.znu.news.viewmodel;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 
 import androidx.lifecycle.MutableLiveData;
@@ -14,11 +15,13 @@ import com.znu.news.model.Resource;
 import com.znu.news.ui.base.BaseViewModel;
 import com.znu.news.utils.rx.SchedulerProvider;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import io.reactivex.Single;
 
 @HiltViewModel
 public class HomeViewModel extends BaseViewModel {
@@ -51,74 +54,39 @@ public class HomeViewModel extends BaseViewModel {
     public void loadData() {
         if (isConnected()) {
             error.setValue(null);
-            fetchTrendingNews();
-            fetchPopularNews();
-            fetchImportantNews();
+            trendingNews.setValue(Resource.loading());
+            popularNews.setValue(Resource.loading());
+            importantNews.setValue(Resource.loading());
+            fetchMergeData();
         } else {
             error.setValue(new Error.RemoteServiceError(ErrorType.Connection));
         }
     }
 
-    private void fetchImportantNews() {
-        importantNews.setValue(Resource.loading());
-        newsRepository.getImportantNewsNews()
+    @SuppressLint("CheckResult")
+    private void fetchMergeData() {
+        Single.zip(
+                        newsRepository.getTrendingNews().subscribeOn(schedulerProvider.io()),
+                        newsRepository.getPopularNews().subscribeOn(schedulerProvider.io()),
+                        newsRepository.getImportantNews().subscribeOn(schedulerProvider.io()),
+                        Arrays::asList
+                )
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
-                .subscribe(new CallbackWrapper<List<News>, Error>() {
+                .subscribe(new CallbackWrapper<List<List<News>>, Error>() {
                     @Override
-                    protected void onComplete(Resource<List<News>> response) {
-                        importantNews.setValue(response);
+                    protected void onComplete(List<List<News>> lists) {
+                        trendingNews.setValue(Resource.success(lists.get(0)));
+                        popularNews.setValue(Resource.success(lists.get(1)));
+                        importantNews.setValue(Resource.success(lists.get(2)));
                     }
 
                     @Override
-                    protected void onFailure(Resource<List<News>> response) {
-                        if (!compareError(response.error))
-                            error.setValue(response.error);
-                    }
-                });
-    }
-
-    private void fetchPopularNews() {
-        popularNews.setValue(Resource.loading());
-        newsRepository.getPopularNews()
-                .subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.ui())
-                .subscribe(new CallbackWrapper<List<News>, Error>() {
-                    @Override
-                    protected void onComplete(Resource<List<News>> response) {
-                        popularNews.setValue(response);
-                    }
-
-                    @Override
-                    protected void onFailure(Resource<List<News>> response) {
-                        if (!compareError(response.error))
-                            error.setValue(response.error);
+                    protected void onFailure(Error e) {
+                        if (e.isNotEqual(error.getValue()))
+                            error.setValue(e);
                     }
                 });
-    }
-
-    private void fetchTrendingNews() {
-        trendingNews.setValue(Resource.loading());
-        newsRepository.getTrendingNews()
-                .subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.ui())
-                .subscribe(new CallbackWrapper<List<News>, Error>() {
-                    @Override
-                    protected void onComplete(Resource<List<News>> response) {
-                        trendingNews.setValue(response);
-                    }
-
-                    @Override
-                    protected void onFailure(Resource<List<News>> response) {
-                        if (!compareError(response.error))
-                            error.setValue(response.error);
-                    }
-                });
-    }
-
-    private boolean compareError(Error error) {
-        return this.error.getValue() != null
-                && this.error.getValue().errorType == error.errorType;
     }
 
     public MutableLiveData<Resource<List<News>>> observeTrendingNews() {

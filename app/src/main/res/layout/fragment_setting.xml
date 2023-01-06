@@ -2,6 +2,7 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setting_scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
@@ -12,7 +13,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/large_distance">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -44,7 +46,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profile_image_view" />
 
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/edit_profile_button"
                 android:layout_width="wrap_content"
@@ -71,48 +72,75 @@
             android:layout_marginEnd="@dimen/large_distance"
             android:text="@string/account" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/email_button"
+        <LinearLayout
+            android:id="@+id/email_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/large_distance"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="@dimen/large_distance"
-            android:drawableLeft="@drawable/edit"
-            android:drawableRight="@drawable/mail"
-            android:gravity="end|center_vertical"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
+            android:background="@drawable/all_8corner_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingStart="@dimen/medium_distance"
+            android:paddingTop="@dimen/small_distance"
             android:paddingEnd="@dimen/medium_distance"
-            android:stateListAnimator="@null"
-            android:text="saramahmoudi@gmail.com"
-            android:textAllCaps="false"
-            android:textColor="?attr/colorControlNormal"
-            app:backgroundTint="?attr/colorSurface"
-            app:cornerRadius="@dimen/medium_radius" />
+            android:paddingBottom="@dimen/small_distance">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/password_button"
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/mail" />
+
+            <TextView
+                android:id="@+id/email_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_distance"
+                android:layout_marginEnd="@dimen/small_distance"
+                android:layout_weight="1"
+                android:text="saramahmoudi@gmail.com" />
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/edit" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/password_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/large_distance"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/small_distance"
             android:layout_marginEnd="@dimen/large_distance"
-            android:drawableLeft="@drawable/edit"
-            android:drawableRight="@drawable/mail"
-            android:gravity="end|center_vertical"
-            android:inputType="textPassword"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
+            android:background="@drawable/all_8corner_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingStart="@dimen/medium_distance"
+            android:paddingTop="@dimen/small_distance"
             android:paddingEnd="@dimen/medium_distance"
-            android:stateListAnimator="@null"
-            android:text="1234567"
-            android:textAllCaps="false"
-            android:textColor="?attr/colorControlNormal"
-            app:backgroundTint="?attr/colorSurface"
-            app:cornerRadius="@dimen/medium_radius" />
+            android:paddingBottom="@dimen/small_distance">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/lock" />
+
+            <TextView
+                android:id="@+id/password_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_distance"
+                android:layout_marginEnd="@dimen/small_distance"
+                android:layout_weight="1"
+                android:text="1234" />
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/edit" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -122,26 +150,39 @@
             android:layout_marginEnd="@dimen/large_distance"
             android:text="@string/notification" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/notification_button"
+        <LinearLayout
+            android:id="@+id/customize_notification_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/large_distance"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="@dimen/large_distance"
-            android:drawableLeft="@drawable/arrow_right"
-            android:drawableRight="@drawable/notification"
+            android:background="@drawable/all_8corner_bg"
             android:gravity="center_vertical"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
+            android:orientation="horizontal"
             android:paddingStart="@dimen/medium_distance"
+            android:paddingTop="@dimen/small_distance"
             android:paddingEnd="@dimen/medium_distance"
-            android:stateListAnimator="@null"
-            android:text="@string/customize"
-            android:textAllCaps="false"
-            android:textColor="?attr/colorControlNormal"
-            app:backgroundTint="?attr/colorSurface"
-            app:cornerRadius="@dimen/medium_radius" />
+            android:paddingBottom="@dimen/small_distance">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/notification" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_distance"
+                android:layout_marginEnd="@dimen/small_distance"
+                android:layout_weight="1"
+                android:text="@string/customize" />
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/arrow_right" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -151,42 +192,207 @@
             android:layout_marginEnd="@dimen/large_distance"
             android:text="@string/others_settings" />
 
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/large_distance"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="@dimen/large_distance"
-            app:cardCornerRadius="@dimen/medium_radius"
-            app:cardElevation="0dp">
+            android:background="@drawable/all_8corner_bg"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/medium_distance"
+            android:paddingEnd="@dimen/medium_distance"
+            android:paddingBottom="@dimen/small_distance">
 
-            <LinearLayout
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/automatic_check_box"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:checked="true"
+                android:text="@string/automatic"
+                app:buttonTint="?attr/colorPrimary" />
 
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/medium_distance"
-                    android:checked="true"
-                    android:text="@string/automatic"
-                    app:buttonTint="?attr/colorPrimary" />
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/night_mode_sc"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/icon_size"
+                android:checked="true"
+                android:paddingStart="@dimen/large_distance"
+                android:paddingEnd="@dimen/large_distance"
+                android:text="@string/dark_mode"
+                android:thumb="@drawable/thumb_selector"
+                app:track="@drawable/track_selector" />
+        </LinearLayout>
 
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/night_mode_sc"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/icon_size"
-                    android:layout_marginStart="@dimen/large_distance"
-                    android:layout_marginBottom="@dimen/small_distance"
-                    android:checked="true"
-                    android:paddingStart="@dimen/large_distance"
-                    android:paddingEnd="@dimen/large_distance"
-                    android:text="حالت تاریک"
-                    android:thumb="@drawable/thumb_selector"
-                    app:track="@drawable/track_selector" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+        <LinearLayout
+            android:id="@+id/cache_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_distance"
+            android:layout_marginTop="@dimen/small_distance"
+            android:layout_marginEnd="@dimen/large_distance"
+            android:background="@drawable/all_8corner_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/medium_distance"
+            android:paddingTop="@dimen/small_distance"
+            android:paddingEnd="@dimen/medium_distance"
+            android:paddingBottom="@dimen/small_distance">
 
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/cache" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_distance"
+                android:layout_marginEnd="@dimen/small_distance"
+                android:layout_weight="1"
+                android:text="@string/delete_cache" />
+
+            <TextView
+                android:id="@+id/cache_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_distance"
+                android:layout_marginEnd="@dimen/small_distance"
+                android:text="124mb"
+                android:textColor="?attr/colorPrimary" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_distance"
+            android:layout_marginTop="@dimen/medium_distance"
+            android:layout_marginEnd="@dimen/large_distance"
+            android:text="@string/about_app" />
+
+        <LinearLayout
+            android:id="@+id/app_rules_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_distance"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="@dimen/large_distance"
+            android:background="@drawable/all_8corner_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/medium_distance"
+            android:paddingTop="@dimen/small_distance"
+            android:paddingEnd="@dimen/medium_distance"
+            android:paddingBottom="@dimen/small_distance">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/app_rules" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_distance"
+                android:layout_marginEnd="@dimen/small_distance"
+                android:layout_weight="1"
+                android:text="@string/app_rules" />
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/arrow_right" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/help_developers_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_distance"
+            android:layout_marginTop="@dimen/small_distance"
+            android:layout_marginEnd="@dimen/large_distance"
+            android:background="@drawable/all_8corner_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/medium_distance"
+            android:paddingTop="@dimen/small_distance"
+            android:paddingEnd="@dimen/medium_distance"
+            android:paddingBottom="@dimen/small_distance">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/help_developers" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_distance"
+                android:layout_marginEnd="@dimen/small_distance"
+                android:layout_weight="1"
+                android:text="@string/help_developers" />
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/arrow_right" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/release_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_distance"
+            android:layout_marginTop="@dimen/small_distance"
+            android:layout_marginEnd="@dimen/large_distance"
+            android:background="@drawable/all_8corner_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/medium_distance"
+            android:paddingTop="@dimen/small_distance"
+            android:paddingEnd="@dimen/medium_distance"
+            android:paddingBottom="@dimen/small_distance">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/phone" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_distance"
+                android:layout_marginEnd="@dimen/small_distance"
+                android:layout_weight="1"
+                android:text="@string/app_release" />
+
+            <TextView
+                android:id="@+id/release_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_distance"
+                android:layout_marginEnd="@dimen/small_distance" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/logout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/large_distance"
+            android:layout_marginTop="@dimen/medium_distance"
+            android:layout_marginEnd="@dimen/large_distance"
+            android:backgroundTint="?attr/colorOnBackground"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:stateListAnimator="@null"
+            android:text="@string/logout"
+            android:textColor="?attr/colorControlNormal"
+            app:cornerRadius="@dimen/medium_radius"
+            app:icon="@drawable/logout"
+            app:iconTint="?attr/colorControlNormal"
+            app:strokeColor="?attr/colorControlNormal"
+            app:strokeWidth="1dp" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

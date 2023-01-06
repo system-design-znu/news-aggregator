@@ -18,7 +18,7 @@
         android:id="@+id/status_bar_view"
         android:layout_width="match_parent"
         android:layout_height="24dp"
-        android:background="@color/pure_black"
+        android:background="?attr/colorOnBackground"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
