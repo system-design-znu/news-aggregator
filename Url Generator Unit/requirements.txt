@@ -1,0 +1,4 @@
+aio_pika==8.2.5
+aiohttp==3.8.3
+nest_asyncio==1.5.6
+requests==2.28.1

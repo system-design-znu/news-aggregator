@@ -1,0 +1,17 @@
+services:
+  generator_unit:
+    image: "alisafapour/news-aggregator-generator-unit"
+    depends_on:
+      - rabbit_mq
+    restart: on-failure
+  fetch_unit:
+    image: "alisafapour/news-aggregator-fetch-unit"
+    depends_on:
+      - rabbit_mq
+      - generator_unit
+    restart: on-failure
+  rabbit_mq:
+    image: "rabbitmq:management"
+    ports:
+      - "18010:15672"
+      - "18009:5672"
