@@ -12,6 +12,7 @@ public class Resource<T> {
 
     public Status status;
 
+    @Nullable
     public final T data;
 
     public Error error;

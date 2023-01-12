@@ -1,6 +1,6 @@
 package com.znu.news.data.remote.services;
 
-import com.znu.news.data.remote.model.NewsResponse;
+import com.znu.news.data.remote.response.NewsResponse;
 
 import io.reactivex.Single;
 import retrofit2.http.GET;

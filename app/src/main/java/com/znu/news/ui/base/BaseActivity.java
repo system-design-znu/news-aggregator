@@ -8,8 +8,12 @@ import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.viewbinding.ViewBinding;
 
+import com.znu.news.BuildConfig;
+import com.znu.news.R;
+import com.znu.news.data.local.prefs.AppPreferencesHelper;
 import com.znu.news.ui.auth.AuthActivity;
 import com.znu.news.utils.SessionManager;
 
@@ -24,8 +28,18 @@ public abstract class BaseActivity<B extends ViewBinding> extends AppCompatActiv
 
     protected abstract B initViewBinding();
 
+    public void setTheme() {
+        AppPreferencesHelper appPreferencesHelper = new AppPreferencesHelper(this, BuildConfig.PREF_NAME);
+        if (appPreferencesHelper.getNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        setTheme();
         super.onCreate(savedInstanceState);
 
         binding = initViewBinding();

@@ -19,7 +19,7 @@ public abstract class BaseViewModel extends AndroidViewModel {
     }
 
 
-    public boolean isConnected() {
+    protected boolean isConnected() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getApplication().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = connectivityManager.getActiveNetworkInfo();

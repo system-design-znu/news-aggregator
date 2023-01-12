@@ -37,8 +37,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
                         .findFragmentById(R.id.nav_host_fragment);
 
 
-        sessionManager.login("a");
-
         if (navHostFragment != null) {
             navHostFragment.getNavController().addOnDestinationChangedListener((navController, navDestination, bundle) -> {
                 switch (navDestination.getId()) {

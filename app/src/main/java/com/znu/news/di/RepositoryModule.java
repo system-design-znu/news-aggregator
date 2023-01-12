@@ -1,7 +1,9 @@
 package com.znu.news.di;
 
+import com.znu.news.data.local.db.dao.UserDao;
+import com.znu.news.data.local.db.entity.UserEntityMapper;
 import com.znu.news.data.local.prefs.AppPreferencesHelper;
-import com.znu.news.data.remote.model.NewsDtoMapper;
+import com.znu.news.data.remote.response.NewsDtoMapper;
 import com.znu.news.data.remote.services.NewsService;
 import com.znu.news.data.remote.services.UserService;
 import com.znu.news.data.repo.NewsRepository;
@@ -28,8 +30,22 @@ public class RepositoryModule {
 
     @Provides
     @Singleton
-    UserRepository provideUserRepository(UserService userService) {
-        return new UserRepository_Impl(userService);
+    UserEntityMapper provideUserEntityMapper() {
+        return new UserEntityMapper();
+    }
+
+    @Provides
+    @Singleton
+    UserRepository provideUserRepository(UserService userService
+            , UserDao userDao
+            , UserEntityMapper userEntityMapper
+            , AppPreferencesHelper appPreferencesHelper) {
+        return new UserRepository_Impl(
+                userService
+                , userDao
+                , userEntityMapper
+                , appPreferencesHelper
+        );
     }
 
     @Provides

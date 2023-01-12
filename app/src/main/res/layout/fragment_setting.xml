@@ -134,6 +134,7 @@
                 android:layout_marginStart="@dimen/small_distance"
                 android:layout_marginEnd="@dimen/small_distance"
                 android:layout_weight="1"
+                android:inputType="textPassword"
                 android:text="1234" />
 
             <ImageView
@@ -200,26 +201,23 @@
             android:layout_marginEnd="@dimen/large_distance"
             android:background="@drawable/all_8corner_bg"
             android:gravity="center_vertical"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:paddingStart="@dimen/medium_distance"
+            android:paddingTop="@dimen/small_distance"
             android:paddingEnd="@dimen/medium_distance"
             android:paddingBottom="@dimen/small_distance">
 
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/automatic_check_box"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/automatic"
-                app:buttonTint="?attr/colorPrimary" />
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/notification" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/night_mode_sc"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/icon_size"
+                android:layout_marginStart="@dimen/small_distance"
                 android:checked="true"
-                android:paddingStart="@dimen/large_distance"
-                android:paddingEnd="@dimen/large_distance"
                 android:text="@string/dark_mode"
                 android:thumb="@drawable/thumb_selector"
                 app:track="@drawable/track_selector" />

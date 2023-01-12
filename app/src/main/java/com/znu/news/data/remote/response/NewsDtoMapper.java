@@ -1,4 +1,4 @@
-package com.znu.news.data.remote.model;
+package com.znu.news.data.remote.response;
 
 import com.znu.news.model.DomainMapper;
 import com.znu.news.model.News;
@@ -34,10 +34,10 @@ public class NewsDtoMapper implements DomainMapper<NewsDto, News> {
     }
 
     public List<NewsDto> fromDomainList(List<News> initial) {
-        List<NewsDto> newsDtoList = new ArrayList<>();
+        List<NewsDto> newsList = new ArrayList<>();
         for (News news : initial) {
-            mapFromDomainModel(news);
+            newsList.add(mapFromDomainModel(news));
         }
-        return newsDtoList;
+        return newsList;
     }
 }

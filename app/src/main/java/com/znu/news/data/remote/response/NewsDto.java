@@ -1,4 +1,4 @@
-package com.znu.news.data.remote.model;
+package com.znu.news.data.remote.response;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -19,17 +19,6 @@ public class SessionManager {
         this.appPreferencesHelper = appPreferencesHelper;
 
         status = new MutableLiveData<>();
-
-        refreshStatus();
-    }
-
-    private void refreshStatus() {
-        status.setValue((appPreferencesHelper.getAccessToken() == null) ? LOGGED_OUT : checkAccessToken());
-    }
-
-    private Status checkAccessToken() {
-        //TODO: check access token is expired or not
-        return Status.LOGGED_IN;
     }
 
     public void logout() {

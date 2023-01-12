@@ -1,6 +1,6 @@
 package com.znu.news.data.repo;
 
-import com.znu.news.data.remote.model.NewsDtoMapper;
+import com.znu.news.data.remote.response.NewsDtoMapper;
 import com.znu.news.data.remote.services.NewsService;
 import com.znu.news.model.News;
 

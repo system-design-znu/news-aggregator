@@ -35,4 +35,6 @@
     <string name="help_developers">کمک و ارتباط با سازندگان</string>
     <string name="app_release">نسخه برنامه</string>
     <string name="logout">خروج از اکانت</string>
+    <string name="splash_error">مشکلی در اتصال وجود دارد.</string>
+    <string name="try_again">تلاش دوباره</string>
 </resources>

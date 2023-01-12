@@ -63,7 +63,6 @@ public class HomeViewModel extends BaseViewModel {
         }
     }
 
-    @SuppressLint("CheckResult")
     private void fetchMergeData() {
         Single.zip(
                         newsRepository.getTrendingNews().subscribeOn(schedulerProvider.io()),

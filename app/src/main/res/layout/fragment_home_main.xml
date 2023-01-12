@@ -65,7 +65,7 @@
                         android:orientation="horizontal"
                         android:paddingStart="@dimen/medium_distance"
                         android:paddingTop="4dp"
-                        android:paddingEnd="@dimen/medium_distance"
+                        android:paddingEnd="@dimen/large_distance"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                     <com.facebook.shimmer.ShimmerFrameLayout

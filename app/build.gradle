@@ -21,10 +21,12 @@ android {
         debug {
             buildConfigField("String", "BASE_URL", "\"https://api.rss2json.com\"")
             buildConfigField("String", "PREF_NAME", "\"news_app\"")
+            buildConfigField("String", "DATABASE_NAME", "\"znu.news.db\"")
         }
         release {
             buildConfigField("String", "BASE_URL", "\"https://api.rss2json.com\"")
             buildConfigField("String", "PREF_NAME", "\"news_app\"")
+            buildConfigField("String", "DATABASE_NAME", "\"znu.news.db\"")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
