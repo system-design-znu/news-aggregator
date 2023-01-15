@@ -1,9 +1,10 @@
 from .models import SendJson
 from .serializers import SendJsonSerializer
-from rest_framework import generics
+from rest_framework import generics, permissions
 
 # Create your views here.
 
 class SendJsonList(generics.CreateAPIView):
+    permission_classes = (permissions.IsAdminUser,)
     queryset = SendJson.objects.all()
     serializer_class = SendJsonSerializer

@@ -28,4 +28,5 @@ urlpatterns = [
     path('schema/', get_schema_view(title="News schema", description="v0")),
     path('docs/', include_docs_urls(DOCS_TITLE, DOCS_DESCRIPTION)),
     path('swagger-ui/', get_swagger_view(DOCS_TITLE)),
+    path('api-auth/', include('rest_framework.urls')),
 ]
