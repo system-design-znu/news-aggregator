@@ -12,6 +12,14 @@ services:
       - mongo_db
       - generator_unit
     restart: on-failure
+  save_unit:
+    image: "alisafapour/news-aggregator-xml-save-unit"
+    depends_on:
+      - rabbit_mq
+      - mongo_db
+      - generator_unit
+      - fetch_unit
+    restart: on-failure
   rabbit_mq:
     image: "rabbitmq:management"
     ports:
@@ -20,4 +28,4 @@ services:
   mongo_db:
     image: "mongo:latest"
     ports:
-      - "27017"
+      - "28101:27017"

@@ -49,8 +49,8 @@ signal.signal(signal.SIGINT, gracefully_sync_exit_handler)
 
 async def initializer():
     global rabbit_mq_conn, rabbit_mq_conn_two, aiohttp_client, urls_local_queues, saving_queue
-    rabbit_mq_conn = await rabbit_mq_connector("amqp://guest:guest@localhost/")
-    rabbit_mq_conn_two = await rabbit_mq_connector("amqp://guest:guest@localhost/")
+    rabbit_mq_conn = await rabbit_mq_connector("amqp://guest:guest@host.docker.internal:18009/")
+    rabbit_mq_conn_two = await rabbit_mq_connector("amqp://guest:guest@host.docker.internal:18009/")
     urls_local_queues = asyncio.Queue()
     saving_queue = asyncio.Queue()
     initialize_future.set_result(0)
@@ -64,7 +64,7 @@ async def on_message(message: AbstractIncomingMessage) -> None:
         # print(f"[x] {message.body!r}")
 
 
-async def url_job_receiver():
+async def xml_job_receiver():
     global rabbit_mq_conn, shutdown_future, shutdown_future_two
     shutdown_future = asyncio.Future()
     shutdown_future_two = asyncio.Future()
@@ -77,21 +77,19 @@ async def url_job_receiver():
     shutdown_future_two.set_result(0)
 
 
-async def url_fetch_worker():
+async def xml_fetch_worker():
     await initialize_future
     print('fetch worker executed')
     while True:
         deserialized_xml = pickle.loads(await urls_local_queues.get())
         await saving_queue.put(deserialized_xml)
-        print(deserialized_xml)
-        print('=' * 50)
         urls_local_queues.task_done()
 
 
 async def xml_save_worker():
     await initialize_future
     print('xml worker executed')
-    client = motor.motor_asyncio.AsyncIOMotorClient('localhost', 27017)
+    client = motor.motor_asyncio.AsyncIOMotorClient('host.docker.internal', 28101)
     db = client.fetched_xmls
     collection = db.whole_data
     while True:
@@ -102,11 +100,12 @@ async def xml_save_worker():
                 "save_epoch_time": time.time()
             }
         )
+        logging.critical('An XML has been saved in the database:', ready_to_be_saved_xml[:50])
         saving_queue.task_done()
 
 loop = asyncio.new_event_loop()
 loop.run_until_complete(initializer())
-loop.create_task(url_job_receiver())
-loop.create_task(url_fetch_worker())
+loop.create_task(xml_job_receiver())
+loop.create_task(xml_fetch_worker())
 loop.create_task(xml_save_worker())
 loop.run_forever()
