@@ -93,29 +93,31 @@ async def url_fetch_worker():
     while True:
         ready_url = await local_async_queue.get()
         async with aiohttp.ClientSession() as session:
-            async with session.get(ready_url) as response:
-                received_response = (await response.text()).strip()
+            try:
+                async with session.get(ready_url) as response:
+                    received_response = (await response.text()).strip()
 
-                if '<?xml' in received_response[:10]:
-                    try:
-                        await rabbit_mq_direct_exchange.publish(
-                            rabbit_mq_message(
-                                pickle.dumps((await response.text())),
-                                delivery_mode=rabbit_mq_delivery_mode.PERSISTENT
-                            ),
-                            routing_key=rabbit_mq_urls_queue.name
-                        )
-                        logging.info(
-                            f'The fetch operation for the url "{ready_url}" has been done.')
-                    except ChannelInvalidStateError as e:
-                        logging.critical(
-                            'Channel is closed. Reopening...')
-                        rabbit_mq_channel = await rabbit_mq_conn.channel()
-                        logging.info('Channel opened again.')
-                else:
-                    logging.error(
-                        f'The provided url "{ready_url}" is not a valid rss. First 10 characters of fetched data: {received_response[:10]}')
-                    
+                    if '<?xml' in received_response[:10]:
+                        try:
+                            await rabbit_mq_direct_exchange.publish(
+                                rabbit_mq_message(
+                                    pickle.dumps((await response.text())),
+                                    delivery_mode=rabbit_mq_delivery_mode.PERSISTENT
+                                ),
+                                routing_key=rabbit_mq_urls_queue.name
+                            )
+                            logging.info(
+                                f'The fetch operation for the url "{ready_url}" has been done.')
+                        except ChannelInvalidStateError as e:
+                            logging.critical(
+                                'Channel is closed. Reopening...')
+                            rabbit_mq_channel = await rabbit_mq_conn.channel()
+                            logging.info('Channel opened again.')
+                    else:
+                        logging.error(
+                            f'The provided url "{ready_url}" is not a valid rss. First 10 characters of fetched data: {received_response[:10]}')
+            except (aiohttp.ClientConnectorError, Exception) as e:
+                logging.critical(e.value)
                     
 loop = asyncio.new_event_loop()
 loop.run_until_complete(initializer())
