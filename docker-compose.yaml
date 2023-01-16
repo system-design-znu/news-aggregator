@@ -3,11 +3,13 @@ services:
     image: "alisafapour/news-aggregator-generator-unit"
     depends_on:
       - rabbit_mq
+      - mongo_db
     restart: on-failure
   fetch_unit:
     image: "alisafapour/news-aggregator-fetch-unit"
     depends_on:
       - rabbit_mq
+      - mongo_db
       - generator_unit
     restart: on-failure
   rabbit_mq:
@@ -15,3 +17,7 @@ services:
     ports:
       - "18010:15672"
       - "18009:5672"
+  mongo_db:
+    image: "mongo:latest"
+    ports:
+      - "27017"
