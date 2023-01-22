@@ -25,7 +25,9 @@ services:
     ports:
       - "18010:15672"
       - "18009:5672"
+    restart: on-failure
   mongo_db:
     image: "mongo:latest"
     ports:
       - "28101:27017"
+    restart: on-failure
