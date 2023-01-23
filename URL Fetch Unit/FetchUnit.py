@@ -21,6 +21,9 @@ from signal import (
 )
 from threading import Event
 
+running_on_docker = True
+localhost_addr = 'host.docker.internal' if running_on_docker else 'localhost'
+
 rabbit_mq_conn, shutdown_future, connection_is_ready = [
     None for i in range(3)]
 local_async_queue = asyncio.Queue()
@@ -32,7 +35,7 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s:  %(message)s',
 async def initializer():
     global rabbit_mq_conn, connection_is_ready
     connection_is_ready = asyncio.Future()
-    rabbit_mq_conn = await rabbit_mq_connector("amqp://guest:guest@host.docker.internal:18009/")
+    rabbit_mq_conn = await rabbit_mq_connector(f"amqp://guest:guest@{localhost_addr}:18009/")
 
 
 # async def on_message(message: AbstractIncomingMessage) -> None:
@@ -115,9 +118,9 @@ async def url_fetch_worker():
                             logging.info('Channel opened again.')
                     else:
                         logging.error(
-                            f'The provided url "{ready_url}" is not a valid rss. First 10 characters of fetched data: {received_response[:10]}')
+                            f'The provided url "{ready_url}" is not a valid rss. The fetch operation aborted.')
             except (aiohttp.ClientConnectorError, Exception) as e:
-                logging.critical(e.value)
+                logging.critical(f'Something went wrong during fetch for the url: "{ready_url}". Probably you have to check your internet connection.')
                     
 loop = asyncio.new_event_loop()
 loop.run_until_complete(initializer())

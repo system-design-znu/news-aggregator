@@ -28,16 +28,19 @@ rabbit_mq_conn = None
 shutdown_command_issued = False
 shutdown_event = asyncio.Event()
 
+running_on_docker = True
+localhost_addr = 'host.docker.internal' if running_on_docker else 'localhost'
+
 available_workers = dict()
 logging.basicConfig(format='%(asctime)s - %(levelname)s:  %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
 
-def get_workers_list(user='guest', password='guest', host='host.docker.internal', port=18010, virtual_host=None):
+def get_workers_list(user='guest', password='guest', host=localhost_addr, port=18010, virtual_host=None):
     url = 'http://%s:%s/api/queues/%s' % (host, port, virtual_host or '')
     response = requests.get(url, auth=(user, password))
     queues = [q['name'] for q in response.json()]
     return queues
 
-async def get_workers_list_async(user='guest', password='guest', host='host.docker.internal', port=18010, virtual_host=None):
+async def get_workers_list_async(user='guest', password='guest', host=localhost_addr, port=18010, virtual_host=None):
     async with aiohttp.ClientSession() as session:
         url = 'http://%s:%s/api/queues/%s' % (host, port, virtual_host or '')
         async with session.get(url, auth=aiohttp.BasicAuth(user, password)) as response:
@@ -45,7 +48,7 @@ async def get_workers_list_async(user='guest', password='guest', host='host.dock
             return workers
 
 
-async def add_fetch_worker(user='guest', password='guest', host='host.docker.internal', port=18010, virtual_host=None):
+async def add_fetch_worker(user='guest', password='guest', host=localhost_addr, port=18010, virtual_host=None):
     global available_workers
     url = 'http://%s:%s/api/queues/%s' % (host, port, virtual_host or '')
     while True:
@@ -178,7 +181,7 @@ def gracefully_sync_exit_handler(sig, frame):
 
 async def initializer():
     global rabbit_mq_conn
-    rabbit_mq_conn = await rabbit_mq_connector("amqp://guest:guest@host.docker.internal:18009/")
+    rabbit_mq_conn = await rabbit_mq_connector(f"amqp://guest:guest@{localhost_addr}:18009/")
 
 
 async def rss_container_updater():

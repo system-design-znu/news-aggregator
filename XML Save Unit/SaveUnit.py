@@ -22,6 +22,10 @@ rabbit_mq_conn, rabbit_mq_conn_two, shutdown_future, shutdown_future_two, urls_l
 
 initialize_future = asyncio.Future()
 
+running_on_docker = True
+localhost_addr = 'host.docker.internal' if running_on_docker else 'localhost'
+
+
 logging.basicConfig(format='%(asctime)s - %(levelname)s:  %(message)s',
                     datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
 
@@ -49,19 +53,19 @@ signal.signal(signal.SIGINT, gracefully_sync_exit_handler)
 
 async def initializer():
     global rabbit_mq_conn, rabbit_mq_conn_two, aiohttp_client, urls_local_queues, saving_queue
-    rabbit_mq_conn = await rabbit_mq_connector("amqp://guest:guest@host.docker.internal:18009/")
-    rabbit_mq_conn_two = await rabbit_mq_connector("amqp://guest:guest@host.docker.internal:18009/")
+    rabbit_mq_conn = await rabbit_mq_connector(f"amqp://guest:guest@{localhost_addr}:18009/")
+    rabbit_mq_conn_two = await rabbit_mq_connector(f"amqp://guest:guest@{localhost_addr}:18009/")
     urls_local_queues = asyncio.Queue()
     saving_queue = asyncio.Queue()
     initialize_future.set_result(0)
-    print('initialize finished')
+    logging.info('Save unit initialization finished.')
 
 
 async def on_message(message: AbstractIncomingMessage) -> None:
     global shutdown_future_two
     async with message.process():
         await urls_local_queues.put(message.body)
-        # print(f"[x] {message.body!r}")
+        # logging.info(f"[x] {message.body!r}")
 
 
 async def xml_job_receiver():
@@ -79,7 +83,7 @@ async def xml_job_receiver():
 
 async def xml_fetch_worker():
     await initialize_future
-    print('fetch worker executed')
+    logging.info('Fetch worker is running...')
     while True:
         deserialized_xml = pickle.loads(await urls_local_queues.get())
         await saving_queue.put(deserialized_xml)
@@ -88,8 +92,8 @@ async def xml_fetch_worker():
 
 async def xml_save_worker():
     await initialize_future
-    print('xml worker executed')
-    client = motor.motor_asyncio.AsyncIOMotorClient('host.docker.internal', 28101)
+    logging.info('Xml worker is running...')
+    client = motor.motor_asyncio.AsyncIOMotorClient(localhost_addr, 28101)
     db = client.fetched_xmls
     collection = db.whole_data
     while True:
