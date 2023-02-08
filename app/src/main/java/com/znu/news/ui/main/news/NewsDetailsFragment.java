@@ -2,14 +2,17 @@ package com.znu.news.ui.main.news;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.material.appbar.AppBarLayout;
 import com.znu.news.R;
 import com.znu.news.databinding.FragmentNewsDetailsBinding;
 import com.znu.news.di.GlideApp;
@@ -48,6 +51,14 @@ public class NewsDetailsFragment extends BaseViewModelFragment<FragmentNewsDetai
                 .load(R.drawable.image)
                 .centerCrop()
                 .into(binding.newsImageView);
+
+        binding.newsDetailsSv.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (v.getChildAt(0).getBottom() <= v.getMeasuredHeight() + scrollY) {
+                if (binding.reactionsLayout.getTranslationY() > 0) {
+                    binding.reactionsLayout.animate().setDuration(400).translationY(0);
+                }
+            }
+        });
 
         setUpToolBar();
     }
