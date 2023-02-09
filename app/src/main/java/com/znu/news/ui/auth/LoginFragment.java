@@ -35,6 +35,7 @@ public class LoginFragment extends BaseViewModelFragment<FragmentLoginBinding, A
         binding.signUpTextView.setOnClickListener(v -> navTo(R.id.action_loginFragment_to_signupFragment));
         binding.loginButton.setOnClickListener(v -> {
             startActivity(toActivity(MainActivity.class));
+            activity.sessionManager.login("1");
             activity.finish();
         });
     }

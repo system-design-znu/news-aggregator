@@ -1,6 +1,5 @@
 package com.znu.news.viewmodel;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 
 import androidx.lifecycle.MutableLiveData;

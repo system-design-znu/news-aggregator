@@ -43,8 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_distance"
-            android:background="?attr/colorSurface"
             android:hint="@string/email"
+            app:boxBackgroundColor="?attr/colorSurface"
             app:boxCornerRadiusBottomEnd="@dimen/medium_radius"
             app:boxCornerRadiusBottomStart="@dimen/medium_radius"
             app:boxCornerRadiusTopEnd="@dimen/medium_radius"
@@ -53,7 +53,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email_et"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:inputType="textEmailAddress"
                 android:textColor="?attr/colorControlNormal" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -64,8 +64,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_distance"
-            android:background="?attr/colorSurface"
             android:hint="@string/password"
+            app:boxBackgroundColor="?attr/colorSurface"
             app:boxCornerRadiusBottomEnd="@dimen/medium_radius"
             app:boxCornerRadiusBottomStart="@dimen/medium_radius"
             app:boxCornerRadiusTopEnd="@dimen/medium_radius"

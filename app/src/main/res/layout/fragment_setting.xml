@@ -373,24 +373,51 @@
                 android:layout_marginEnd="@dimen/small_distance" />
         </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/logout_button"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginStart="@dimen/large_distance"
             android:layout_marginTop="@dimen/medium_distance"
             android:layout_marginEnd="@dimen/large_distance"
-            android:backgroundTint="?attr/colorOnBackground"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:stateListAnimator="@null"
-            android:text="@string/logout"
-            android:textColor="?attr/colorControlNormal"
-            app:cornerRadius="@dimen/medium_radius"
-            app:icon="@drawable/logout"
-            app:iconTint="?attr/colorControlNormal"
-            app:strokeColor="?attr/colorControlNormal"
-            app:strokeWidth="1dp" />
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/logout_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="@dimen/small_distance"
+                android:layout_weight="1"
+                android:backgroundTint="?attr/colorOnBackground"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:stateListAnimator="@null"
+                android:text="@string/logout"
+                android:textColor="?attr/colorControlNormal"
+                app:cornerRadius="@dimen/medium_radius"
+                app:icon="@drawable/logout"
+                app:iconTint="?attr/colorControlNormal"
+                app:strokeColor="?attr/colorControlNormal"
+                app:strokeWidth="1dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/delete_account_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/small_distance"
+                android:layout_weight="1"
+                android:backgroundTint="?attr/colorOnBackground"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:stateListAnimator="@null"
+                android:text="@string/delete_account"
+                android:textColor="?attr/colorError"
+                app:cornerRadius="@dimen/medium_radius"
+                app:icon="@drawable/error"
+                app:iconTint="?attr/colorError"
+                app:strokeColor="?attr/colorError"
+                app:strokeWidth="1dp" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

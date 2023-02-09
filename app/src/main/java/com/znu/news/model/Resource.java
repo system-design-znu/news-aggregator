@@ -10,11 +10,9 @@ import androidx.annotation.Nullable;
 public class Resource<T> {
 
 
-    public Status status;
-
     @Nullable
     public final T data;
-
+    public Status status;
     public Error error;
 
     public Resource(Status status, @Nullable T data, @Nullable Error error) {

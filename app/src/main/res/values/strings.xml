@@ -37,4 +37,6 @@
     <string name="logout">خروج از اکانت</string>
     <string name="splash_error">مشکلی در اتصال وجود دارد.</string>
     <string name="try_again">تلاش دوباره</string>
+    <string name="repeat_password">تکرار رمزعبور</string>
+    <string name="delete_account">حذف اکانت</string>
 </resources>

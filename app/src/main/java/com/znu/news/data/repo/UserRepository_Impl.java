@@ -46,7 +46,7 @@ public class UserRepository_Impl implements UserRepository {
         if (token != null)
             return Single.fromCallable(() -> token);
 //            return userService.checkToken(token);
-        else return Single.fromCallable(() -> "null");
+        else return Single.fromCallable(String::new);
     }
 
     @Override

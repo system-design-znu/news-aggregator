@@ -17,7 +17,6 @@ public class SignupFragment extends BaseViewModelFragment<FragmentSignupBinding,
     @Override
     protected FragmentSignupBinding initViewBinding() {
         return FragmentSignupBinding.inflate(getLayoutInflater());
-
     }
 
     @Override
@@ -31,6 +30,7 @@ public class SignupFragment extends BaseViewModelFragment<FragmentSignupBinding,
 
         binding.signUpButton.setOnClickListener(v -> {
             startActivity(toActivity(MainActivity.class));
+            activity.sessionManager.login("1");
             activity.finish();
         });
     }
