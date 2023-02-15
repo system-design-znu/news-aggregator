@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.znu.news.R;
 import com.znu.news.databinding.FragmentSignupBinding;
 import com.znu.news.ui.base.BaseViewModelFragment;
 import com.znu.news.ui.main.MainActivity;
@@ -30,7 +29,9 @@ public class SignupFragment extends BaseViewModelFragment<FragmentSignupBinding,
         super.onViewCreated(view, savedInstanceState);
 
         binding.signUpButton.setOnClickListener(v -> {
-            navTo(R.id.action_signupFragment_to_chooseCategoryFragment);
+            startActivity(toActivity(MainActivity.class));
+            activity.sessionManager.login("1");
+            activity.finish();
         });
     }
 }

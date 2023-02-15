@@ -32,8 +32,10 @@ public abstract class BaseActivity<B extends ViewBinding> extends AppCompatActiv
         AppPreferencesHelper appPreferencesHelper = new AppPreferencesHelper(this, BuildConfig.PREF_NAME);
         if (appPreferencesHelper.getNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            setTheme(R.style.Theme_News);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            setTheme(R.style.Theme_News);
         }
     }
 

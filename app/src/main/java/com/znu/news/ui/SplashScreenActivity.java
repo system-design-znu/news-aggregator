@@ -3,6 +3,7 @@ package com.znu.news.ui;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -52,9 +53,9 @@ public class SplashScreenActivity extends BaseViewModelActivity<ActivitySplashSc
                     break;
 
                 case SUCCESS:
-                    String t = token.data;
-                    if (!t.equals("null"))
-                        sessionManager.login(t);
+                    String result = token.data;
+                    if (!TextUtils.isEmpty(result))
+                        sessionManager.login(token.data);
                     else sessionManager.logout();
                     break;
             }

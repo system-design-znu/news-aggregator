@@ -37,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_distance"
+            android:baselineAligned="false"
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -45,8 +46,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/small_distance"
                 android:layout_weight="1"
-                android:background="?attr/colorSurface"
                 android:hint="@string/firstName"
+                app:boxBackgroundColor="?attr/colorSurface"
                 app:boxCornerRadiusBottomEnd="@dimen/medium_radius"
                 app:boxCornerRadiusBottomStart="@dimen/medium_radius"
                 app:boxCornerRadiusTopEnd="@dimen/medium_radius"
@@ -55,7 +56,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/firstName_et"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:inputType="text"
                     android:textColor="?attr/colorControlNormal" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -66,8 +67,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/small_distance"
                 android:layout_weight="1"
-                android:background="?attr/colorSurface"
                 android:hint="@string/lastName"
+                app:boxBackgroundColor="?attr/colorSurface"
                 app:boxCornerRadiusBottomEnd="@dimen/medium_radius"
                 app:boxCornerRadiusBottomStart="@dimen/medium_radius"
                 app:boxCornerRadiusTopEnd="@dimen/medium_radius"
@@ -87,8 +88,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_distance"
-            android:background="?attr/colorSurface"
             android:hint="@string/password"
+            app:boxBackgroundColor="?attr/colorSurface"
             app:boxCornerRadiusBottomEnd="@dimen/medium_radius"
             app:boxCornerRadiusBottomStart="@dimen/medium_radius"
             app:boxCornerRadiusTopEnd="@dimen/medium_radius"
@@ -97,7 +98,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_et"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:inputType="text"
                 android:textColor="?attr/colorControlNormal" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -107,8 +108,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_distance"
-            android:background="?attr/colorSurface"
-            android:hint="@string/password"
+            android:hint="@string/repeat_password"
+            app:boxBackgroundColor="?attr/colorSurface"
             app:boxCornerRadiusBottomEnd="@dimen/medium_radius"
             app:boxCornerRadiusBottomStart="@dimen/medium_radius"
             app:boxCornerRadiusTopEnd="@dimen/medium_radius"
@@ -117,27 +118,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password1_et"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="?attr/colorControlNormal" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/medium_distance"
-            android:background="?attr/colorSurface"
-            android:hint="@string/password"
-            app:boxCornerRadiusBottomEnd="@dimen/medium_radius"
-            app:boxCornerRadiusBottomStart="@dimen/medium_radius"
-            app:boxCornerRadiusTopEnd="@dimen/medium_radius"
-            app:boxCornerRadiusTopStart="@dimen/medium_radius">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password2_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:inputType="text"
                 android:textColor="?attr/colorControlNormal" />
         </com.google.android.material.textfield.TextInputLayout>
