@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl"
+    android:orientation="vertical"
+    tools:context=".ui.auth.ChooseCategoryFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large_distance"
+        android:layout_marginTop="@dimen/large_distance"
+        android:layout_marginEnd="@dimen/large_distance"
+        android:text="@string/choose_category"
+        android:textSize="@dimen/small_text_size" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large_distance"
+        android:layout_marginTop="@dimen/small_distance"
+        android:layout_marginEnd="@dimen/large_distance"
+        android:text="نگران نباش میتونی بعدا تغییرش بدی :)" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large_distance"
+        android:layout_marginTop="@dimen/large_distance"
+        android:layout_marginEnd="@dimen/large_distance">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/categories_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3"
+            tools:listitem="@layout/category_item" />
+
+        <ProgressBar
+            android:id="@+id/category_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/confirm_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large_distance"
+        android:layout_marginTop="@dimen/large_distance"
+        android:layout_marginEnd="@dimen/large_distance"
+        android:background="@drawable/all_8corner_bg"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:paddingTop="@dimen/medium_distance"
+        android:paddingBottom="@dimen/medium_distance"
+        android:stateListAnimator="@null"
+        android:text="@string/login" />
+</LinearLayout>

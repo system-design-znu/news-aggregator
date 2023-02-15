@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.button.MaterialButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/category_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/small_distance"
+    android:insetTop="0dp"
+    android:insetBottom="0dp"
+    android:stateListAnimator="@null"
+    android:textColor="?attr/colorControlNormal"
+    app:backgroundTint="?attr/colorSurface"
+    app:cornerRadius="@dimen/medium_radius"
+    app:iconTint="@null"
+    app:strokeColor="#10000000"
+    app:strokeWidth="1dp" />
