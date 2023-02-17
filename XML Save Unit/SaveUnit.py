@@ -2,10 +2,10 @@ import asyncio
 import logging
 import time
 import motor.motor_asyncio
-import aiohttp
 import signal
 import nest_asyncio
 import pickle
+import configparser
 from aio_pika import (
     connect as rabbit_mq_connector,
     Message as rabbit_mq_message,
@@ -21,9 +21,10 @@ rabbit_mq_conn, rabbit_mq_conn_two, shutdown_future, shutdown_future_two, urls_l
     None for i in range(6)]
 
 initialize_future = asyncio.Future()
-
-running_on_docker = True
-localhost_addr = 'host.docker.internal' if running_on_docker else 'localhost'
+config = configparser.ConfigParser()
+config.read('config.ini')
+is_running_in_docker = True if config['docker']['is_running_in_docker'] == 'True' else False
+localhost_addr = 'host.docker.internal' if is_running_in_docker else 'localhost'
 
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s:  %(message)s',

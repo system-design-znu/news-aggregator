@@ -1,4 +1,5 @@
 import asyncio
+import configparser
 import datetime
 import logging
 import aiohttp
@@ -21,8 +22,10 @@ from signal import (
 )
 from threading import Event
 
-running_on_docker = True
-localhost_addr = 'host.docker.internal' if running_on_docker else 'localhost'
+config = configparser.ConfigParser()
+config.read('config.ini')
+is_running_in_docker = True if config['docker']['is_running_in_docker'] == 'True' else False
+localhost_addr = 'host.docker.internal' if is_running_in_docker else 'localhost'
 
 rabbit_mq_conn, shutdown_future, connection_is_ready = [
     None for i in range(3)]

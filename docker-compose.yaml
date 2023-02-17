@@ -1,23 +1,24 @@
 services:
   generator_unit:
-    image: "alisafapour/news-aggregator-generator-unit"
+    build:
+      context: ./URL Generator Unit
     depends_on:
       - rabbit_mq
-      - mongo_db
+      - postgres_db
     restart: on-failure
   fetch_unit:
-    image: "alisafapour/news-aggregator-fetch-unit"
+    build:
+      context: ./URL Fetch Unit
     depends_on:
       - rabbit_mq
-      - mongo_db
       - generator_unit
     restart: on-failure
   save_unit:
-    image: "alisafapour/news-aggregator-xml-save-unit"
+    build:
+      context: ./XML Save Unit
     depends_on:
       - rabbit_mq
       - mongo_db
-      - generator_unit
       - fetch_unit
     restart: on-failure
   rabbit_mq:
@@ -30,4 +31,9 @@ services:
     image: "mongo:latest"
     ports:
       - "28101:27017"
+    restart: on-failure
+  postgres_db:
+    image: "postgres:latest"
+    ports:
+      - "5432:5432"
     restart: on-failure
