@@ -24,8 +24,9 @@ from threading import Event
 
 config = configparser.ConfigParser()
 config.read('config.ini')
-is_running_in_docker = True if config['docker']['is_running_in_docker'] == 'True' else False
-localhost_addr = 'host.docker.internal' if is_running_in_docker else 'localhost'
+# is_running_in_docker = True if config['docker']['is_running_in_docker'] == 'True' else False
+# localhost_addr = 'host.docker.internal' if is_running_in_docker else 'localhost'
+rabbit_mq_host = 'rabbit_mq'
 
 rabbit_mq_conn, shutdown_future, connection_is_ready = [
     None for i in range(3)]
@@ -38,7 +39,13 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s:  %(message)s',
 async def initializer():
     global rabbit_mq_conn, connection_is_ready
     connection_is_ready = asyncio.Future()
-    rabbit_mq_conn = await rabbit_mq_connector(f"amqp://guest:guest@{localhost_addr}:18009/")
+    while True:
+        try:
+            rabbit_mq_conn = await rabbit_mq_connector(f"amqp://guest:guest@{rabbit_mq_host}:5672/")
+        except:
+            continue
+        else:
+            break
 
 
 # async def on_message(message: AbstractIncomingMessage) -> None:

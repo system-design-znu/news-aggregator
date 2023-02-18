@@ -27,33 +27,42 @@ db_user = config['postgres']['user']
 db_pass = config['postgres']['pass']
 db_port = config['postgres']['port']
 db_table_name = config['postgres']['table_name']
+rabbit_mq_host = 'rabbit_mq'
+postgres_host = 'postgres_db'
 database_conn = None
 old_excel_file_hash = None
 excel_file_path = str(pathlib.Path(__file__).parent.resolve()) + "/RSS.xlsx"
 initializer_finish_event, change_excel_trigger_event, shutdown_event, update_rss_container_trigger_event, generator_finish_work_event = [asyncio.Event() for i in range(5)]
 rabbit_mq_conn = None
 shutdown_command_issued = False
-is_running_in_docker = True if config['docker']['is_running_in_docker'] == 'True' else False
-localhost_addr = 'host.docker.internal' if is_running_in_docker else 'localhost'
+# is_running_in_docker = True if config['docker']['is_running_in_docker'] == 'True' else False
+# localhost_addr = 'host.docker.internal' if is_running_in_docker else 'localhost'
 available_workers, rss_container = dict(), list()
 logging.basicConfig(format='%(asctime)s - %(levelname)s:  %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
 
 
 async def initializer():
     global rabbit_mq_conn
-    rabbit_mq_conn = await rabbit_mq_connector(f"amqp://guest:guest@{localhost_addr}:18009/")
     global database_conn
+    while True:
+        try:
+            rabbit_mq_conn = await rabbit_mq_connector(f"amqp://guest:guest@{rabbit_mq_host}:5672/")
+        except:
+            continue
+        else:
+            break
     try:
-        database_conn = await asyncpg.connect(user=db_user, password=db_pass, host=localhost_addr, database=db_table_name)
+        database_conn = await asyncpg.connect(user=db_user, password=db_pass, host=postgres_host, port=db_port, database=db_table_name)
     except asyncpg.exceptions.InvalidCatalogNameError:
-        conn = await asyncpg.connect(user=db_user, password=db_pass, host=localhost_addr)
+        conn = await asyncpg.connect(user=db_user, password=db_pass, host=postgres_host)
         values = await conn.execute(
         	f'''
         		CREATE DATABASE {db_table_name};
         	'''
 		)
         await conn.close()
-        database_conn = await asyncpg.connect(user=db_user, password=db_pass, host=localhost_addr, database=db_table_name)
+        database_conn = await asyncpg.connect(user=db_user, password=db_pass, host=postgres_host, port=db_port, database=db_table_name)
+    logging.info('Initialization finished.')
     initializer_finish_event.set()
 
 
@@ -125,14 +134,14 @@ async def update_urls_table():
             logging.info('RSS table update finished.')
 
 
-def get_workers_list(user='guest', password='guest', host=localhost_addr, port=18010, virtual_host=None):
+def get_workers_list(user='guest', password='guest', host=rabbit_mq_host, port=15672, virtual_host=None):
     url = 'http://%s:%s/api/queues/%s' % (host, port, virtual_host or '')
     response = requests.get(url, auth=(user, password))
     queues = [q['name'] for q in response.json()]
     return queues
 
 
-async def get_workers_list_async(user='guest', password='guest', host=localhost_addr, port=18010, virtual_host=None):
+async def get_workers_list_async(user='guest', password='guest', host=rabbit_mq_host, port=15672, virtual_host=None):
     async with aiohttp.ClientSession() as session:
         url = 'http://%s:%s/api/queues/%s' % (host, port, virtual_host or '')
         async with session.get(url, auth=aiohttp.BasicAuth(user, password)) as response:
@@ -140,7 +149,7 @@ async def get_workers_list_async(user='guest', password='guest', host=localhost_
             return workers
 
 
-async def add_fetch_worker(user='guest', password='guest', host=localhost_addr, port=18010, virtual_host=None):
+async def add_fetch_worker(user='guest', password='guest', host=rabbit_mq_host, port=15672, virtual_host=None):
     await initializer_finish_event.wait()
     global available_workers
     url = 'http://%s:%s/api/queues/%s' % (host, port, virtual_host or '')
@@ -213,8 +222,8 @@ async def rss_container_updater():
             rss_container.append(
                 {
                     'url': temp_list[0],
-                    'fetch_counts_per_sixty_minutes': 3600,
                     # 'fetch_counts_per_sixty_minutes': float(temp_list[1]),
+                    'fetch_counts_per_sixty_minutes': 60,
                     'priority': temp_list[0].count('/')
                 }
             )

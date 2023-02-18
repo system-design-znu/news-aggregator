@@ -23,8 +23,10 @@ rabbit_mq_conn, rabbit_mq_conn_two, shutdown_future, shutdown_future_two, urls_l
 initialize_future = asyncio.Future()
 config = configparser.ConfigParser()
 config.read('config.ini')
-is_running_in_docker = True if config['docker']['is_running_in_docker'] == 'True' else False
-localhost_addr = 'host.docker.internal' if is_running_in_docker else 'localhost'
+# is_running_in_docker = True if config['docker']['is_running_in_docker'] == 'True' else False
+# localhost_addr = 'host.docker.internal' if is_running_in_docker else 'localhost'
+mongo_host = 'mongo_db'
+rabbit_mq_host = 'rabbit_mq'
 
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s:  %(message)s',
@@ -54,8 +56,14 @@ signal.signal(signal.SIGINT, gracefully_sync_exit_handler)
 
 async def initializer():
     global rabbit_mq_conn, rabbit_mq_conn_two, aiohttp_client, urls_local_queues, saving_queue
-    rabbit_mq_conn = await rabbit_mq_connector(f"amqp://guest:guest@{localhost_addr}:18009/")
-    rabbit_mq_conn_two = await rabbit_mq_connector(f"amqp://guest:guest@{localhost_addr}:18009/")
+    while True:
+        try:
+            rabbit_mq_conn = await rabbit_mq_connector(f"amqp://guest:guest@{rabbit_mq_host}:5672/")
+        except:
+            continue
+        else:
+            break
+    rabbit_mq_conn_two = await rabbit_mq_connector(f"amqp://guest:guest@{rabbit_mq_host}:5672/")
     urls_local_queues = asyncio.Queue()
     saving_queue = asyncio.Queue()
     initialize_future.set_result(0)
@@ -94,7 +102,7 @@ async def xml_fetch_worker():
 async def xml_save_worker():
     await initialize_future
     logging.info('Xml worker is running...')
-    client = motor.motor_asyncio.AsyncIOMotorClient(localhost_addr, 28101)
+    client = motor.motor_asyncio.AsyncIOMotorClient(mongo_host, 27017)
     db = client.fetched_xmls
     collection = db.whole_data
     while True:
