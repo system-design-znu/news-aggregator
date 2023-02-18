@@ -70,14 +70,18 @@ class _BuildHotNewsContainerState extends State<BuildHotNewsContainer> {
             //var date = _g2j!.dateG(newsModel.items![index].pubDate.toString());
             //ConvertDate();
 
-            return Padding(
-              padding: const EdgeInsets.only(left: 13),
-              child: HotNewsContainer(
-                author: newsModel.items![index].description.toString(),
-                title: newsModel.items![index].title.toString(),
-                date: date,
-                
+            return GestureDetector(
+              child: Padding(
+                padding: EdgeInsets.only(left: 13),
+                child: HotNewsContainer(
+                  author: newsModel.items![index].description.toString(),
+                  title: newsModel.items![index].title.toString(),
+                  date: date,
+                ),
               ),
+              onTap: () {
+                print('salam');
+              },
             );
           }),
         ),

@@ -112,8 +112,11 @@ class _HomeTabBarViewState extends State<HomeTabBarView>
             ),
           ),
         ),
-        const SliverToBoxAdapter(
-          child: BuildMostSeenContainer(),
+        SliverToBoxAdapter(
+          child: BlocProvider(
+            create: (context) => _newsBloc,
+            child: BuildMostSeenContainer(),
+          ),
         )
       ],
     );

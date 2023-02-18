@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 
-class MostSeenContainer extends StatelessWidget {
-  const MostSeenContainer({Key? key}) : super(key: key);
+import '../../../../data/models/api_result_model.dart';
 
+// ignore: must_be_immutable
+class MostSeenContainer extends StatelessWidget {
+  MostSeenContainer(
+      {Key? key, required this.title, required this.date, required this.author})
+      : super(key: key);
+  String title;
+  String date;
+  String author;
   @override
   Widget build(BuildContext context) {
-    return mostNewsContainer();
+    return mostNewsContainer(NewsModel());
   }
 
-  Widget mostNewsContainer() {
+  Widget mostNewsContainer(NewsModel newsModel) {
     return Container(
       width: 341,
-      height: 72,
+      height: 90,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(
@@ -24,39 +31,55 @@ class MostSeenContainer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
                     Text(
-                      'چند دقیقه قبل',
-                      style: TextStyle(
-                          fontSize: 8,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'IS'),
+                      date,
+                      style: const TextStyle(
+                        fontSize: 8,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'IS',
+                      ),
                     ),
                     SizedBox(
                       width: 17,
                     ),
-                    Text(
-                      'قیمت آیفون ۱۳ به ۶۰,۰۰۰ میلیون رسید',
-                      style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: 'IS'),
+                    SizedBox(
+                      width: 203,
+                      child: Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: Text(
+                          title,
+                          softWrap: true,
+                          //maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: 'IS',
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  child: Text(
-                    '!دلار ۴۰ هزار تومانی',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'IS',
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: SizedBox(
+                    width: 200,
+                    child: Text(
+                      author,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'IS',
+                      ),
                     ),
                   ),
                 ),
@@ -65,7 +88,7 @@ class MostSeenContainer extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Image.asset('assets/images/icon_like_gray.png'),
+                      //Image.asset('assets/images/icon_like_gray.png'),
                       const SizedBox(
                         width: 190,
                       ),
@@ -101,7 +124,17 @@ class MostSeenContainer extends StatelessWidget {
               ],
             ),
           ),
-          Image.asset('assets/images/iphone_news.png'),
+          ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(6)),
+            child: SizedBox(
+              width: 60,
+              height: 60,
+              child: Image.asset(
+                'assets/images/breaking_news.jpeg',
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
         ],
       ),
     );

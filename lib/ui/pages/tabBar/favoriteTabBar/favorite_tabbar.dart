@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../bloc/news_bloc.dart';
-import '../hotNewsContainer/build_container_hot_news.dart';
-import '../mostSeenContainer/build_container_most_seen.dart';
+import 'package:news_analysis_design/bloc/news_bloc.dart';
+import 'package:news_analysis_design/ui/pages/tabBar/hotNewsContainer/build_container_hot_news.dart';
+import 'package:news_analysis_design/ui/pages/tabBar/mostSeenContainer/build_container_most_seen.dart';
+import '../../../../bloc/news_event.dart';
 
 class FavoriteTabBarView extends StatefulWidget {
   const FavoriteTabBarView({Key? key}) : super(key: key);
@@ -14,12 +14,20 @@ class FavoriteTabBarView extends StatefulWidget {
 
 class _FavoriteTabBarViewState extends State<FavoriteTabBarView>
     with SingleTickerProviderStateMixin {
+  final NewsBloc _newsBloc = NewsBloc();
   @override
-  Widget build(BuildContext context) {
-    return sliverFavoriteTabBar();
+  void initState() {
+    super.initState();
+
+    _newsBloc.add(GetNewsList());
   }
 
-  CustomScrollView sliverFavoriteTabBar() {
+  @override
+  Widget build(BuildContext context) {
+    return sliverHomeTabBar();
+  }
+
+  CustomScrollView sliverHomeTabBar() {
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
@@ -45,12 +53,20 @@ class _FavoriteTabBarViewState extends State<FavoriteTabBarView>
                   ],
                 ),
                 const Spacer(),
-                const Text(
-                  'اخبار داغ',
-                  style: TextStyle(
-                      fontFamily: 'IS',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w900),
+                Row(
+                  children: const [
+                    //Image.asset('assets/images/fire.png'),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      'اخبار مورد علاقه',
+                      style: TextStyle(
+                          fontFamily: 'IS',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -58,7 +74,7 @@ class _FavoriteTabBarViewState extends State<FavoriteTabBarView>
         ),
         SliverToBoxAdapter(
           child: BlocProvider(
-            create: (context) => NewsBloc(),
+            create: (context) => _newsBloc,
             child: BuildHotNewsContainer(),
           ),
         ),
@@ -96,10 +112,15 @@ class _FavoriteTabBarViewState extends State<FavoriteTabBarView>
             ),
           ),
         ),
-        const SliverToBoxAdapter(
-          child:  BuildMostSeenContainer(),
+         SliverToBoxAdapter(
+          child: BlocProvider(
+            create: (context) => _newsBloc,
+            child: BuildMostSeenContainer(),
+          ),
         )
       ],
     );
   }
+
+  Widget _buildLoading() => Center(child: CircularProgressIndicator());
 }

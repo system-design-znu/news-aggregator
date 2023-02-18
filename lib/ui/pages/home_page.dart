@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:news_analysis_design/ui/pages/appbar/appbar.dart';
+import 'package:news_analysis_design/ui/pages/botton_navigator.dart';
 import 'package:news_analysis_design/ui/pages/tabBar/favoriteTabBar/favorite_tabbar.dart';
 import 'package:news_analysis_design/ui/pages/tabBar/homeTabBar/home_tabbar.dart';
+import 'package:news_analysis_design/ui/pages/tabBar/hotNewsContainer/build_container_hot_news.dart';
 import 'package:news_analysis_design/ui/pages/tabBar/hotNewsContainer/container_hot_news.dart';
 import 'package:news_analysis_design/ui/pages/tabBar/mostSeenContainer/container_most_seen.dart';
 
@@ -35,51 +37,10 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF9F9F9),
+      backgroundColor: const Color(0xffF9F9F9),
       appBar: getAppBar(),
       body: getTabView(),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(),
-        height: 89,
-        child: BottomNavigationBar(
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          currentIndex: _bottonNavigationBar,
-          onTap: (index) {
-            setState(() {
-              _bottonNavigationBar = index;
-            });
-          },
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
-          items: [
-            BottomNavigationBarItem(
-              label: '',
-              icon: Image.asset(
-                'assets/images/icon_home.png',
-              ),
-            ),
-            BottomNavigationBarItem(
-              label: '',
-              icon: Image.asset('assets/images/icon_search.png'),
-            ),
-            BottomNavigationBarItem(
-              label: '',
-              icon: Image.asset('assets/images/icon_setting.png'),
-            )
-          ],
-        ),
-      ),
     );
-  }
-
-  List<Widget> getLayout() {
-    return <Widget>[
-      HomeTabBarView(),
-      //HotNewsContainer(),
-      MostSeenContainer(),
-      MostSeenContainer(),
-    ];
   }
 
   AppBar getAppBar() {
@@ -161,7 +122,7 @@ class _HomePageState extends State<HomePage>
   TabBarView getTabView() {
     return TabBarView(
       controller: _tabController,
-      children: <Widget>[
+      children: const <Widget>[
         FavoriteTabBarView(),
         HomeTabBarView(),
       ],

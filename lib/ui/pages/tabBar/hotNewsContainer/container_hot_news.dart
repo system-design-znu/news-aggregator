@@ -32,7 +32,15 @@ class HotNewsContainer extends StatelessWidget {
           SizedBox(
             width: 232,
             height: 232,
-            child: Image.asset('assets/images/nft_image.png'),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(15),
+              ),
+              child: Image.asset(
+                'assets/images/breaking_news.jpeg',
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 12, left: 4, right: 7),
@@ -59,10 +67,10 @@ class HotNewsContainer extends StatelessWidget {
                 Directionality(
                   textDirection: TextDirection.rtl,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 2, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 12),
                     child: Text(
                       author,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 10,
                         fontFamily: 'IS',
                         fontWeight: FontWeight.w400,
