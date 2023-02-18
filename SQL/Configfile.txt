@@ -1,0 +1,7 @@
+user :postgres
+password :123456
+host :localhost
+port :5432
+database :RSS
+excelpath :D:\Programming\Python\PythonCode\SQL\RSS.xlsx
+tableName :RSS_Fetch
