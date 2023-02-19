@@ -2,12 +2,8 @@ package com.znu.news.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.Resources;
-
-import androidx.core.content.ContextCompat;
-
-import com.znu.news.R;
+import android.util.TypedValue;
 
 public final class Utils {
 
@@ -23,5 +19,14 @@ public final class Utils {
         @SuppressLint("DiscouragedApi")
         int resId = resources.getIdentifier(name, "string", packageName);
         return resources.getString(resId);
+    }
+
+    public static float dipToPx(Context context, int dip) {
+        Resources r = context.getResources();
+        return TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                dip,
+                r.getDisplayMetrics()
+        );
     }
 }

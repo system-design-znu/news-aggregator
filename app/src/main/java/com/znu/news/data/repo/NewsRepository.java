@@ -1,6 +1,7 @@
 package com.znu.news.data.repo;
 
 import com.znu.news.model.News;
+import com.znu.news.model.NewsDetails;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ public interface NewsRepository {
     Single<List<News>> getPopularNews();
 
     Single<List<News>> getImportantNews();
+
+    Single<NewsDetails> getNewsDetails(int newsId);
 }

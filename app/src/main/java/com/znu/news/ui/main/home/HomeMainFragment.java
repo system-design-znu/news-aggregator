@@ -92,7 +92,7 @@ public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBind
                     break;
 
                 case SUCCESS:
-                    importantNewsAdapter.submitData(response.data.subList(4, 7));
+                    importantNewsAdapter.submitData(response.data.subList(0, 3));
                     binding.importantShimmerFl.setVisibility(View.GONE);
                     binding.importantShimmerFl.stopShimmer();
                     break;
@@ -126,7 +126,7 @@ public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBind
                     break;
 
                 case SUCCESS:
-                    trendingNewsAdapter.submitData(response.data.subList(5, 10));
+                    trendingNewsAdapter.submitData(response.data);
                     binding.trendingShimmerFl.setVisibility(View.GONE);
                     binding.trendingShimmerFl.stopShimmer();
                     break;
@@ -137,7 +137,7 @@ public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBind
     @Override
     public void onNewsClick(News news) {
         Bundle bundle = new Bundle();
-        bundle.putInt("newsId", news.getId());
+        bundle.putSerializable("news", news);//TODO:change with news id
         navTo(R.id.action_to_newsDetailsFragment, bundle);
     }
 }

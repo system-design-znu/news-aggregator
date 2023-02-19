@@ -39,4 +39,5 @@
     <string name="try_again">تلاش دوباره</string>
     <string name="repeat_password">تکرار رمزعبور</string>
     <string name="delete_account">حذف اکانت</string>
+    <string name="choose_category">دسته‌بندی‌های مورد‌علاقه خود را انتخاب کنید.</string>
 </resources>

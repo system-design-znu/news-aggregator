@@ -64,7 +64,7 @@ public class HomeFavoriteFragment extends BaseViewModelFragment<FragmentHomeFavo
     @Override
     public void onNewsClick(News news) {
         Bundle bundle = new Bundle();
-        bundle.putInt("newsId", news.getId());
+        bundle.putSerializable("news", news);//TODO:change with news id
         navTo(R.id.action_to_newsDetailsFragment, bundle);
     }
 }

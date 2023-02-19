@@ -19,13 +19,13 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", "\"https://api.rss2json.com\"")
-            buildConfigField("String", "PREF_NAME", "\"news_app\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.200.165:8000\"")
+            buildConfigField("String", "PREF_NAME", "\"znu_news_app\"")
             buildConfigField("String", "DATABASE_NAME", "\"znu.news.db\"")
         }
         release {
-            buildConfigField("String", "BASE_URL", "\"https://api.rss2json.com\"")
-            buildConfigField("String", "PREF_NAME", "\"news_app\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.200.165:8000\"")
+            buildConfigField("String", "PREF_NAME", "\"znu_news_app\"")
             buildConfigField("String", "DATABASE_NAME", "\"znu.news.db\"")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -53,7 +53,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
-
     //hilt
     implementation("com.google.dagger:hilt-android:2.42")
     annotationProcessor("com.google.dagger:hilt-compiler:2.42")
@@ -69,7 +68,6 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-rxjava2:$room_version")
     implementation("com.google.code.gson:gson:2.9.0")
-
 
     //retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")

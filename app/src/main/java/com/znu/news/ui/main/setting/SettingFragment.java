@@ -43,9 +43,11 @@ public class SettingFragment extends BaseViewModelFragment<FragmentSettingBindin
 
     private void setUpViews() {
         binding.nightModeSc.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            binding.nightModeSc.setEnabled(false);
             activity.overridePendingTransition(0, 0);
             viewModel.setNightMode((isChecked) ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
             activity.recreate();
+            binding.nightModeSc.setEnabled(true);
         });
     }
 

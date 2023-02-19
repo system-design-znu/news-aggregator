@@ -19,5 +19,14 @@
         android:id="@+id/signupFragment"
         android:name="com.znu.news.ui.auth.SignupFragment"
         android:label="fragment_signup"
-        tools:layout="@layout/fragment_signup" />
+        tools:layout="@layout/fragment_signup" >
+        <action
+            android:id="@+id/action_signupFragment_to_chooseCategoryFragment"
+            app:destination="@id/chooseCategoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooseCategoryFragment"
+        android:name="com.znu.news.ui.auth.ChooseCategoryFragment"
+        android:label="fragment_choose_category"
+        tools:layout="@layout/fragment_choose_category" />
 </navigation>

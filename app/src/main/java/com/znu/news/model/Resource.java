@@ -21,16 +21,16 @@ public class Resource<T> {
         this.error = error;
     }
 
-    public static Resource loading() {
-        return new Resource(LOADING, null, null);
+    public static <T> Resource<T> loading() {
+        return new Resource<>(LOADING, null, null);
     }
 
-    public static Resource success(@NonNull Object data) {
-        return new Resource(SUCCESS, data, null);
+    public static <T> Resource<T> success(@NonNull T data) {
+        return new Resource<>(SUCCESS, data, null);
     }
 
-    public static Resource error(@NonNull Error error) {
-        return new Resource(ERROR, null, error);
+    public static <T> Resource<T> error(@NonNull Error error) {
+        return new Resource<>(ERROR, null, error);
     }
 }
 

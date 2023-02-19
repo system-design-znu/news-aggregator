@@ -43,7 +43,7 @@ public class NetworkModule {
                 .Builder()
                 .addInterceptor(headerInterceptorHelper)
                 .callTimeout(40, TimeUnit.SECONDS)
-                .connectTimeout(5, TimeUnit.SECONDS)
+                .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .build();

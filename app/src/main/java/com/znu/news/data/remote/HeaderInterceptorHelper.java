@@ -25,10 +25,10 @@ public class HeaderInterceptorHelper implements Interceptor {
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
         Request.Builder requestBuilder = chain.request().newBuilder();
-        if (preferencesHelper.getAccessToken() != null) {
-            requestBuilder.addHeader("Authorization", preferencesHelper.getAccessToken())
-                    .build();
-        }
+//        if (preferencesHelper.getAccessToken() != null) {
+//            requestBuilder.addHeader("Authorization", preferencesHelper.getAccessToken())
+//                    .build();
+//        }
         return chain.proceed(requestBuilder.build());
     }
 }

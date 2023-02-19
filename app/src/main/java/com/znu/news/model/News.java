@@ -1,6 +1,8 @@
 package com.znu.news.model;
 
-public class News {
+import java.io.Serializable;
+
+public class News implements Serializable {
 
     private int id;
     private String title;
@@ -8,6 +10,14 @@ public class News {
     private String author;
     private String mediaUrl;
     private String category;
+    private String description;
+
+
+    public News(String title, String author, String description) {
+        this.title = title;
+        this.author = author;
+        this.description = description;
+    }
 
     public News(String title, String pubDate, String author, String mediaUrl, String category) {
         this.title = title;
@@ -63,5 +73,13 @@ public class News {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

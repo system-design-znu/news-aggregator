@@ -13,7 +13,7 @@
         android:id="@+id/newsDetailsFragment"
         android:name="com.znu.news.ui.main.news.NewsDetailsFragment"
         android:label="fragment_news_details"
-        tools:layout="@layout/fragment_news_details" />
+        tools:layout="@layout/fragment_news_details"/>
 
     <action
         android:id="@+id/action_to_newsDetailsFragment"

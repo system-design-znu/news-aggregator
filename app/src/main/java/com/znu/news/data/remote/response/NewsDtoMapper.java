@@ -13,10 +13,8 @@ public class NewsDtoMapper implements DomainMapper<NewsDto, News> {
     public News mapToDomainModel(NewsDto newsDto) {
         return new News(
                 newsDto.getTitle(),
-                newsDto.getPubDate(),
                 newsDto.getAuthor(),
-                newsDto.getEnclosure().getLink(),
-                newsDto.getCategories().get(0)
+                newsDto.getDescription()
         );
     }
 
