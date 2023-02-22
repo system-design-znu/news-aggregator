@@ -8,3 +8,4 @@ class SendJsonList(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
     queryset = SendJson.objects.all()
     serializer_class = SendJsonSerializer
+    
