@@ -21,12 +21,14 @@ from signal import (
     signal, SIGINT, SIG_DFL
 )
 from threading import Event
+import pathlib
 
 config = configparser.ConfigParser()
-config.read('config.ini')
+config.read(str(pathlib.Path(__file__).parent.resolve()) + '/config.ini')
 # is_running_in_docker = True if config['docker']['is_running_in_docker'] == 'True' else False
 # localhost_addr = 'host.docker.internal' if is_running_in_docker else 'localhost'
-rabbit_mq_host = 'rabbit_mq'
+rabbit_mq_host = 'rabbit_mq' 
+# rabbit_mq_host = 'localhost'
 
 rabbit_mq_conn, shutdown_future, connection_is_ready = [
     None for i in range(3)]
@@ -46,6 +48,7 @@ async def initializer():
             continue
         else:
             break
+    logging.info('Initialization Finished.')
 
 
 # async def on_message(message: AbstractIncomingMessage) -> None:
