@@ -18,8 +18,6 @@ from aio_pika import (
 from aio_pika.exceptions import ChannelClosed as rabbit_mq_does_not_exists_exception
 import time
 from signal import signal, SIGINT, SIG_DFL
-from termcolor import colored
-from sys import getsizeof
 
 config = configparser.ConfigParser()
 config.read(str(pathlib.Path(__file__).parent.resolve()) + "/config.ini")

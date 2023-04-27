@@ -113,7 +113,7 @@ async def xml_save_worker():
                 "save_epoch_time": time.time()
             }
         )
-        logging.critical('An XML has been saved in the database:', ready_to_be_saved_xml[:50])
+        logging.info('An XML has been saved in the database: {}'.format(ready_to_be_saved_xml[:50]))
         saving_queue.task_done()
 
 loop = asyncio.new_event_loop()
