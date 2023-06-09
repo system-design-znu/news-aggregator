@@ -1,14 +1,13 @@
-from django.db import models
 import urllib.request as ulrr
-import json
+from django.db import models
+from json import loads
 
 # Create your models here.
 
 class SendJson(models.Model):
-
     url = "https://api.rss2json.com/v1/api.json?rss_url=https://www.irna.ir/rss"
     response = ulrr.urlopen(url).read().decode('utf8')
-    disarray_data = json.loads(response)
+    disarray_data = loads(response)
     raw_information = disarray_data['items']
 
     titles_list = []
