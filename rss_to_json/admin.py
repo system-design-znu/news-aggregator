@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import SendJson
+from .models import Archive
 
 # Register your models here.
 
-admin.site.register(SendJson)
+admin.site.register(Archive)

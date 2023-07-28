@@ -1,6 +1,6 @@
-from .views import SendJsonList
+from .views import ArchiveList
 from django.urls import path
 
 urlpatterns = [
-    path('', SendJsonList.as_view()),
+    path('', ArchiveList.as_view()),
 ]
