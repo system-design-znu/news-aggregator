@@ -1,0 +1,5 @@
+{
+    "version": 0.1,
+    "build": "docker build -t 0behnam0/s.a.d:v0.1 . --no-cache",
+    "run": "docker run -p 8000:8000 0behnam0/s.a.d:v0.1"
+}
