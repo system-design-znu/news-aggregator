@@ -1,16 +1,22 @@
+from rest_framework import generics, permissions, status
+from rest_framework.response import Response
 from .models import Archive
 from .serializers import ArchiveSerializer
-from rest_framework import generics, permissions
-from .data import News
+from .fetch_news import News
+import schedule
+import time
 
-# Create your views here.
-
-class ArchiveList(generics.ListAPIView, generics.CreateAPIView):
+class ArchiveList(generics.ListAPIView):
     permission_classes = (permissions.AllowAny,)
     queryset = Archive.objects.all()
     serializer_class = ArchiveSerializer
 
-    def create(self, request, *args, **kwargs):
+class ArchiveCreate(generics.GenericAPIView):
+    permission_classes = (permissions.AllowAny,)
+    queryset = Archive.objects.all()
+    serializer_class = ArchiveSerializer
+
+    def get(self, request, *args, **kwargs):
         # Fetching data from the News class
         news = News.irna_news()
 
@@ -28,4 +34,4 @@ class ArchiveList(generics.ListAPIView, generics.CreateAPIView):
 
             archive_instance.save()
 
-        return super().create(request, *args, **kwargs)
+        return Response("Data inserted successfully", status=status.HTTP_201_CREATED)
