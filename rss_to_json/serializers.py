@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from .models import SendJson
+from .models import Archive
 
-class SendJsonSerializer(serializers.ModelSerializer):
+class ArchiveSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = SendJson
-        fields = ('id', 'page_size', 'data')
+        model = Archive
+        fields = '__all__'
         
