@@ -1,5 +1,13 @@
 {
-    "version": 0.1,
-    "build": "docker build -t 0behnam0/s.a.d:v0.1 . --no-cache",
-    "run": "docker run -p 8000:8000 0behnam0/s.a.d:v0.1"
+    "FIX": {
+        "swagger": {
+            "path": ".\\.venv\\Lib\\site-packages\\rest_framework_swagger\\templates\\rest_framework_swagger\\index.html",
+            "command": "(Get-Content -Raw -Encoding UTF8 [PATH]) -replace 'staticfiles', 'static' | Set-Content -Encoding UTF8 [PATH]"
+        }
+    },
+    "DOCKER": {
+        "latest version": "v0.1",
+        "build": "docker build -t 0behnam0/s.a.d:[VERSION] . --no-cache",
+        "run": "docker run -p 8000:8000 0behnam0/s.a.d:[VERSION]"
+    }
 }
