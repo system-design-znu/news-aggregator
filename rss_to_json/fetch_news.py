@@ -29,7 +29,7 @@ class News:
             data.append(data_dict)
 
         return data
-    
+
 
 if __name__ == '__main__':
     def fetch_and_print_news():
