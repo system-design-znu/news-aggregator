@@ -3,6 +3,7 @@ import urllib.request as ulrr
 
 class News:
 
+    @staticmethod
     def irna_news():
         url = "https://api.rss2json.com/v1/api.json?rss_url=https://www.irna.ir/rss"
         response = ulrr.urlopen(url).read().decode('utf8')

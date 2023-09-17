@@ -3,8 +3,6 @@ from rest_framework.response import Response
 from .models import Archive
 from .serializers import ArchiveSerializer
 from .fetch_news import News
-import schedule
-import time
 
 class ArchiveList(generics.ListAPIView):
     permission_classes = (permissions.AllowAny,)
