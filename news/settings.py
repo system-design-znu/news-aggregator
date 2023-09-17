@@ -78,6 +78,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'news.wsgi.application'
 
 
+# Redis connection configuration
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0
+
+
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
