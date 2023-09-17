@@ -4,10 +4,24 @@ from .models import Archive
 from .serializers import ArchiveSerializer
 from .fetch_news import News
 
+# Create your views here.
+
 class ArchiveList(generics.ListAPIView):
     permission_classes = (permissions.AllowAny,)
-    queryset = Archive.objects.all()
     serializer_class = ArchiveSerializer
+    
+    def get_queryset(self):
+        return Archive.objects.all() # must not use both .all() and .get_queryset()
+
+    def get_serializer_class(self):
+        return self.serializer_class
+    
+
+class ArchiveListLT(ArchiveList): # last ten news ordered by id that inherit from ArchiveList
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.order_by('-id')[:10][::-1]
+
 
 class ArchiveCreate(generics.GenericAPIView):
     permission_classes = (permissions.AllowAny,)
@@ -15,11 +29,9 @@ class ArchiveCreate(generics.GenericAPIView):
     serializer_class = ArchiveSerializer
 
     def get(self, request, *args, **kwargs):
-        # Fetching data from the News class
-        news = News.irna_news()
+        news = News.irna_news() # Fetching data from the News class
 
-        # Creating instances of Archive from the fetched data
-        for data in news:
+        for data in news: # Creating instances of Archive from the fetched data
             title = data['title'],
             author = data['author'],
             publish_date = data['publish date']
