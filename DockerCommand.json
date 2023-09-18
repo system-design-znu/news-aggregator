@@ -6,7 +6,7 @@
         }
     },
     "DOCKER": {
-        "latest version": "v0.1",
+        "latest version": "v0.2",
         "build": "docker build -t 0behnam0/s.a.d:[VERSION] . --no-cache",
         "run": "docker run -p 8000:8000 0behnam0/s.a.d:[VERSION]"
     }
