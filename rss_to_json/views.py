@@ -36,7 +36,7 @@ class ArchiveCreate(generics.GenericAPIView):
         redis_instance = Redis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
 
         if redis_instance.get('data_inserted'):
-            remaining_time = redis_instance.ttl('data_inserted')
+            remaining_time = int(str(redis_instance.ttl('data_inserted')))
             if remaining_time >= 0:
                 remaining_time = datetime.timedelta(seconds=remaining_time)
                 remaining_time_str = str(remaining_time)
@@ -67,7 +67,7 @@ class ArchiveCreate(generics.GenericAPIView):
 
         if skipped:
             response_code = status.HTTP_409_CONFLICT
-            remaining_time = redis_instance.ttl('data_inserted')
+            remaining_time = int(str(redis_instance.ttl('data_inserted')))
             if remaining_time >= 0:
                 remaining_time = datetime.timedelta(seconds=remaining_time)
                 remaining_time_str = str(remaining_time)
