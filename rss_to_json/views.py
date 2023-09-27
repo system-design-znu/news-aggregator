@@ -10,7 +10,7 @@ from rest_framework.response import Response
 # Create your views here.
 
 class ArchiveList(generics.ListAPIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = ArchiveSerializer
     
     def get_queryset(self):
@@ -27,7 +27,7 @@ class ArchiveListLT(ArchiveList):  # last ten news ordered by id that inherit fr
 
 
 class ArchiveCreate(generics.GenericAPIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Archive.objects.all()
     serializer_class = ArchiveSerializer
 
