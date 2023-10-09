@@ -35,11 +35,12 @@ a {
 }
 
 .status_button:hover {
-    background-color: #3e3e8e
+    background-color: #3e3e8e;
+    box-shadow: 0px 5px 5px rgb(67, 126, 235);
 }
 
 .status_button:active {
-    background-color: #a95ba6;
-    box-shadow: 0 5px #666;
+    background-color: #6363dc;
+    box-shadow: 0px 5px 5px rgb(29, 108, 255);
     transform: translateY(4px);
 }
