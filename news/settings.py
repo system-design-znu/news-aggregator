@@ -176,3 +176,5 @@ SWAGGER_SETTINGS = {
 SITE_ID = 1  # this will used by allauth
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+SILENCED_SYSTEM_CHECKS = ["2_0.W001"]
