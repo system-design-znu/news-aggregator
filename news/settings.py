@@ -30,22 +30,26 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-
-    #   default apps
+    # Default apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
-    #   3rd-party apps
+    # 3rd-party apps
     'rest_framework',
     'rest_framework_swagger',
     'rest_framework.authtoken',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'rest_auth',
+    'rest_auth.registration',
 
-    #   local apps
+    # Local apps
     'rss_to_json.apps.RssToJsonConfig',
 ]
 
@@ -168,3 +172,7 @@ SWAGGER_SETTINGS = {
     'LOGIN_URL': 'rest_framework:login',
     'LOGOUT_URL': 'rest_framework:logout'
 }
+
+SITE_ID = 1  # this will used by allauth
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

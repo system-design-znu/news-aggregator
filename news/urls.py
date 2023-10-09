@@ -28,6 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/', include('rest_framework.urls')),
     path('api/v0/auth/', include('rest_auth.urls')),
+    path('api/v0/auth/registration/', include('rest_auth.registration.urls')),
     path('api/v0/news/irna/', include('rss_to_json.urls')),
     path('schema/', get_schema_view(title="News schema", description="v0")),
     path('docs/', include_docs_urls(DOCS_TITLE, DOCS_DESCRIPTION)),
