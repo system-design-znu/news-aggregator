@@ -10,6 +10,12 @@ COPY . .
 # Install project dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Reinstall rest-auth package
+RUN pip uninstall -y django-rest-auth
+RUN pip uninstall -y django-rest-auth-forked
+RUN pip install django-rest-auth
+RUN pip install django-rest-auth-forked
+
 # Database migrations
 RUN python manage.py makemigrations
 RUN python manage.py migrate
