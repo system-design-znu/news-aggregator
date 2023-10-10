@@ -1,4 +1,4 @@
-# Packages Bullshit Logics(BPL)
+# Bullshit Packages Logics(BPL)
 
 ## django-rest-auth
 
