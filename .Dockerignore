@@ -1,7 +1,19 @@
-.venv/
-.vscode/
+# Django project specific ignores
+__pycache__
 *.pyc
-*.pyo
+
+# Editor specific files
+.vscode/
+
+# Virtual environment
+.venv/
+
+# Database file
+db.sqlite3
+
+# Any other temporary or unnecessary files or directories
+*.log
+*.swp
+*.swo
+*.swn
 __pycache__/
-*.sqlite3
-/staticfiles/
