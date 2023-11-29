@@ -25,7 +25,7 @@ class MyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: MyApp(),
     );
   }
 }
@@ -127,15 +127,15 @@ class LoginPage extends StatelessWidget {
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => MyApp()));
               },
-              child: const Text(
-                'وارد شدن',
-                style: const TextStyle(fontFamily: 'IS', fontSize: 18),
-              ),
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8))),
                 minimumSize: Size(342, 64),
                 backgroundColor: Color(0xff5474FF),
+              ),
+              child: const Text(
+                'وارد شدن',
+                style: TextStyle(fontFamily: 'IS', fontSize: 18),
               ),
             ),
             SizedBox(

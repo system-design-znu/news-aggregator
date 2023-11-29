@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_analysis_design/data/models/api_result_model.dart';
+import 'package:news_analysis_design/data/models/newsArticle.dart';
 import 'package:news_analysis_design/rss/g2j.dart';
 
 import '../../../../bloc/news_bloc.dart';
 import '../../../../bloc/news_event.dart';
 import '../../../../bloc/news_state.dart';
+import '../../viewNews/view_news_page.dart';
 import 'container_hot_news.dart';
 
 class BuildHotNewsContainer extends StatefulWidget {
@@ -17,7 +18,7 @@ class BuildHotNewsContainer extends StatefulWidget {
 
 class _BuildHotNewsContainerState extends State<BuildHotNewsContainer> {
   final NewsBloc _newsBloc = NewsBloc();
-  NewsModel? newsModel;
+  NewsArticle? newsModel;
   G2j? _g2j;
   @override
   void initState() {
@@ -52,21 +53,23 @@ class _BuildHotNewsContainerState extends State<BuildHotNewsContainer> {
 
   Widget _buildLoading() => Center(child: CircularProgressIndicator());
 
-  Padding containerBuilder(BuildContext context, NewsModel newsModel) {
+  Padding containerBuilder(BuildContext context, List<NewsArticle> newsModel) {
     return Padding(
       padding: const EdgeInsets.only(right: 24, bottom: 20),
       child: SizedBox(
         height: 326,
         child: ListView.builder(
           reverse: true,
-          itemCount: newsModel.items!.length,
+          itemCount: newsModel.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: ((context, index) {
             //G2j(index, newsModel.items![index].pubDate.toString());
-            var date = G2j(index, newsModel.items![index].pubDate.toString())
-                .g2jDate();
-            var time = G2j(index, newsModel.items![index].pubDate.toString())
-                .g2jTime();
+            // var date =
+            //     G2j(index, newsModel[index].publishDate![index].toString())
+            //         .g2jDate();
+            // var time =
+            //     G2j(index, newsModel[index].lastUpdateDate![index].toString())
+            //         .g2jTime();
             //var date = _g2j!.dateG(newsModel.items![index].pubDate.toString());
             //ConvertDate();
 
@@ -74,13 +77,21 @@ class _BuildHotNewsContainerState extends State<BuildHotNewsContainer> {
               child: Padding(
                 padding: EdgeInsets.only(left: 13),
                 child: HotNewsContainer(
-                  author: newsModel.items![index].description.toString(),
-                  title: newsModel.items![index].title.toString(),
-                  date: date,
+                  author: newsModel[index].title!.toString(),
+                  title: newsModel[index].title!,
+                  describe: newsModel[index].description!,
                 ),
               ),
               onTap: () {
-                print('salam');
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ViewNews(
+                      author: newsModel[index].description!,
+                      title: newsModel[index].title!,
+                      describe: newsModel[index].url!,
+                    ),
+                  ),
+                );
               },
             );
           }),

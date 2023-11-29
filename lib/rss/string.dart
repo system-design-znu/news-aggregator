@@ -1,9 +1,9 @@
-import '../data/models/api_result_model.dart';
+import '../data/models/newsArticle.dart';
 import '../data/repository/news_repository.dart';
 
 class ApiRepository {
   final _provider = ApiProvider();
-  Future<NewsModel> fetchNewsList() {
+  Future<List<NewsArticle>> fetchNewsList() {
     return _provider.fetchNewsList();
   }
 }

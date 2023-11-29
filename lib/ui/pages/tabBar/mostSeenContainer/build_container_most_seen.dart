@@ -4,7 +4,7 @@ import 'package:news_analysis_design/bloc/news_bloc.dart';
 import 'package:news_analysis_design/bloc/news_state.dart';
 import 'package:news_analysis_design/ui/pages/tabBar/mostSeenContainer/container_most_seen.dart';
 
-import '../../../../data/models/api_result_model.dart';
+import '../../../../data/models/newsArticle.dart';
 import '../../../../rss/g2j.dart';
 
 class BuildMostSeenContainer extends StatelessWidget {
@@ -35,22 +35,22 @@ class BuildMostSeenContainer extends StatelessWidget {
   }
 
   Widget _buildLoading() => Center(child: CircularProgressIndicator());
-  Widget buildContainer(BuildContext context, NewsModel newsModel) {
+  Widget buildContainer(BuildContext context, List<NewsArticle> newsModel) {
     return SizedBox(
       height: 500,
       child: ListView.builder(
-        itemCount: 10,
         scrollDirection: Axis.vertical,
+        itemCount: newsModel.length,
         itemBuilder: ((context, index) {
           var date =
-              G2j(index, newsModel.items![index].pubDate.toString()).g2jDate();
+              G2j(index, newsModel[index].publishDate!.toString()).g2jDate();
           var time =
-              G2j(index, newsModel.items![index].pubDate.toString()).g2jTime();
-          return  Padding(
-            padding:const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
+              G2j(index, newsModel[index].lastUpdateDate.toString()).g2jTime();
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
             child: MostSeenContainer(
-              author: newsModel.items![index].description.toString(),
-              title: newsModel.items![index].title.toString(),
+              author: newsModel[index].title.toString(),
+              title: newsModel[index].agency.toString(),
               date: date,
             ),
           );

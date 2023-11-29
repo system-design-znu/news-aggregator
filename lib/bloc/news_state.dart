@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../data/models/api_result_model.dart';
+import '../data/models/newsArticle.dart';
 
 
 abstract class NewsState extends Equatable {
@@ -15,7 +15,7 @@ class NewsInitial extends NewsState {}
 class NewsLoading extends NewsState {}
 
 class NewsLoaded extends NewsState {
-  final NewsModel newsModel;
+  final List<NewsArticle> newsModel;
   const NewsLoaded(this.newsModel);
 }
 

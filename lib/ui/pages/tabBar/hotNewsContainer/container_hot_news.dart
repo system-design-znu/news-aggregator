@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:news_analysis_design/data/models/api_result_model.dart';
+import 'package:news_analysis_design/data/models/newsArticle.dart';
 
 class HotNewsContainer extends StatelessWidget {
   HotNewsContainer(
-      {Key? key, required this.title, required this.date, required this.author})
+      {Key? key,
+      required this.title,
+      required this.author,
+      required this.describe})
       : super(key: key);
   String title;
-  String date;
+
   String author;
+  String describe;
 
   get kTransparentImage => null;
 
   @override
   Widget build(BuildContext context) {
-    return newMethod(NewsModel());
+    return newMethod(NewsArticle());
   }
 
-  Container newMethod(NewsModel newsModel) {
+  Container newMethod(NewsArticle newsModel) {
     return Container(
       height: 326,
       width: 250,
@@ -37,7 +41,7 @@ class HotNewsContainer extends StatelessWidget {
                 Radius.circular(15),
               ),
               child: Image.asset(
-                'assets/images/breaking_news.jpeg',
+                'assets/images/image 4.png',
                 fit: BoxFit.cover,
               ),
             ),
@@ -67,9 +71,10 @@ class HotNewsContainer extends StatelessWidget {
                 Directionality(
                   textDirection: TextDirection.rtl,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 12),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 2, vertical: 12),
                     child: Text(
-                      author,
+                      describe,
                       style: const TextStyle(
                         fontSize: 10,
                         fontFamily: 'IS',
@@ -80,18 +85,18 @@ class HotNewsContainer extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 0, top: 2),
-                  child: Text(
-                    date,
-                    style: const TextStyle(
-                      fontSize: 10,
-                      fontFamily: 'IS',
-                      fontWeight: FontWeight.w200,
-                    ),
-                    maxLines: 1,
-                  ),
-                )
+                // Padding(
+                //   padding: const EdgeInsets.only(bottom: 0, top: 2),
+                //   child: Text(
+                //     date,
+                //     style: const TextStyle(
+                //       fontSize: 10,
+                //       fontFamily: 'IS',
+                //       fontWeight: FontWeight.w200,
+                //     ),
+                //     maxLines: 1,
+                //   ),
+                // )
               ],
             ),
           )

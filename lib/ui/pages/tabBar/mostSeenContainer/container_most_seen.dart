@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../data/models/api_result_model.dart';
+import '../../../../data/models/newsArticle.dart';
 
 // ignore: must_be_immutable
 class MostSeenContainer extends StatelessWidget {
@@ -12,10 +12,10 @@ class MostSeenContainer extends StatelessWidget {
   String author;
   @override
   Widget build(BuildContext context) {
-    return mostNewsContainer(NewsModel());
+    return mostNewsContainer();
   }
 
-  Widget mostNewsContainer(NewsModel newsModel) {
+  Widget mostNewsContainer() {
     return Container(
       width: 341,
       height: 90,

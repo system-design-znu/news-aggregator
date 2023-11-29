@@ -3,10 +3,6 @@ import 'package:news_analysis_design/ui/pages/appbar/appbar.dart';
 import 'package:news_analysis_design/ui/pages/botton_navigator.dart';
 import 'package:news_analysis_design/ui/pages/tabBar/favoriteTabBar/favorite_tabbar.dart';
 import 'package:news_analysis_design/ui/pages/tabBar/homeTabBar/home_tabbar.dart';
-import 'package:news_analysis_design/ui/pages/tabBar/hotNewsContainer/build_container_hot_news.dart';
-import 'package:news_analysis_design/ui/pages/tabBar/hotNewsContainer/container_hot_news.dart';
-import 'package:news_analysis_design/ui/pages/tabBar/mostSeenContainer/container_most_seen.dart';
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 

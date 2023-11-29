@@ -1,7 +1,7 @@
-import 'package:news_analysis_design/data/models/api_result_model.dart';
+import 'package:news_analysis_design/data/models/newsArticle.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
-NewsModel? _newsModel;
+NewsArticle? _newsModel;
 
 class G2j {
   var dateG;
