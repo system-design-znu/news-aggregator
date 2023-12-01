@@ -45,14 +45,16 @@ public class HomeFavoriteFragment extends BaseViewModelFragment<FragmentHomeFavo
     }
 
     private void observeData() {
-        News news = new News(
-                "رکورد گران قیمت\u200Cترین ان\u200Cاف\u200Cتی دنیا شکسته شد.",
-                "۳ ساعت پیش",
-                "خبرگزاری فارس",
-                "",
-                "تکنولوژی"
-        );
-        favoriteNewsAdapter.submitData(Arrays.asList(news, news, news, news));
+        viewModel.observeImportantNews().observe(getViewLifecycleOwner(), response -> {
+            switch (response.status) {
+                case LOADING:
+                    break;
+
+                case SUCCESS:
+                    favoriteNewsAdapter.submitData(response.data);
+                    break;
+            }
+        });
     }
 
     private void setUpAdapter() {
@@ -64,7 +66,7 @@ public class HomeFavoriteFragment extends BaseViewModelFragment<FragmentHomeFavo
     @Override
     public void onNewsClick(News news) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable("news", news);//TODO:change with news id
+        bundle.putSerializable("news", news);
         navTo(R.id.action_to_newsDetailsFragment, bundle);
     }
 }

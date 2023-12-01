@@ -1,5 +1,7 @@
 package com.znu.news.data.remote.response;
 
+import android.util.Log;
+
 import com.znu.news.model.DomainMapper;
 import com.znu.news.model.News;
 
@@ -12,9 +14,12 @@ public class NewsDtoMapper implements DomainMapper<NewsDto, News> {
     @Override
     public News mapToDomainModel(NewsDto newsDto) {
         return new News(
+                newsDto.getId(),
                 newsDto.getTitle(),
-                newsDto.getAuthor(),
-                newsDto.getDescription()
+                newsDto.getDescription(),
+                newsDto.getAgency(),
+                newsDto.getPublishDate(),
+                newsDto.getImageUrl()
         );
     }
 

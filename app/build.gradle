@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'dagger.hilt.android.plugin'
+    id 'kotlin-android'
 }
 
 android {
@@ -19,12 +20,12 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", "\"http://192.168.200.165:8000\"")
+            buildConfigField("String", "BASE_URL", "\"http://156.253.5.226:2648/\"")
             buildConfigField("String", "PREF_NAME", "\"znu_news_app\"")
             buildConfigField("String", "DATABASE_NAME", "\"znu.news.db\"")
         }
         release {
-            buildConfigField("String", "BASE_URL", "\"http://192.168.200.165:8000\"")
+            buildConfigField("String", "BASE_URL", "\"http://156.253.5.226:2648/\"")
             buildConfigField("String", "PREF_NAME", "\"znu_news_app\"")
             buildConfigField("String", "DATABASE_NAME", "\"znu.news.db\"")
             minifyEnabled false
@@ -53,6 +54,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
+    //kotlin
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.10")
+
     //hilt
     implementation("com.google.dagger:hilt-android:2.42")
     annotationProcessor("com.google.dagger:hilt-compiler:2.42")
@@ -73,9 +77,9 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.retrofit2:retrofit-mock:2.3.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.7.2")
     implementation("com.squareup.okhttp3:okhttp:4.7.2")
     implementation("com.squareup.retrofit2:adapter-rxjava2:2.3.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 
     //rxjava
     implementation('io.reactivex.rxjava2:rxandroid:2.1.1')

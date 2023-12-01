@@ -8,6 +8,7 @@ import javax.inject.Inject;
 public class AppPreferencesHelper {
 
     private static final String USER_ACCESS_TOKEN = "USER_ACCESS_TOKEN";
+    private static final String USER_REFRESH_TOKEN = "USER_REFRESH_TOKEN";
     private static final String NIGHT_MODE = "NIGHT_MODE";
 
 
@@ -26,6 +27,21 @@ public class AppPreferencesHelper {
 
     public void setAccessToken(String accessToken) {
         sharedPreferences.edit().putString(USER_ACCESS_TOKEN, accessToken).apply();
+    }
+
+    public String getRefreshToken() {
+        return sharedPreferences.getString(USER_REFRESH_TOKEN, null);
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        sharedPreferences.edit().putString(USER_REFRESH_TOKEN, refreshToken).apply();
+    }
+
+    public void clearAllTokens() {
+        sharedPreferences.edit()
+                .remove(USER_ACCESS_TOKEN)
+                .remove(USER_REFRESH_TOKEN)
+                .apply();
     }
 
     public int getNightMode() {

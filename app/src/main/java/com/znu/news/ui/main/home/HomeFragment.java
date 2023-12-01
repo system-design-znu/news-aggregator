@@ -84,6 +84,8 @@ public class HomeFragment extends BaseViewModelFragment<FragmentHomeBinding, Hom
         fragmentStateAdapter.addFragment(new HomeMainFragment());
         fragmentStateAdapter.addFragment(new HomeFavoriteFragment());
 
+        binding.homeViewPager.setUserInputEnabled(false);
+        binding.homeViewPager.setEnabled(false);
         binding.homeViewPager.setAdapter(fragmentStateAdapter);
 
         final String[] homeTabs = activity.getResources().getStringArray(R.array.home_tabs);

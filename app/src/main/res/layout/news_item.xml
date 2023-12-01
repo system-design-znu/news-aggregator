@@ -27,6 +27,7 @@
             app:riv_corner_radius="@dimen/medium_radius" />
 
         <TextView
+            android:layout_marginEnd="@dimen/small_distance"
             android:id="@+id/news_title_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

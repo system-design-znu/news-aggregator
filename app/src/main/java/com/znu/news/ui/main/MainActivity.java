@@ -18,8 +18,6 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
-    private NavHostFragment navHostFragment;
-
     @Override
     protected ActivityMainBinding initViewBinding() {
         return ActivityMainBinding.inflate(getLayoutInflater());
@@ -31,9 +29,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         super.onCreate(savedInstanceState);
 
-        navHostFragment =
-                (NavHostFragment) getSupportFragmentManager()
-                        .findFragmentById(R.id.nav_host_fragment);
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
 
 
         if (navHostFragment != null) {
@@ -65,9 +62,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     }
 
     private void observeData() {
-        sessionManager.status.observe(this, status -> {
-            if (status == SessionManager.Status.LOGGED_OUT) {
+        sessionManager.authStatus.observe(this, status -> {
+            if (status == SessionManager.AuthStatus.LOGGED_OUT) {
                 openLoginActivity();
+                finish();
             }
         });
     }

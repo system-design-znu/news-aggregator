@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public class News implements Serializable {
 
-    private int id;
-    private String title;
-    private String pubDate;
-    private String author;
-    private String mediaUrl;
+    private long id;
     private String category;
+    private String title;
     private String description;
+    private String author;
+    private String pubDate;
+    private String imageUrl;
 
 
     public News(String title, String author, String description) {
@@ -19,19 +19,29 @@ public class News implements Serializable {
         this.description = description;
     }
 
-    public News(String title, String pubDate, String author, String mediaUrl, String category) {
+    public News(String title, String pubDate, String author, String mediaUrl, String category, String description) {
         this.title = title;
         this.pubDate = pubDate;
         this.author = author;
-        this.mediaUrl = mediaUrl;
+        this.imageUrl = mediaUrl;
         this.category = category;
+        this.description = description;
     }
 
-    public int getId() {
+    public News(long id, String title, String description, String author, String pubDate, String imageUrl) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.author = author;
+        this.pubDate = pubDate;
+        this.imageUrl = imageUrl;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -59,12 +69,12 @@ public class News implements Serializable {
         this.author = author;
     }
 
-    public String getMediaUrl() {
-        return mediaUrl;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setMediaUrl(String mediaUrl) {
-        this.mediaUrl = mediaUrl;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getCategory() {

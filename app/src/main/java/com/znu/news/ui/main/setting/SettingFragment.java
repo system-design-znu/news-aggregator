@@ -10,9 +10,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.znu.news.BuildConfig;
 import com.znu.news.databinding.FragmentSettingBinding;
+import com.znu.news.model.Status;
 import com.znu.news.model.User;
 import com.znu.news.ui.base.BaseViewModelFragment;
 import com.znu.news.viewmodel.SettingViewModel;
+
+import java.util.Objects;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -57,13 +60,10 @@ public class SettingFragment extends BaseViewModelFragment<FragmentSettingBindin
         binding.nightModeSc.setChecked(viewModel.getNightMode() == AppCompatDelegate.MODE_NIGHT_YES);
 
         viewModel.observeUser().observe(getViewLifecycleOwner(), response -> {
-            switch (response.status) {
-                case SUCCESS:
-                    User user = response.data;
-                    binding.fullNameTv.setText(user.getName());
-                    binding.emailTextView.setText(user.getEmail());
-                    binding.passwordTextView.setText(user.getPassword());
-                    break;
+            if (Objects.requireNonNull(response.status) == Status.SUCCESS) {
+                User user = response.data;
+                binding.emailTextView.setText(user.getUsername());
+                binding.passwordTextView.setText(user.getPassword());
             }
         });
     }

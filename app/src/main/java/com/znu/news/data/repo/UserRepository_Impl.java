@@ -5,19 +5,21 @@ import com.znu.news.data.local.db.entity.UserEntityMapper;
 import com.znu.news.data.local.prefs.AppPreferencesHelper;
 import com.znu.news.data.remote.services.UserService;
 import com.znu.news.model.User;
+import com.znu.news.model.UserToken;
 
 import javax.inject.Inject;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
+import okhttp3.RequestBody;
 
 public class UserRepository_Impl implements UserRepository {
 
-    private UserService userService;
-    private UserDao userDao;
-    private UserEntityMapper userEntityMapper;
-    private AppPreferencesHelper appPreferencesHelper;
+    private final UserService userService;
+    private final UserDao userDao;
+    private final UserEntityMapper userEntityMapper;
+    private final AppPreferencesHelper appPreferencesHelper;
 
     @Inject
     public UserRepository_Impl(UserService userService
@@ -31,6 +33,11 @@ public class UserRepository_Impl implements UserRepository {
     }
 
     @Override
+    public Single<UserToken> login(RequestBody body) {
+        return userService.login(body).map(userTokenDto -> new UserToken(userTokenDto.getAccessToken(), userTokenDto.getRefreshToken()));
+    }
+
+    @Override
     public int getNightMode() {
         return appPreferencesHelper.getNightMode();
     }
@@ -38,15 +45,6 @@ public class UserRepository_Impl implements UserRepository {
     @Override
     public void setNightMode(int nightMode) {
         appPreferencesHelper.setNightMode(nightMode);
-    }
-
-    @Override
-    public Single<String> checkToken() {
-        String token = appPreferencesHelper.getAccessToken();
-        if (token != null)
-            return Single.fromCallable(() -> token);
-//            return userService.checkToken(token);
-        else return Single.fromCallable(String::new);
     }
 
     @Override

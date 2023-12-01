@@ -40,7 +40,7 @@ public class NewsDetailsFragment extends BaseViewModelFragment<FragmentNewsDetai
         super.onViewCreated(view, savedInstanceState);
 
         if (getArguments() != null) {
-            viewModel.setNews((News) getArguments().getSerializable("news"));//TODO:delete this part later.
+            setUpNewDetails((News) getArguments().getSerializable("news"));
         }
 
         activity.getWindow()
@@ -62,16 +62,28 @@ public class NewsDetailsFragment extends BaseViewModelFragment<FragmentNewsDetai
     }
 
     private void observeData() {
-        viewModel.observeNews().observe(getViewLifecycleOwner(), news -> {
-            GlideApp.with(this)
-                    .load(R.drawable.image)//TODO:replace with news image
-                    .centerCrop()
-                    .into(binding.newsImageView);
+//        viewModel.observeNews().observe(getViewLifecycleOwner(), news -> {
+//            GlideApp.with(this)
+//                    .load(R.drawable.image)//TODO:replace with news image
+//                    .centerCrop()
+//                    .into(binding.newsImageView);
+//
+//            binding.newsTitleTv.setText(news.getTitle());
+//            binding.newsAuthorTv.setText(news.getAuthor());
+//            binding.newsDescriptionTv.setText(news.getDescription());
+//        });
+    }
 
-            binding.newsTitleTv.setText(news.getTitle());
-            binding.newsAuthorTv.setText(news.getAuthor());
-            binding.newsDescriptionTv.setText(news.getDescription());
-        });
+    private void setUpNewDetails(News news) {
+        GlideApp.with(this)
+                .load(news.getImageUrl())
+                .centerCrop()
+                .into(binding.newsImageView);
+
+        binding.newsPubDateTv.setText(Utils.convertDateToShamsi(news.getPubDate()));
+        binding.newsTitleTv.setText(news.getTitle());
+        binding.newsAuthorTv.setText(news.getAuthor());
+        binding.newsDescriptionTv.setText(news.getDescription());
     }
 
     @SuppressLint("NonConstantResourceId")

@@ -4,8 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.znu.news.data.remote.CallbackWrapper;
-import com.znu.news.data.repo.UserRepository;
+import com.znu.news.data.local.prefs.AppPreferencesHelper;
 import com.znu.news.model.Error;
 import com.znu.news.model.ErrorType;
 import com.znu.news.model.Resource;
@@ -20,14 +19,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 public class SplashScreenViewModel extends BaseViewModel {
 
     private final MutableLiveData<Resource<String>> token;
-    private final UserRepository userRepository;
+    private final AppPreferencesHelper appPreferencesHelper;
 
     @Inject
     public SplashScreenViewModel(Application application
             , SchedulerProvider schedulerProvider
-            , UserRepository userRepository) {
+            , AppPreferencesHelper appPreferencesHelper) {
         super(application, schedulerProvider);
-        this.userRepository = userRepository;
+
+        this.appPreferencesHelper = appPreferencesHelper;
 
         token = new MutableLiveData<>();
 
@@ -37,20 +37,8 @@ public class SplashScreenViewModel extends BaseViewModel {
     public void checkToken() {
         if (isConnected()) {
             token.setValue(Resource.loading());
-            userRepository.checkToken()
-                    .subscribeOn(schedulerProvider.io())
-                    .observeOn(schedulerProvider.ui())
-                    .subscribe(new CallbackWrapper<String, Error>() {
-                        @Override
-                        protected void onComplete(String s) {
-                            token.setValue(Resource.success(s));
-                        }
 
-                        @Override
-                        protected void onFailure(Error e) {
-                            token.setValue(Resource.error(e));
-                        }
-                    });
+            token.setValue(Resource.success(appPreferencesHelper.getAccessToken()));
         } else token.setValue(Resource.error(new Error.RemoteServiceError(ErrorType.Connection)));
     }
 

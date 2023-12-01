@@ -137,7 +137,7 @@ public class HomeMainFragment extends BaseViewModelFragment<FragmentHomeMainBind
     @Override
     public void onNewsClick(News news) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable("news", news);//TODO:change with news id
+        bundle.putSerializable("news", news);
         navTo(R.id.action_to_newsDetailsFragment, bundle);
     }
 }

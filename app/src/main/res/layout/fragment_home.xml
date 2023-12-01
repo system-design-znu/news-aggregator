@@ -78,8 +78,6 @@
         android:layout_height="?actionBarSize"
         android:layout_marginTop="@dimen/medium_distance"
         android:background="?attr/colorOnBackground"
-        android:paddingStart="@dimen/large_distance"
-        android:paddingEnd="@dimen/large_distance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_appbar"

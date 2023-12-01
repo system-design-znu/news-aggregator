@@ -12,6 +12,11 @@ public class AppSchedulerProvider implements SchedulerProvider {
     }
 
     @Override
+    public Scheduler mainThread() {
+        return AndroidSchedulers.mainThread();
+    }
+
+    @Override
     public Scheduler io() {
         return Schedulers.io();
     }

@@ -1,6 +1,8 @@
 package com.znu.news.ui.auth;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -34,9 +36,28 @@ public class LoginFragment extends BaseViewModelFragment<FragmentLoginBinding, A
 
         binding.signUpTextView.setOnClickListener(v -> navTo(R.id.action_loginFragment_to_signupFragment));
         binding.loginButton.setOnClickListener(v -> {
-            startActivity(toActivity(MainActivity.class));
-            activity.sessionManager.login("1");
-            activity.finish();
+            String username = binding.emailEt.getText().toString();
+            String password = binding.passWordEt.getText().toString();
+
+            if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
+                viewModel.login(username, password);
+            }
+        });
+
+        viewModel.observeUserToken().observe(getViewLifecycleOwner(), userToken -> {
+            binding.userProgressBarLayout.setVisibility(View.GONE);
+            switch (userToken.status) {
+                case LOADING:
+                    binding.userProgressBarLayout.setVisibility(View.VISIBLE);
+                    break;
+
+                case ERROR:
+                    Log.d("LoginFragment", "onViewCreated: " + userToken.error.error);
+                    break;
+
+                case SUCCESS:
+                    activity.sessionManager.login(userToken.data.getAccessToken(), userToken.data.getRefreshToken());
+            }
         });
     }
 }

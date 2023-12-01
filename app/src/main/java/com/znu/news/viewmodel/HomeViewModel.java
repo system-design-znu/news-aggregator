@@ -1,6 +1,7 @@
 package com.znu.news.viewmodel;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -81,6 +82,7 @@ public class HomeViewModel extends BaseViewModel {
 
                     @Override
                     protected void onFailure(Error e) {
+                        Log.d("HomeViewModel", "onFailure: " + e.errorType);
                         if (e.isNotEqual(error.getValue()))
                             error.setValue(e);
                     }

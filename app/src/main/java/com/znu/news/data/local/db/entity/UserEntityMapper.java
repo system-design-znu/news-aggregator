@@ -8,8 +8,7 @@ public class UserEntityMapper implements DomainMapper<UserEntity, User> {
     @Override
     public User mapToDomainModel(UserEntity model) {
         return new User(
-                model.getName()
-                , model.getEmail()
+                model.getUsername()
                 , model.getPassword()
         );
     }
@@ -17,8 +16,7 @@ public class UserEntityMapper implements DomainMapper<UserEntity, User> {
     @Override
     public UserEntity mapFromDomainModel(User user) {
         return new UserEntity(
-                user.getName()
-                , user.getEmail()
+                user.getUsername()
                 , user.getPassword()
         );
     }

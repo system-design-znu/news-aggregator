@@ -7,6 +7,8 @@ import android.os.Bundle;
 import com.znu.news.R;
 import com.znu.news.databinding.ActivityAuthBinding;
 import com.znu.news.ui.base.BaseActivity;
+import com.znu.news.ui.main.MainActivity;
+import com.znu.news.utils.SessionManager;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -28,5 +30,13 @@ public class AuthActivity extends BaseActivity<ActivityAuthBinding> {
         navHostFragment =
                 (NavHostFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.nav_host_fragment);
+
+
+        sessionManager.authStatus.observe(this, status -> {
+            if (status == SessionManager.AuthStatus.LOGGED_IN) {
+                startActivity(toActivity(MainActivity.class));
+                finish();
+            }
+        });
     }
 }

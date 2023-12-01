@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/large_distance"
             android:paddingEnd="@dimen/large_distance"
-            android:paddingBottom="54dp">
+            android:paddingBottom="88dp">
 
             <TextView
                 android:id="@+id/news_category_tv"
@@ -170,7 +170,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="@dimen/small_distance"
+        android:layout_marginBottom="@dimen/large_distance"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"

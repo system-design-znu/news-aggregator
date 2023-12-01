@@ -31,6 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_distance"
+            android:layout_marginEnd="@dimen/small_distance"
             android:maxLines="2"
             android:text="قیمت آیفون ۱۳ به ۶۰,۰۰۰ میلیون رسید."
             android:textStyle="bold"
@@ -46,7 +47,6 @@
             android:alpha="0.6"
             android:maxLines="1"
             android:text="خبرگزاری فارس"
-            app:layout_constraintEnd_toEndOf="@id/news_image_view"
             app:layout_constraintStart_toStartOf="@id/news_image_view"
             app:layout_constraintTop_toBottomOf="@+id/news_title_tv" />
 

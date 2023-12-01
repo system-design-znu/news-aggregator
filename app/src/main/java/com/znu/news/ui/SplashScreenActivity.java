@@ -2,13 +2,13 @@ package com.znu.news.ui;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 
 import androidx.lifecycle.ViewModelProvider;
 
 import com.znu.news.databinding.ActivitySplashScreenBinding;
+import com.znu.news.model.Error;
 import com.znu.news.ui.base.BaseViewModelActivity;
 import com.znu.news.ui.main.MainActivity;
 import com.znu.news.utils.SessionManager;
@@ -36,7 +36,7 @@ public class SplashScreenActivity extends BaseViewModelActivity<ActivitySplashSc
 
         binding.splashErrorTv.setOnClickListener(v -> viewModel.checkToken());
 
-        new Handler().postDelayed(this::observeData, 1000);
+        observeData();
     }
 
     private void observeData() {
@@ -55,14 +55,14 @@ public class SplashScreenActivity extends BaseViewModelActivity<ActivitySplashSc
                 case SUCCESS:
                     String result = token.data;
                     if (!TextUtils.isEmpty(result))
-                        sessionManager.login(token.data);
+                        sessionManager.login(result);
                     else sessionManager.logout();
                     break;
             }
         });
 
-        sessionManager.status.observe(this, status -> {
-            if (status == SessionManager.Status.LOGGED_IN) {
+        sessionManager.authStatus.observe(this, status -> {
+            if (status == SessionManager.AuthStatus.LOGGED_IN) {
                 startActivity(toActivity(MainActivity.class));
             } else {
                 openLoginActivity();
