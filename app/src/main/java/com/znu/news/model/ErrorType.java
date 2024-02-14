@@ -1,9 +1,5 @@
 package com.znu.news.model;
 
-import android.annotation.SuppressLint;
-import android.content.res.Resources;
-import android.util.Log;
-
 public enum ErrorType {
 
     Unknown(-1),

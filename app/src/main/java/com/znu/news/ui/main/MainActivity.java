@@ -36,14 +36,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         if (navHostFragment != null) {
             navHostFragment.getNavController().addOnDestinationChangedListener((navController, navDestination, bundle) -> {
                 switch (navDestination.getId()) {
-                    case R.id.homeFragment:
-                    case R.id.searchFragment:
-                    case R.id.settingFragment:
-                        showBottomAppbar();
-                        break;
-
-                    default:
-                        hideBottomAppbar();
+                    case R.id.homeFragment, R.id.searchFragment, R.id.settingFragment ->
+                            showBottomAppbar();
+                    default -> hideBottomAppbar();
                 }
             });
 

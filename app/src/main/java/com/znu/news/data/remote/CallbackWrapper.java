@@ -36,7 +36,7 @@ public abstract class CallbackWrapper<T, E extends Error> implements SingleObser
         } else if (throwable instanceof IOException) {
             onFailure((new Error.RemoteServiceError(Connection)));
         } else {
-            onFailure(new Error.RemoteServiceError(Unknown));
+            onFailure(new Error.RemoteServiceError(Unknown, throwable));
         }
     }
 

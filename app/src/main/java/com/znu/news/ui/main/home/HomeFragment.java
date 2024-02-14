@@ -55,23 +55,23 @@ public class HomeFragment extends BaseViewModelFragment<FragmentHomeBinding, Hom
             binding.errorLayout.rootLayout.setVisibility(View.GONE);
             if (error != null) {
                 switch (error.errorType) {
-                    case Unknown:
+                    case Unknown -> {
+//                        Log.d("HomeFragment", "observeData: " + error.error);
                         Toast.makeText(activity, "Unknown", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case Connection:
+                    }
+                    case Connection -> {
                         binding.errorLayout.errorTextView.setText(Utils.getErrorMessage(activity, error.errorType.toString()));
                         binding.errorLayout.retryButton.setOnClickListener(v -> viewModel.loadData());
                         binding.errorLayout.rootLayout.setVisibility(View.VISIBLE);
-                        break;
-
-                    default:
+                    }
+                    default -> {
                         Error.RemoteServiceError remoteServiceError = (Error.RemoteServiceError) error;
                         if (remoteServiceError.isClientError) {
                             Toast.makeText(activity, "isClientError", Toast.LENGTH_SHORT).show();
                         } else if (remoteServiceError.isServerError) {
                             Toast.makeText(activity, "isServerError", Toast.LENGTH_SHORT).show();
                         }
+                    }
                 }
             }
         });

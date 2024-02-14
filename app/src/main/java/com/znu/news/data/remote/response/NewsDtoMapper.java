@@ -1,7 +1,5 @@
 package com.znu.news.data.remote.response;
 
-import android.util.Log;
-
 import com.znu.news.model.DomainMapper;
 import com.znu.news.model.News;
 
